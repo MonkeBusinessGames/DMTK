@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 
 [System.Serializable]
-public class PaletteData : MonoBehaviour
+public class PaletteData
 {
     public string paletteName;
     public string palettePath;

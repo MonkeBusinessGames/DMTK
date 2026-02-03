@@ -4,22 +4,19 @@ using UnityEngine;
 public class TileData
 {
     public string tileName;
-    public string palette;
     public bool isRule;
     public TileRules ruleData;
 
-    public TileData(string name, string tilepalette)
+    public TileData(string name)
     {
         tileName = name;
-        palette = tilepalette;
         isRule = false;
         ruleData = null;
     }
 
-    public TileData(string name, string tilepalette, TileRules rules)
+    public TileData(string name, TileRules rules)
     {
         tileName = name;
-        palette = tilepalette;
         isRule = true;
         ruleData = rules;
     }

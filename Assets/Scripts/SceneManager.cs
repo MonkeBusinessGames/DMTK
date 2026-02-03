@@ -7,14 +7,15 @@ using UnityEngine.UI;
 
 public class SceneManager : MonoBehaviour
 {
-    [SerializeField] Image backgroundImage;
+    [SerializeField] Image dmBackground;
+    [SerializeField] Image playerBackground;
     [SerializeField] AudioSource musicSource;
     [SerializeField] AudioSource sfxSource;
 
     public void SetBackground(string fileName)
     {
         Sprite sprite = BackgroundManager.Instance.LoadSprite(fileName);
-        backgroundImage.sprite = sprite;
+        dmBackground.sprite = playerBackground.sprite = sprite;
     }
 
     public async void SetMusic(string fileName)

@@ -19,11 +19,6 @@ public class BackgroundList : MonoBehaviour
 
     public void Refresh()
     {
-        foreach (Transform child in content)
-        {
-            if(child.name != "Create New")
-                Destroy(child.gameObject);
-        }
 
         int i = 0;
         foreach(var bg in BackgroundManager.Instance.backgrounds)

@@ -63,19 +63,18 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Tiles\Assets\TileData.cs" />
     <Compile Include="Assets\StandaloneFileBrowser\StandaloneFileBrowserWindows.cs" />
-    <Compile Include="Assets\Scripts\Tiles\PaletteData.cs" />
     <Compile Include="Assets\Scripts\SceneManager.cs" />
-    <Compile Include="Assets\Scripts\GridManager.cs" />
     <Compile Include="Assets\Scripts\Audio\SFXManager.cs" />
     <Compile Include="Assets\StandaloneFileBrowser\StandaloneFileBrowser.cs" />
     <Compile Include="Assets\StandaloneFileBrowser\Sample\CanvasSampleSaveFileText.cs" />
     <Compile Include="Assets\Scripts\Tiles\Assets\TileRules.cs" />
+    <Compile Include="Assets\Scripts\Tiles\Assets\PaletteData.cs" />
+    <Compile Include="Assets\Scripts\Tiles\TilePreview.cs" />
     <Compile Include="Assets\StandaloneFileBrowser\StandaloneFileBrowserEditor.cs" />
     <Compile Include="Assets\Scripts\Backgrounds\BackgroundManager.cs" />
     <Compile Include="Assets\Scripts\Backgrounds\BackgroundButton.cs" />
     <Compile Include="Assets\Scripts\Tiles\GridRenderer.cs" />
     <Compile Include="Assets\Scripts\Tiles\GridSizer.cs" />
-    <Compile Include="Assets\Scripts\Tiles\Assets\GridTIle.cs" />
     <Compile Include="Assets\Scripts\Tiles\Assets\GridMap.cs" />
     <Compile Include="Assets\Scripts\Audio\MusicManager.cs" />
     <Compile Include="Assets\StandaloneFileBrowser\IStandaloneFileBrowser.cs" />
@@ -87,7 +86,10 @@
     <Compile Include="Assets\StandaloneFileBrowser\StandaloneFileBrowserMac.cs" />
     <Compile Include="Assets\Scripts\Tiles\ObjectRenderer.cs" />
     <Compile Include="Assets\Scripts\Tiles\Assets\GridObject.cs" />
+    <Compile Include="Assets\Scripts\Tiles\Assets\GridTile.cs" />
     <Compile Include="Assets\Scripts\CursorManager.cs" />
+    <Compile Include="Assets\Scripts\Tiles\GridManager.cs" />
+    <Compile Include="Assets\Scripts\Tiles\PaletteNamer.cs" />
     <Compile Include="Assets\Scripts\DM Manager.cs" />
     <Compile Include="Assets\Scripts\Tiles\PaletteManager.cs" />
     <Compile Include="Assets\StandaloneFileBrowser\Sample\CanvasSampleOpenFileTextMultiple.cs" />

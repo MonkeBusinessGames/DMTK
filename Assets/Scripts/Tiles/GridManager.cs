@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
-    [SerializeField] private GameObject ToolPanel;
+    [SerializeField] private GameObject gridManager;
     private TileData selectedTile;
     private TileButton selectedButton;
     public static GridManager Instance;
@@ -36,20 +36,16 @@ public class GridManager : MonoBehaviour
         CursorController.Instance.SetCursor((ToolState) newTool);
     }
 
-    public void ToggleTools()
+    public void OpenGridTools()
     {
-        if (ToolPanel.activeSelf)
-        {
-            ToolPanel.SetActive(false);
+            gridManager.SetActive(true);
             CursorController.Instance.SetCursor(ToolState.Select);
-        }
-        else
-            ToolPanel.SetActive(true);
-
     }
 
-    public void CloseTools()
+    public void CloseGridTools()
     {
+        gridManager.SetActive(false);
+        CursorController.Instance.SetCursor(ToolState.Select);
     }
 
     private void Highlight()
