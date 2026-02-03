@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 6647c3cc02fb5244bbc34cf21dbd12c5
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - select: {fileID: 2800000, guid: f2a45557380506245bb5753cbc669c96, type: 3}
+  - paint: {fileID: 2800000, guid: 10c746a2d4c6dde4aaa5cf0bd98bae0e, type: 3}
+  - box: {fileID: 2800000, guid: 49c6d5dccffcfbe4b9799d0876ba4357, type: 3}
+  - fill: {fileID: 2800000, guid: cdc38764fac45894bb5f4d9f5df83781, type: 3}
+  - erase: {fileID: 2800000, guid: e629075073e73c54a914a8aba9ac0427, type: 3}
+  - drag: {fileID: 2800000, guid: fcbdbd5cadd28cb44aad24e0b2b764de, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
