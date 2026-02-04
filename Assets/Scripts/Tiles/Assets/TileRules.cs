@@ -10,4 +10,9 @@ public class TileRules
     public string[] cornerTiles;// NE, SE, SW, NW
 
 
+    public override string ToString()
+    {
+        return ruleName + " | " + parent + " | " + defaultTile + " | " + edgeTiles + " | " + cornerTiles;
+    }
+
 }

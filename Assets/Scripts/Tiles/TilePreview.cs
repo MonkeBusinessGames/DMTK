@@ -22,4 +22,24 @@ public class TilePreview : MonoBehaviour
         PaletteManager.Instance.DeleteTile(fileName);
         Destroy(this);
     }
+
+    private void OnDestroy()
+    {
+        if (preview == null) return;
+
+        //Break the sprite reference
+        var sprite = preview.sprite;
+        preview.sprite = null;
+
+        //If the sprite exists, destory it
+        if (sprite != null)
+        {
+            var tex = sprite.texture;
+            Destroy(sprite);
+
+            //If the texture exists, destroy it
+            if (tex != null)
+                Destroy(tex);
+        }
+    }
 }

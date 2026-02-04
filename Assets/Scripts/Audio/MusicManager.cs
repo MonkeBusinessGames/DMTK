@@ -130,6 +130,12 @@ public class MusicManager : MonoBehaviour
 
     public void RefreshSelector()
     {
+
+        foreach (Transform child in content)
+        {
+             Destroy(child.gameObject);
+        }
+
         int i = 0;
         foreach (var bg in musicList)
         {

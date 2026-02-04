@@ -20,4 +20,10 @@ public class PaletteData
         tList = tiles;
         mainSprite = sprite;
     }
+
+    public override string ToString()
+    {
+        return paletteName + " | " + palettePath + " | " + tList + " | " + mainSprite;
+    }
+
 }

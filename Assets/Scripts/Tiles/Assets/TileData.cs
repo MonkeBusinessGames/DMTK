@@ -20,4 +20,9 @@ public class TileData
         isRule = true;
         ruleData = rules;
     }
+
+    public override string ToString()
+    {
+        return tileName + " | " + isRule + " | " + ruleData;
+    }
 }

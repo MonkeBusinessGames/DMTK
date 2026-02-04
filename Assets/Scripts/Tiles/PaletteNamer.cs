@@ -21,8 +21,7 @@ public class PaletteNamer : MonoBehaviour
 
     public void NoError()
     {
-        errorField.gameObject.SetActive(true);
-        errorField.text = "This name is in use.";
+        errorField.gameObject.SetActive(false);
     }
 
     public bool RequiredCheck()

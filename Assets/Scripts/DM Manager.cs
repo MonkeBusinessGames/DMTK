@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 public class DMManager : MonoBehaviour
 {
     [SerializeField] Camera dmCamera;
@@ -71,7 +72,4 @@ public class DMManager : MonoBehaviour
             }
         }
     }
-
-
-
 }

@@ -20,6 +20,10 @@ public class BackgroundList : MonoBehaviour
     public void Refresh()
     {
 
+        foreach (Transform child in content)
+        {
+            Destroy(child.gameObject);
+        }
         int i = 0;
         foreach(var bg in BackgroundManager.Instance.backgrounds)
         {
