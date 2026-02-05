@@ -4,17 +4,17 @@ using TMPro;
 public class PaletteNamer : MonoBehaviour
 {
 
-    [SerializeField] TMP_Text errorField;
-    [SerializeField] TMP_InputField input;
+    [SerializeField] private TMP_Text errorField;
+    [SerializeField] private TMP_InputField input;
 
     public void SetName(string name)
     {
         input.text = name;
     }
 
-    public void DuplicateError()
+    public void DuplicateError(string oldName)
     {
-        input.text = "";
+        input.text = oldName;
         errorField.gameObject.SetActive(true);
         errorField.text = "This name is in use.";
     }

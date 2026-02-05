@@ -16,6 +16,16 @@ public class PaletteButton : MonoBehaviour
         GetComponent<RectTransform>().anchoredPosition = new Vector2(-300 + 200 * (listPosition % 4), 50 - 100 * Mathf.Floor(listPosition / 4));
     }
 
+    public void Setup(string paletteData, int listPosition)
+    {
+        palette = paletteData;
+        buttonName.text = palette;
+
+        preview.gameObject.SetActive(false);
+
+        GetComponent<RectTransform>().anchoredPosition = new Vector2(-300 + 200 * (listPosition % 4), 50 - 100 * Mathf.Floor(listPosition / 4));
+    }
+
     public void OnClick()
     {
         PaletteManager.Instance.SelectPalette(palette);

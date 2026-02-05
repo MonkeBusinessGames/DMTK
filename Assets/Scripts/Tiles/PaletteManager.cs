@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UIElements;
 using System;
-
+using Newtonsoft.Json;
 public class PaletteManager : MonoBehaviour
 {
     public static PaletteManager Instance;
@@ -16,8 +16,7 @@ public class PaletteManager : MonoBehaviour
     public Dictionary<string, Sprite> loadedTiles = new();
     public PaletteData loadedPalette = null;
     public PaletteData tempPalette = null;
-    private string editedPaletteName = null;
-    private string tempPath;
+    public PaletteData backupPalette = null;
 
     //Palette Selector Elements
     public Transform selectorContent;
@@ -42,7 +41,6 @@ public class PaletteManager : MonoBehaviour
 
         //Define the palette path
         palettesPath = Path.Combine(Application.persistentDataPath, "Palettes");
-        tempPath = Path.Combine(palettesPath, "temp");
 
         //If the folder for storing palettes doesn't exist, create it.
         if (!Directory.Exists(palettesPath))
@@ -64,9 +62,9 @@ public class PaletteManager : MonoBehaviour
         if (!Directory.Exists(palettesPath))
             return;
 
-        foreach (var palette in Directory.GetDirectories(palettesPath))
+        foreach (var palettePath in Directory.GetDirectories(palettesPath))
         {
-            palettes.Add(palette, JsonUtility.FromJson<PaletteData>(File.ReadAllText(Path.Combine(palettesPath, palette, "PaletteData"))));
+            palettes.Add(new DirectoryInfo(palettePath).Name, JsonConvert.DeserializeObject<PaletteData>(File.ReadAllText(Path.Combine(palettePath, "PaletteData"))));
         }
 
         //Refresh the selector;
@@ -81,18 +79,23 @@ public class PaletteManager : MonoBehaviour
     public void SelectPalette(string paletteName)
     {
         CloseSelector();
+        GridManager.Instance.ClearTiles();
+        loadedPalette = JsonConvert.DeserializeObject<PaletteData>(File.ReadAllText(Path.Combine(palettesPath, paletteName, "PaletteData")));
 
-        loadedPalette = JsonUtility.FromJson<PaletteData>(File.ReadAllText(Path.Combine(palettesPath, paletteName, "PaletteData")));
-
-        Texture2D tex = new Texture2D(2, 2);
+        int i = 0;
         foreach (var tile in loadedPalette.tList.Keys)
         {
             byte[] data = File.ReadAllBytes(Path.Combine(loadedPalette.palettePath, tile));
-
+            
+            Texture2D tex = new Texture2D(2, 2);
+                
             tex.LoadImage(data);
             tex.filterMode = FilterMode.Bilinear;
 
             loadedTiles.Add(tile, Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100));
+
+            GridManager.Instance.LoadTile(loadedPalette.tList[tile], i);
+            i++;
         }
 
     }
@@ -136,20 +139,27 @@ public class PaletteManager : MonoBehaviour
         int i = 0;
         foreach (var palette in palettes.Values)
         {
+
             var btn = Instantiate(palettePrefab, selectorContent);
 
-            //Create the sprite
-            byte[] data = File.ReadAllBytes(Path.Combine(palette.palettePath, palette.mainSprite));
+            if (palette.mainSprite == null)
+                btn.Setup(palette.paletteName, i);
+            else
+            {
+                //Create the sprite
+                byte[] data = File.ReadAllBytes(Path.Combine(palette.palettePath, palette.mainSprite));
 
-            Texture2D tex = new Texture2D(2, 2);
-            tex.LoadImage(data);
-            tex.filterMode = FilterMode.Bilinear;
+                Texture2D tex = new Texture2D(2, 2);
+                tex.LoadImage(data);
+                tex.filterMode = FilterMode.Bilinear;
 
-            //Setup the preview object
-            btn.Setup(palette.paletteName, Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100), i);
-            
-            i++;
-            Debug.Log("new plist item " + palette.paletteName);
+                //Setup the preview object
+                btn.Setup(palette.paletteName, Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100), i);
+
+                i++;
+                Debug.Log("new plist item " + palette.paletteName);
+            }
+
         }
     }
 
@@ -165,29 +175,24 @@ public class PaletteManager : MonoBehaviour
 
         DMManager.onGrid = false;
 
-        editedPaletteName = paletteName;
+        //Create a backup of the palette and temporary palette to make changes to.
+        string json = File.ReadAllText(Path.Combine(palettesPath, paletteName, "PaletteData"));
+        tempPalette = JsonConvert.DeserializeObject<PaletteData>(json);
+        backupPalette = JsonConvert.DeserializeObject<PaletteData>(json);
 
-        //Create a temporary palette with the same as the old palette
-        tempPalette = JsonUtility.FromJson<PaletteData>(File.ReadAllText(Path.Combine(palettesPath, paletteName, "PaletteData")));
         Debug.Log(tempPalette);
+        
+        ////Create the new palette folder
+        //Directory.CreateDirectory(tempPath);
 
-        string oldPath = tempPalette.palettePath;
-
-        //Create the new palette folder
-        Directory.CreateDirectory(tempPath);
-
-        //Clear unused assets
-        Resources.UnloadUnusedAssets();
-        GC.Collect();
-
-        //Copy all files over to the new folder
-        foreach (var fileName in Directory.GetFiles(tempPalette.palettePath))
-        {
-            string sourcePath = Path.Combine(oldPath, fileName);
-            string destPath = Path.Combine(tempPath, fileName);
-            Debug.Log(sourcePath + " | " + fileName + " | " + destPath);
-            File.Copy(sourcePath, destPath, overwrite: true);
-        }
+        ////Copy all files over to the new folder
+        //foreach (var fileName in Directory.GetFiles(tempPalette.palettePath))
+        //{
+        //    string sourcePath = Path.Combine(oldPath, fileName);
+        //    string destPath = Path.Combine(tempPath, fileName);
+        //    Debug.Log(sourcePath + " | " + fileName + " | " + destPath);
+        //    File.Copy(sourcePath, destPath, overwrite: true);
+        //}
 
         //Set the palette name in the UI
         paletteNamer.SetName(paletteName);
@@ -208,18 +213,18 @@ public class PaletteManager : MonoBehaviour
 
         DMManager.onGrid = false;
 
-        //Create a temporary palette with no information
-        tempPalette = new PaletteData("temp", new Dictionary<string, TileData>(), null);
-        Debug.Log(tempPalette);
+        //Create a temporary and backup palette with no information
+        tempPalette = new PaletteData("", new Dictionary<string, TileData>(), null);
+        backupPalette = new PaletteData("", new Dictionary<string, TileData>(), null);
 
         //Create the palette folder
-        Directory.CreateDirectory(tempPath);
+        Directory.CreateDirectory(tempPalette.palettePath);
 
         //Create the palette data json
-        File.WriteAllText(Path.Combine(tempPalette.palettePath, "PaletteData"), JsonUtility.ToJson(tempPalette));
+        File.WriteAllText(Path.Combine(tempPalette.palettePath, "PaletteData"), JsonConvert.SerializeObject(tempPalette, Formatting.Indented));
 
-        //Set the editable palette to null
-        editedPaletteName = "";
+        //Set the backup palette to null
+        
 
         //Set the palette name in the UI
         paletteNamer.SetName("");
@@ -235,13 +240,15 @@ public class PaletteManager : MonoBehaviour
     /// <param name="newName">The new name of the temp palette</param>
     public void EditName(string newName)
     {
-        Debug.Log(tempPalette.paletteName + " is renamed to " + newName);
         //If the name already exists, don't allow the new name
         if (palettes.ContainsKey(newName))
         {
-            paletteNamer.DuplicateError();
+            paletteNamer.DuplicateError(tempPalette.paletteName);
+            Debug.Log(newName + " is a duplicate");
+
             return;
         }
+        Debug.Log(tempPalette.paletteName + " is renamed to " + newName);
 
         paletteNamer.NoError();
         tempPalette.paletteName = newName;
@@ -260,7 +267,7 @@ public class PaletteManager : MonoBehaviour
         foreach (var sourcePath in Paths)
         {
             string fileName = Path.GetFileName(sourcePath);
-            string destPath = Path.Combine(tempPath, fileName);
+            string destPath = Path.Combine(backupPalette.palettePath, fileName);
             Debug.Log(sourcePath + " | " + fileName + " | " + destPath);
             File.Copy(sourcePath, destPath, overwrite: true);
             tempPalette.tList.Add(fileName, new TileData(fileName));
@@ -285,19 +292,25 @@ public class PaletteManager : MonoBehaviour
         //Close the palette manager
         UpdateView(false);
 
-        //If you're editing an existing palette, delete the old palette and rename the new one.
-        if (editedPaletteName != "")
+        //If you're editing an existing palette, delete the removed tiles
+        if (backupPalette != null)
         {
-            //Delete the old folder
-            Directory.Delete(Path.Combine(palettesPath, editedPaletteName), true);
+            //Check all backed up tiles to confirm whether they should be kept
+            foreach (var tile in backupPalette.tList.Keys)
+            {
+                //If a tile is not longer found in the tlist, delete it.
+                if (!tempPalette.tList.ContainsKey(tile))
+                    File.Delete(Path.Combine(backupPalette.palettePath, tile));
+            }
         }
 
-        //Rename the new folder
-        Directory.Move(tempPath, tempPalette.palettePath);
+        //Rename the palette folder
+        if(backupPalette.paletteName != tempPalette.paletteName)
+            Directory.Move(backupPalette.palettePath, tempPalette.palettePath);
 
         //Create or Update the palette data json
-        File.WriteAllText(Path.Combine(tempPalette.palettePath, "PaletteData"), JsonUtility.ToJson(tempPalette));
-
+        File.WriteAllText(Path.Combine(tempPalette.palettePath, "PaletteData"), JsonConvert.SerializeObject(tempPalette, Formatting.Indented));
+        Debug.Log(tempPalette);
         //Refresh the selector;
         RefreshPaletteList();
     }
@@ -310,8 +323,13 @@ public class PaletteManager : MonoBehaviour
         //Close the palette manager
         UpdateView(false);
 
-        //Delete the temp data
-        Directory.Delete(tempPath, true);
+        //Check all temp tiles to confirm whether they should be kept
+        foreach (var tile in tempPalette.tList.Keys)
+        {
+            //If a tile is not found in the backup palette, delete it.
+            if (!backupPalette.tList.ContainsKey(tile))
+                File.Delete(Path.Combine(backupPalette.palettePath, tile));
+        }
     }
 
     /// <summary>
@@ -320,16 +338,13 @@ public class PaletteManager : MonoBehaviour
     /// <param name="fileName">The tile to be deleted.</param>
     public void DeleteTile(string tileName)
     {
-        //Delete the tile data
-        File.Delete(Path.Combine(tempPath, tileName));
-
         //Remove the tile reference from the palette data
         tempPalette.tList.Remove(tileName);
 
         //Refresh the tile list
         RefreshTileList();
 
-        Debug.Log("Deleted " + tileName);
+        Debug.Log(tileName + " will be deleted");
     }
 
     /// <summary>
@@ -342,13 +357,10 @@ public class PaletteManager : MonoBehaviour
         UpdateView(false);
 
         //Delete the old folder
-        Directory.Delete(Path.Combine(palettesPath, editedPaletteName), true);
-        
-        //Delete the temp data
-        Directory.Delete(tempPath, true);
+        Directory.Delete(backupPalette.palettePath, true);
 
         //Remove the palette from the palette list
-        palettes.Remove(editedPaletteName);
+        palettes.Remove(backupPalette.paletteName);
 
         //Refresh the selector;
         RefreshPaletteSelector();
@@ -360,11 +372,11 @@ public class PaletteManager : MonoBehaviour
     /// </summary>
     public void RefreshTileList()
     {
+        //Destroy the existing tiles in the list
         foreach (Transform child in managerContent)
             Destroy(child.gameObject);
 
         StartCoroutine(WaitOneFrame());
-
         int i = 0;
 
         //If the preview sprite is no longer in the palette, get a new one.
@@ -378,7 +390,6 @@ public class PaletteManager : MonoBehaviour
         {
             resetPreview = true;
         }
-            
 
         foreach (var tile in tempPalette.tList.Keys)
         {
@@ -393,7 +404,7 @@ public class PaletteManager : MonoBehaviour
             var btn = Instantiate(tilePrefab, managerContent);
 
             //Create the sprite
-            byte[] data = File.ReadAllBytes(Path.Combine(tempPath, tile));
+            byte[] data = File.ReadAllBytes(Path.Combine(backupPalette.palettePath, tile));
 
             Texture2D tex = new Texture2D(2, 2);
             tex.LoadImage(data);
@@ -405,6 +416,11 @@ public class PaletteManager : MonoBehaviour
             i++;
             Debug.Log("new list item " + tile);
         }
+
+        //Set the null as the preview sprite if there are no more sprites.
+        if (resetPreview)
+            tempPalette.mainSprite = null;
+        
 
     }
 

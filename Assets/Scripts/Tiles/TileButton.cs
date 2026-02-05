@@ -11,7 +11,7 @@ public class TileButton : MonoBehaviour
         tile = tileData;
         preview.sprite = PaletteManager.Instance.loadedTiles[tile.tileName];
 
-        GetComponent<RectTransform>().anchoredPosition = new Vector2(-300 + 200 * (listPosition % 4), 50 - 100 * Mathf.Floor(listPosition / 4));
+        GetComponent<RectTransform>().anchoredPosition = new Vector2(-65 + 65 * (listPosition % 3), 115 - 65 * Mathf.Floor(listPosition / 3));
     }
 
     public void OnClick()

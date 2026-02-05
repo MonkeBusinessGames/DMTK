@@ -1,8 +1,6 @@
 using UnityEngine;
 using System.IO;
-using SFB;
 using System.Collections.Generic;
-using UnityEngine.UIElements;
 
 
 [System.Serializable]
@@ -12,6 +10,14 @@ public class PaletteData
     public string palettePath;
     public Dictionary<string, TileData> tList;
     public string mainSprite;
+
+    public PaletteData()
+    {
+        paletteName = "None";
+        palettePath = "None";
+        tList = new Dictionary<string, TileData>();
+        mainSprite = null;
+    }
 
     public PaletteData(string name, Dictionary<string, TileData> tiles, string sprite)
     {
@@ -23,7 +29,13 @@ public class PaletteData
 
     public override string ToString()
     {
-        return paletteName + " | " + palettePath + " | " + tList + " | " + mainSprite;
+        string t = "";
+        foreach(var key in tList.Keys)
+        {
+            t += ", " + key;
+        }
+
+        return paletteName + " | " + palettePath + " | " + t + " | " + mainSprite;
     }
 
 }

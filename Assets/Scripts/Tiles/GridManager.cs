@@ -6,6 +6,9 @@ public class GridManager : MonoBehaviour
     private TileData selectedTile;
     private TileButton selectedButton;
     public static GridManager Instance;
+    [SerializeField] private TileButton tilePrefab;
+    [SerializeField] private Transform tilePanel;
+
     private void Awake()
     {
         //Prevent duplicates of this object from existing
@@ -78,5 +81,18 @@ public class GridManager : MonoBehaviour
         tileButton.Unselect();
         selectedTile = tileButton.tile;
         selectedButton = tileButton;
+    }
+
+    public void ClearTiles()
+    {
+
+        foreach (Transform child in tilePanel)
+            Destroy(child.gameObject);
+    }
+
+    public void LoadTile(TileData tile, int placement)
+    {
+        var btn = Instantiate(tilePrefab, tilePanel);
+        btn.Setup(tile, placement);
     }
 }

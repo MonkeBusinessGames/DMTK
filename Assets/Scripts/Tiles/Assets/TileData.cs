@@ -1,4 +1,3 @@
-using UnityEngine;
 
 [System.Serializable]
 public class TileData
@@ -6,6 +5,13 @@ public class TileData
     public string tileName;
     public bool isRule;
     public TileRules ruleData;
+
+    public TileData()
+    {
+        tileName = "None";
+        isRule = false;
+        ruleData = null;
+    }
 
     public TileData(string name)
     {
