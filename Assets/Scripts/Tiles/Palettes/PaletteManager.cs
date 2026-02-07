@@ -100,6 +100,7 @@ public class PaletteManager : MonoBehaviour
 
             GridManager.Instance.LoadTile(tile.Key, i);
             i++;
+            Debug.Log("Loaded" + tile.Value);
         }
 
     }
@@ -119,11 +120,11 @@ public class PaletteManager : MonoBehaviour
     /// </summary>
     public void CloseSelector()
     {
-        //Clear selector
-        foreach (Transform child in selectorContent)
-            Destroy(child.gameObject);
+    //    //Clear selector
+    //    foreach (Transform child in selectorContent)
+    //        Destroy(child.gameObject);
 
-        StartCoroutine(WaitOneFrame());
+    //    StartCoroutine(WaitOneFrame());
 
         paletteSelector.SetActive(false);
         DMManager.onGrid = true;
