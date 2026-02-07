@@ -3,7 +3,6 @@ using System.IO;
 using SFB;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UIElements;
 using System;
 using Newtonsoft.Json;
 public class PaletteManager : MonoBehaviour
@@ -13,7 +12,8 @@ public class PaletteManager : MonoBehaviour
     //Palette Data Elements
     private string palettesPath;
     public Dictionary<string, PaletteData> palettes = new();
-    public Dictionary<string, Sprite> loadedTiles = new();
+    public Dictionary<float, Sprite> loadedTiles = new();
+    public Dictionary<float, string> tileLibrary = new();
     public PaletteData loadedPalette = null;
     public PaletteData tempPalette = null;
     public PaletteData backupPalette = null;
@@ -45,6 +45,10 @@ public class PaletteManager : MonoBehaviour
         //If the folder for storing palettes doesn't exist, create it.
         if (!Directory.Exists(palettesPath))
             Directory.CreateDirectory(palettesPath);
+
+        if(File.Exists(Path.Combine(palettesPath, "TileLibrary")))
+            tileLibrary = JsonConvert.DeserializeObject<Dictionary<float, string>>(File.ReadAllText(Path.Combine(palettesPath, "TileLibrary")));
+
 
         //Refresh the palettes list
         RefreshPaletteList();
@@ -83,18 +87,18 @@ public class PaletteManager : MonoBehaviour
         loadedPalette = JsonConvert.DeserializeObject<PaletteData>(File.ReadAllText(Path.Combine(palettesPath, paletteName, "PaletteData")));
 
         int i = 0;
-        foreach (var tile in loadedPalette.tList.Keys)
+        foreach (var tile in loadedPalette.tList)
         {
-            byte[] data = File.ReadAllBytes(Path.Combine(loadedPalette.palettePath, tile));
+            byte[] data = File.ReadAllBytes(Path.Combine(loadedPalette.palettePath, tile.Value + "data"));
             
             Texture2D tex = new Texture2D(2, 2);
                 
             tex.LoadImage(data);
             tex.filterMode = FilterMode.Bilinear;
 
-            loadedTiles.Add(tile, Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100));
+            loadedTiles.Add(tile.Key, Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100));
 
-            GridManager.Instance.LoadTile(loadedPalette.tList[tile], i);
+            GridManager.Instance.LoadTile(tile.Key, i);
             i++;
         }
 
@@ -214,8 +218,8 @@ public class PaletteManager : MonoBehaviour
         DMManager.onGrid = false;
 
         //Create a temporary and backup palette with no information
-        tempPalette = new PaletteData("", new Dictionary<string, TileData>(), null);
-        backupPalette = new PaletteData("", new Dictionary<string, TileData>(), null);
+        tempPalette = new PaletteData(palettesPath);
+        backupPalette = new PaletteData(palettesPath);
 
         //Create the palette folder
         Directory.CreateDirectory(tempPalette.palettePath);
@@ -266,11 +270,20 @@ public class PaletteManager : MonoBehaviour
 
         foreach (var sourcePath in Paths)
         {
+            //Copy the file over to the palette's folder
             string fileName = Path.GetFileName(sourcePath);
             string destPath = Path.Combine(backupPalette.palettePath, fileName);
             Debug.Log(sourcePath + " | " + fileName + " | " + destPath);
             File.Copy(sourcePath, destPath, overwrite: true);
-            tempPalette.tList.Add(fileName, new TileData(fileName));
+
+            //Generate a unique ID for the tile 
+            float tempID = UnityEngine.Random.value;
+            while (tileLibrary.ContainsKey(tempID))
+                tempID = UnityEngine.Random.value;
+
+            //Create the tileData and add it to the paletteData
+            File.WriteAllText(Path.Combine(backupPalette.palettePath, fileName + "data"), JsonConvert.SerializeObject(new TileData(fileName, tempID)));
+            tempPalette.tList[tempID] = fileName;
         }
 
         //Refresh the tile list
@@ -296,17 +309,29 @@ public class PaletteManager : MonoBehaviour
         if (backupPalette != null)
         {
             //Check all backed up tiles to confirm whether they should be kept
-            foreach (var tile in backupPalette.tList.Keys)
+            foreach (var tile in backupPalette.tList.Values)
             {
-                //If a tile is not longer found in the tlist, delete it.
-                if (!tempPalette.tList.ContainsKey(tile))
+                //If a tile is not longer found in the tlist, delete the image and image data.
+                if (!tempPalette.tList.ContainsValue(tile))
+                {
                     File.Delete(Path.Combine(backupPalette.palettePath, tile));
+                    File.Delete(Path.Combine(backupPalette.palettePath, tile + "data"));
+                }
             }
-        }
 
-        //Rename the palette folder
-        if(backupPalette.paletteName != tempPalette.paletteName)
+            //Rename the palette folder if the name changed from the existing palette
+            if (backupPalette.paletteName != tempPalette.paletteName)
+                Directory.Move(backupPalette.palettePath, tempPalette.palettePath);
+        }
+        //If you're editing a new palette, you always need to rename the folder
+        else
             Directory.Move(backupPalette.palettePath, tempPalette.palettePath);
+
+        //Make sure the tileLibrary is updated with all the tiles and their paths.
+        foreach(var tile in tempPalette.tList)
+        {
+                tileLibrary[tile.Key] = Path.Combine(tempPalette.palettePath, tile.Value);
+        }
 
         //Create or Update the palette data json
         File.WriteAllText(Path.Combine(tempPalette.palettePath, "PaletteData"), JsonConvert.SerializeObject(tempPalette, Formatting.Indented));
@@ -324,27 +349,30 @@ public class PaletteManager : MonoBehaviour
         UpdateView(false);
 
         //Check all temp tiles to confirm whether they should be kept
-        foreach (var tile in tempPalette.tList.Keys)
+        foreach (var tile in tempPalette.tList.Values)
         {
             //If a tile is not found in the backup palette, delete it.
-            if (!backupPalette.tList.ContainsKey(tile))
+            if (!backupPalette.tList.ContainsValue(tile))
+            {
                 File.Delete(Path.Combine(backupPalette.palettePath, tile));
+                File.Delete(Path.Combine(backupPalette.palettePath, tile + "data"));
+            }
         }
+
+        //Refresh the Palette Selector
+        RefreshPaletteSelector();
     }
 
     /// <summary>
     /// Delete a tile within a palette
     /// </summary>
     /// <param name="fileName">The tile to be deleted.</param>
-    public void DeleteTile(string tileName)
+    public void DeleteTile(float tileKey)
     {
         //Remove the tile reference from the palette data
-        tempPalette.tList.Remove(tileName);
-
+        tempPalette.tList.Remove(tileKey);
         //Refresh the tile list
         RefreshTileList();
-
-        Debug.Log(tileName + " will be deleted");
     }
 
     /// <summary>
@@ -383,7 +411,7 @@ public class PaletteManager : MonoBehaviour
         bool resetPreview = false;
         try
         {
-            if(!tempPalette.tList.ContainsKey(tempPalette.mainSprite))
+            if(!tempPalette.tList.ContainsValue(tempPalette.mainSprite))
                 resetPreview = true;
         }
         catch (ArgumentNullException)
@@ -391,12 +419,12 @@ public class PaletteManager : MonoBehaviour
             resetPreview = true;
         }
 
-        foreach (var tile in tempPalette.tList.Keys)
+        foreach (var tile in tempPalette.tList)
         {
             //Set the new preview sprite as the first sprite 
             if (resetPreview)
             {
-                tempPalette.mainSprite = tile;
+                tempPalette.mainSprite = tile.Value;
                 resetPreview = false;
             }
 
@@ -404,14 +432,14 @@ public class PaletteManager : MonoBehaviour
             var btn = Instantiate(tilePrefab, managerContent);
 
             //Create the sprite
-            byte[] data = File.ReadAllBytes(Path.Combine(backupPalette.palettePath, tile));
+            byte[] data = File.ReadAllBytes(Path.Combine(backupPalette.palettePath, tile.Value));
 
             Texture2D tex = new Texture2D(2, 2);
             tex.LoadImage(data);
             tex.filterMode = FilterMode.Bilinear;
 
             //Setup the preview object
-            btn.Setup(tile, Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100), i);
+            btn.Setup(tile.Key, tile.Value, Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100), i);
 
             i++;
             Debug.Log("new list item " + tile);

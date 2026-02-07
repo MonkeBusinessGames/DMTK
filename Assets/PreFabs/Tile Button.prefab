@@ -120,7 +120,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 732947402255087442}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4880077723754915031}
+        m_TargetAssemblyTypeName: TileButton, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4880077723754915031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,12 +146,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TileButton
   preview: {fileID: 732947402255087442}
-  tile:
-    tileName: 
-    isRule: 0
-    ruleData:
-      ruleName: 
-      parent: 
-      defaultTile: 
-      edgeTiles: []
-      cornerTiles: []
+  tile: 0

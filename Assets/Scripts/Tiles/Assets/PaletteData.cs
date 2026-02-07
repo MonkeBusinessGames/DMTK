@@ -8,18 +8,26 @@ public class PaletteData
 {
     public string paletteName;
     public string palettePath;
-    public Dictionary<string, TileData> tList;
+    public Dictionary<float, string> tList;
     public string mainSprite;
 
     public PaletteData()
     {
-        paletteName = "None";
-        palettePath = "None";
-        tList = new Dictionary<string, TileData>();
+        paletteName = "";
+        palettePath = "";
+        tList = new Dictionary<float, string>();
         mainSprite = null;
     }
 
-    public PaletteData(string name, Dictionary<string, TileData> tiles, string sprite)
+    public PaletteData(string path)
+    {
+        paletteName = "";
+        palettePath = Path.Combine(path, "temp");
+        tList = new Dictionary<float, string>();
+        mainSprite = null;
+    }
+
+    public PaletteData(string name, Dictionary<float, string> tiles, string sprite)
     {
         paletteName = name;
         palettePath = Path.Combine(Application.persistentDataPath, "Palettes", paletteName);
@@ -30,12 +38,11 @@ public class PaletteData
     public override string ToString()
     {
         string t = "";
-        foreach(var key in tList.Keys)
+        foreach(var key in tList.Values)
         {
             t += ", " + key;
         }
 
         return paletteName + " | " + palettePath + " | " + t + " | " + mainSprite;
     }
-
 }

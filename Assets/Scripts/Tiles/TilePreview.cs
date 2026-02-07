@@ -6,20 +6,20 @@ public class TilePreview : MonoBehaviour
 {
     [SerializeField] private Image preview;
     [SerializeField] private TMP_Text buttonName;
-    private string fileName;
+    private float tile;
 
-    public void Setup(string file, Sprite previewSprite, int listPosition)
+    public void Setup(float tileID, string tileName, Sprite previewSprite, int listPosition)
     {
-        fileName = file;
+        tile = tileID;
         preview.sprite = previewSprite;
-        buttonName.text = fileName;
+        buttonName.text = tileName;
 
-        GetComponent<RectTransform>().anchoredPosition = new Vector2(-300 + 200 * (listPosition % 4), 50 - 100 * Mathf.Floor(listPosition / 4));
+        GetComponent<RectTransform>().anchoredPosition = new Vector2(-300 + 150 * (listPosition % 5), 75 - 150 * Mathf.Floor(listPosition / 5));
     }
 
     public void Delete()
     {
-        PaletteManager.Instance.DeleteTile(fileName);
+        PaletteManager.Instance.DeleteTile(tile);
         Destroy(this);
     }
 

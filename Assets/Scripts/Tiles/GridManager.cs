@@ -3,7 +3,7 @@ using UnityEngine;
 public class GridManager : MonoBehaviour
 {
     [SerializeField] private GameObject gridManager;
-    private TileData selectedTile;
+    private float selectedTile;
     private TileButton selectedButton;
     public static GridManager Instance;
     [SerializeField] private TileButton tilePrefab;
@@ -90,7 +90,7 @@ public class GridManager : MonoBehaviour
             Destroy(child.gameObject);
     }
 
-    public void LoadTile(TileData tile, int placement)
+    public void LoadTile(float tile, int placement)
     {
         var btn = Instantiate(tilePrefab, tilePanel);
         btn.Setup(tile, placement);

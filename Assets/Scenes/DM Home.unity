@@ -1792,8 +1792,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 473ce8b098230834ea0f6f8f9584cc36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  dmBackground: {fileID: 1770951451}
-  playerBackground: {fileID: 810806158}
+  dmBackground: {fileID: 0}
+  playerBackground: {fileID: 0}
   musicSource: {fileID: 1953799487}
   sfxSource: {fileID: 154859352}
 --- !u!4 &119472229
@@ -7582,19 +7582,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PaletteManager
   loadedPalette:
-    paletteName: 
-    palettePath: 
+    paletteName: None
+    palettePath: None
     mainSprite: 
   tempPalette:
-    paletteName: 
-    palettePath: 
+    paletteName: None
+    palettePath: None
     mainSprite: 
   backupPalette:
     paletteName: None
     palettePath: None
     mainSprite: 
-  selectorContent: {fileID: 16904967}
-  managerContent: {fileID: 989718550}
+  selectorContent: {fileID: 1869081276}
+  managerContent: {fileID: 2079280937}
   palettePrefab: {fileID: 3694583973602696594, guid: 0b2f9f1a727ef1448bf3e449208d0b51, type: 3}
   tilePrefab: {fileID: 4818415471305639796, guid: d699a6645e6882f459743f63b8a9d26b, type: 3}
   paletteSelector: {fileID: 1869081275}
