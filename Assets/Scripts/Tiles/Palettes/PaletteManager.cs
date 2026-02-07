@@ -89,7 +89,7 @@ public class PaletteManager : MonoBehaviour
         int i = 0;
         foreach (var tile in loadedPalette.tList)
         {
-            byte[] data = File.ReadAllBytes(Path.Combine(loadedPalette.palettePath, tile.Value + "data"));
+            byte[] data = File.ReadAllBytes(Path.Combine(loadedPalette.palettePath, tile.Value));
             
             Texture2D tex = new Texture2D(2, 2);
                 

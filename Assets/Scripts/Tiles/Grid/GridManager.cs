@@ -41,8 +41,8 @@ public class GridManager : MonoBehaviour
 
     public void OpenGridTools()
     {
-            gridManager.SetActive(true);
-            CursorController.Instance.SetCursor(ToolState.Select);
+        gridManager.SetActive(true);
+        CursorController.Instance.SetCursor(ToolState.Select);
     }
 
     public void CloseGridTools()
@@ -78,7 +78,7 @@ public class GridManager : MonoBehaviour
 
     public void SelectTile(TileButton tileButton)
     {
-        tileButton.Unselect();
+        selectedButton.Unselect();
         selectedTile = tileButton.tile;
         selectedButton = tileButton;
     }

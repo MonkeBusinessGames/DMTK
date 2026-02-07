@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class GridMap
 {
     public Vector2 size;
-    public string parent;
     public GridTile[][,] tileLayers;
     public List<GridObject> objects;
 
