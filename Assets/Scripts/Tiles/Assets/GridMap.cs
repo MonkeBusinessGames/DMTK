@@ -4,19 +4,20 @@ using System.Collections.Generic;
 [System.Serializable]
 public class GridMap
 {
-    public Vector2 size;
+    public string mapName;
+    public int width, height;
     public GridTile[][,] tileLayers;
     public List<GridObject> objects;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    public GridMap() 
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    public GridMap(string name, int gridWidth, int gridHeight)
     {
-        
+        mapName = name;
+        width = gridWidth;
+        height = gridHeight;
     }
 }

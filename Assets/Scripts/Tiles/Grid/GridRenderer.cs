@@ -2,9 +2,26 @@ using UnityEngine;
 using System.Collections.Generic;
 public class GridRenderer : MonoBehaviour
 {
-
+    public static GridRenderer Instance;
     private Dictionary<Vector2Int, SpriteRenderer> gridSpaces = new();
-    
+    private void Awake()
+    {
+        //Prevent duplicates of this object from existing
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        //Make this object accessible to other objects.
+        Instance = this;
+    }
+
+    public void LoadGridMap()
+    {
+
+    }
+
     public void SetTile(Vector2Int position, Sprite sprite)
     {
         //Check if a gameobject already exists in this gridspace

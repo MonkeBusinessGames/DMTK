@@ -25,7 +25,7 @@ public class PaletteManager : MonoBehaviour
     public TilePreview tilePrefab;
     [SerializeField] private GameObject paletteSelector;
     [SerializeField] private GameObject paletteManager;
-    [SerializeField] private PaletteNamer paletteNamer;
+    [SerializeField] private DataNamer paletteNamer;
 
     private void Awake()
     {
@@ -160,11 +160,10 @@ public class PaletteManager : MonoBehaviour
 
                 //Setup the preview object
                 btn.Setup(palette.paletteName, Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100), i);
-
-                i++;
-                Debug.Log("new plist item " + palette.paletteName);
             }
 
+            i++;
+            Debug.Log("new plist item " + palette.paletteName);
         }
     }
 

@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 
-public class PaletteNamer : MonoBehaviour
+public class DataNamer : MonoBehaviour
 {
 
     [SerializeField] private TMP_Text errorField;
