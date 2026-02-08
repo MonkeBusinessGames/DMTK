@@ -17,9 +17,9 @@ public class GridRenderer : MonoBehaviour
         Instance = this;
     }
 
-    public void LoadGridMap()
+    public void LoadGridMap(GridMap gridMap)
     {
-
+        GridSizer.Instance.LoadSize(gridMap.width, gridMap.height);
     }
 
     public void SetTile(Vector2Int position, Sprite sprite)

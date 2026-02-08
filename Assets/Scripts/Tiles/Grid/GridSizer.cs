@@ -3,12 +3,26 @@ using UnityEngine.UI;
 using TMPro;
 public class GridSizer : MonoBehaviour
 {
-    public static Vector2 gridSize = new Vector2Int(10, 10);
+    public static GridSizer Instance;
+
+    public Vector2Int gridSize = new Vector2Int(10, 10);
     [SerializeField] private SpriteRenderer sRend;
     [SerializeField] private Slider widthSlider;
     [SerializeField] private Slider heightSlider;
     [SerializeField] private TMP_Text widthValue;
     [SerializeField] private TMP_Text heightValue;
+    private void Awake()
+    {
+        //Prevent duplicates of this object from existing
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        //Make this object accessible to other objects.
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -23,6 +37,7 @@ public class GridSizer : MonoBehaviour
         gridSize.y = (int) heightSlider.value * 2;
         sRend.size = gridSize;
         heightValue.text = gridSize.y.ToString();
+        GridSelector.Instance.loadedGridMap.height = gridSize.y;
     }
 
     public void ChangeWidth()
@@ -30,11 +45,12 @@ public class GridSizer : MonoBehaviour
         gridSize.x = (int) widthSlider.value * 2;
         sRend.size = gridSize;
         widthValue.text = gridSize.x.ToString();
+        GridSelector.Instance.loadedGridMap.width = gridSize.x;
     }
 
-    public void LoadSize(Vector2Int newSize) 
+    public void LoadSize(int gridWidth, int gridHeight) 
     {
-        gridSize = newSize;
+        gridSize = new Vector2Int(gridWidth, gridHeight);
 
         widthSlider.value = gridSize.x / 2;
         heightSlider.value = gridSize.y / 2;

@@ -10,6 +10,7 @@ public class GridSelector : MonoBehaviour
 {
 
     public static GridSelector Instance;
+    [SerializeField] private GameObject selector;
     private string gridmapPath;
     public List<string> gridmapList = new();
     public Transform content;
@@ -48,12 +49,18 @@ public class GridSelector : MonoBehaviour
         RefreshSelector();
 
         gridmapNamer.SetName(loadedGridMap.mapName);
+    }
 
+    private void Start()
+    {
         NewGridMap();
     }
 
     public void Delete(string fileName)
     {
+        if (fileName == backupGridMap)
+            NewGridMap();
+
         File.Delete(Path.Combine(gridmapPath, fileName));
         gridmapList.Remove(fileName);
         RefreshSelector();
@@ -61,12 +68,12 @@ public class GridSelector : MonoBehaviour
 
     public void OpenSelector()
     {
-        gameObject.SetActive(true);
+        selector.SetActive(true);
         DMManager.onGrid = false;
     }
     public void CloseSelector()
     {
-        gameObject.SetActive(false);
+        selector.SetActive(false);
         DMManager.onGrid = true;
     }
 
@@ -90,6 +97,15 @@ public class GridSelector : MonoBehaviour
 
     public void SaveNewGridMap()
     {
+        //If the name already exists, don't allow the new name
+        if (gridmapList.Contains(loadedGridMap.mapName))
+        {
+            gridmapNamer.DuplicateError(loadedGridMap.mapName);
+            Debug.Log(loadedGridMap + " is a duplicate");
+
+            return;
+        }
+
         //If the name is empty, don't let them save
         if (!gridmapNamer.RequiredCheck())
             return;
@@ -120,7 +136,7 @@ public class GridSelector : MonoBehaviour
     public void EditName(string newName)
     {
         //If the name already exists, don't allow the new name
-        if (gridmapList.Contains(newName))
+        if (gridmapList.Contains(newName) && newName != backupGridMap)
         {
             gridmapNamer.DuplicateError(loadedGridMap.mapName);
             Debug.Log(newName + " is a duplicate");
@@ -136,7 +152,9 @@ public class GridSelector : MonoBehaviour
     public void NewGridMap()
     {
         loadedGridMap = new GridMap("", 10, 10);
-        GridRenderer.Instance.LoadGridMap();
+        backupGridMap = loadedGridMap.mapName;
+        gridmapNamer.SetName("");
+        GridRenderer.Instance.LoadGridMap(loadedGridMap);
         CloseSelector();
         saveExisting.interactable = false;
     }
@@ -144,8 +162,9 @@ public class GridSelector : MonoBehaviour
     public void SelectGridMap(string mapName)
     {
         loadedGridMap = JsonConvert.DeserializeObject<GridMap>(File.ReadAllText(Path.Combine(gridmapPath, mapName)));
+        backupGridMap = loadedGridMap.mapName;
         gridmapNamer.SetName(loadedGridMap.mapName);
-        GridRenderer.Instance.LoadGridMap();
+        GridRenderer.Instance.LoadGridMap(loadedGridMap);
         CloseSelector();
         saveExisting.interactable = true;
     }
