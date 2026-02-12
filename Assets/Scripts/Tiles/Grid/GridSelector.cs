@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GridSelector : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class GridSelector : MonoBehaviour
     public GridButton buttonPrefab;
     public GridMap loadedGridMap;
     public DataNamer gridmapNamer;
+    public TMP_Text currentMapText;
     public string backupGridMap;
     public Button saveExisting;
 
@@ -122,8 +124,8 @@ public class GridSelector : MonoBehaviour
         if (!gridmapNamer.RequiredCheck())
             return;
 
-        gridmapList.Add(loadedGridMap.mapName);
-        Delete(backupGridMap);
+        loadedGridMap.mapName = new string(backupGridMap);
+
         File.WriteAllText(Path.Combine(gridmapPath, loadedGridMap.mapName), JsonConvert.SerializeObject(loadedGridMap));
 
         RefreshSelector();
@@ -152,17 +154,20 @@ public class GridSelector : MonoBehaviour
     public void NewGridMap()
     {
         loadedGridMap = new GridMap("", 10, 10);
-        backupGridMap = loadedGridMap.mapName;
+        backupGridMap = new string(loadedGridMap.mapName);
         gridmapNamer.SetName("");
+        GridSizer.Instance.LoadSize(10, 10);
         GridRenderer.Instance.LoadGridMap(loadedGridMap);
         CloseSelector();
         saveExisting.interactable = false;
+        currentMapText.text = "New Grid Map";
     }
 
     public void SelectGridMap(string mapName)
     {
         loadedGridMap = JsonConvert.DeserializeObject<GridMap>(File.ReadAllText(Path.Combine(gridmapPath, mapName)));
-        backupGridMap = loadedGridMap.mapName;
+        backupGridMap = new string(loadedGridMap.mapName);
+        currentMapText.text = backupGridMap;
         gridmapNamer.SetName(loadedGridMap.mapName);
         GridRenderer.Instance.LoadGridMap(loadedGridMap);
         CloseSelector();

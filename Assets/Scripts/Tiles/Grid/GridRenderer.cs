@@ -1,9 +1,16 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
+
 public class GridRenderer : MonoBehaviour
 {
     public static GridRenderer Instance;
     private Dictionary<Vector2Int, SpriteRenderer> gridSpaces = new();
+    private InputAction leftClick;
+    public GridTile currentTile;
+    public GridTile selectedTile;
+    [SerializeField] GridTile prefab;
+
     private void Awake()
     {
         //Prevent duplicates of this object from existing
@@ -15,6 +22,11 @@ public class GridRenderer : MonoBehaviour
 
         //Make this object accessible to other objects.
         Instance = this;
+    }
+
+    private void Start()
+    {
+        leftClick = InputSystem.actions.FindAction("LeftClick");
     }
 
     public void LoadGridMap(GridMap gridMap)
@@ -38,4 +50,6 @@ public class GridRenderer : MonoBehaviour
         //Set gameobject's sprite to the new sprite.
         sr.sprite = sprite;
     }
+
+    
 }

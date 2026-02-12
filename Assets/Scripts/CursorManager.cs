@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 [System.Serializable]
 public enum ToolState
 {
@@ -20,6 +20,7 @@ public class CursorController : MonoBehaviour
     [SerializeField] Texture2D fill;
     [SerializeField] Texture2D erase;
     [SerializeField] Texture2D drag;
+
     public static CursorController Instance;
 
     private void Awake()
@@ -36,6 +37,10 @@ public class CursorController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    public void Update()
+    {
+        //transform.position = Input.mousePosition;
+    }
     public void SetCursor(ToolState newState)
     {
         tool = newState;

@@ -20,4 +20,9 @@ public class GridMap
         width = gridWidth;
         height = gridHeight;
     }
+
+    public override string ToString()
+    {
+        return mapName + ", " + width + ", " + height;
+    }
 }
