@@ -1,15 +1,19 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
+using System;
 
 public class GridRenderer : MonoBehaviour
 {
     public static GridRenderer Instance;
     private Dictionary<Vector2Int, SpriteRenderer> gridSpaces = new();
+    private GridTile[,] tileMatrix = new GridTile[10, 10];
     private InputAction leftClick;
-    public GridTile currentTile;
-    public GridTile selectedTile;
-    [SerializeField] GridTile prefab;
+    public GridTile currentTile = null;
+    public GridTile selectedTile = null;
+    [SerializeField] private GridTile tilePrefab;
+    [SerializeField] private Transform tileParent;
+    [SerializeField] Camera cam;
 
     private void Awake()
     {
@@ -29,9 +33,59 @@ public class GridRenderer : MonoBehaviour
         leftClick = InputSystem.actions.FindAction("LeftClick");
     }
 
+    private void Update()
+    {
+        Vector2 mousePosition = cam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        Vector2Int posInGrid = new Vector2Int(Mathf.FloorToInt(mousePosition.x) + tileMatrix.GetLength(0)/2, Mathf.FloorToInt(mousePosition.y) + tileMatrix.GetLength(1) / 2);
+
+        //Debug.Log("Mouse" + mousePosition + "| Grid " + posInGrid);
+        try
+        {
+            HoverOnTile(tileMatrix[posInGrid.x, posInGrid.y]);
+        }
+        catch (IndexOutOfRangeException)
+        {
+            //Debug.Log("No Tile");
+        }
+
+        if (leftClick.IsPressed())
+        {
+            GridManager.Instance.UseTool(currentTile);
+        }
+    }
+
     public void LoadGridMap(GridMap gridMap)
     {
         GridSizer.Instance.LoadSize(gridMap.width, gridMap.height);
+        UpdateGridSize(gridMap.width, gridMap.height);
+        //Debug.Log("Loaded " + gridMap);
+    }
+
+    public void UpdateGridSize(int gridWidth, int gridHeight)
+    {
+
+        foreach (Transform child in tileParent)
+        {
+            Destroy(child.gameObject);
+        }
+
+        GridTile[,] newMatrix = new GridTile[gridWidth, gridHeight];
+        
+        float xStartPos = 0.5f - gridWidth / 2;
+        float yStartPos = 0.5f - gridHeight / 2;
+        int iStartOld = tileMatrix.GetLength(0) / 2;
+        int jStartOld = tileMatrix.GetLength(1) / 2;
+
+        for(int i = 0; i < gridWidth; i++)
+        {
+            for (int j = 0; j < gridHeight; j++) 
+            {
+                newMatrix[i, j] = Instantiate<GridTile>(tilePrefab, new Vector2(xStartPos + i, yStartPos + j), Quaternion.identity, tileParent);
+            }
+        }
+
+        tileMatrix = newMatrix;
+
     }
 
     public void SetTile(Vector2Int position, Sprite sprite)
@@ -51,5 +105,14 @@ public class GridRenderer : MonoBehaviour
         sr.sprite = sprite;
     }
 
-    
+    public void HoverOnTile(GridTile newTile)
+    {
+        //Debug.Log(newTile);
+
+        if(currentTile!= null)
+            currentTile.sRend.color = Color.white;
+        currentTile = newTile;
+        newTile.sRend.color = Color.gray;
+
+    }
 }

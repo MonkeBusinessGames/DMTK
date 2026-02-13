@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 [System.Serializable]
 public enum ToolState
 {
@@ -8,7 +9,8 @@ public enum ToolState
     Box,
     Fill,
     Erase,
-    Drag
+    Drag,
+    Paste
 }
 
 public class CursorController : MonoBehaviour
@@ -20,6 +22,7 @@ public class CursorController : MonoBehaviour
     [SerializeField] Texture2D fill;
     [SerializeField] Texture2D erase;
     [SerializeField] Texture2D drag;
+    [SerializeField] Texture2D paste;
 
     public static CursorController Instance;
 
@@ -34,13 +37,8 @@ public class CursorController : MonoBehaviour
 
         //Make this object accessible to other objects and don't destory it.
         Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
-    public void Update()
-    {
-        //transform.position = Input.mousePosition;
-    }
     public void SetCursor(ToolState newState)
     {
         tool = newState;
@@ -64,6 +62,9 @@ public class CursorController : MonoBehaviour
                 break;
             case ToolState.Drag:
                 Cursor.SetCursor(drag, Vector2.zero, CursorMode.Auto);
+                break;
+            case ToolState.Paste:
+                Cursor.SetCursor(paste, Vector2.zero, CursorMode.Auto);
                 break;
 
         }

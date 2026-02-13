@@ -36,6 +36,7 @@ public class DMManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         //Check if on the grid
         if(onGrid)
         {

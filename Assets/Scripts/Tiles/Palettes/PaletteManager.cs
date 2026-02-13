@@ -12,7 +12,8 @@ public class PaletteManager : MonoBehaviour
     //Palette Data Elements
     private string palettesPath;
     public Dictionary<string, PaletteData> palettes = new();
-    public Dictionary<float, Sprite> loadedTiles = new();
+    public Dictionary<float, Sprite> loadedTileSprites = new();
+    public Dictionary<float, TileData> loadedTileData = new();
     public Dictionary<float, string> tileLibrary = new();
     public PaletteData loadedPalette = null;
     public PaletteData tempPalette = null;
@@ -96,13 +97,13 @@ public class PaletteManager : MonoBehaviour
             tex.LoadImage(data);
             tex.filterMode = FilterMode.Bilinear;
 
-            loadedTiles.Add(tile.Key, Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100));
-
+            loadedTileSprites.Add(tile.Key, Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100));
+            loadedTileData.Add(tile.Key, JsonConvert.DeserializeObject<TileData>(File.ReadAllText(Path.Combine(loadedPalette.palettePath, Path.GetFileNameWithoutExtension(tile.Value) + "data"))));
             GridManager.Instance.LoadTile(tile.Key, i);
             i++;
             Debug.Log("Loaded" + tile.Value);
         }
-
+        
     }
 
     /// <summary>
@@ -282,7 +283,7 @@ public class PaletteManager : MonoBehaviour
                 tempID = UnityEngine.Random.value;
 
             //Create the tileData and add it to the paletteData
-            File.WriteAllText(Path.Combine(backupPalette.palettePath, fileName + "data"), JsonConvert.SerializeObject(new TileData(fileName, tempID)));
+            File.WriteAllText(Path.Combine(backupPalette.palettePath, Path.GetFileNameWithoutExtension(fileName) + "data"), JsonConvert.SerializeObject(new TileData(fileName, tempID)));
             tempPalette.tList[tempID] = fileName;
         }
 
@@ -315,7 +316,7 @@ public class PaletteManager : MonoBehaviour
                 if (!tempPalette.tList.ContainsValue(tile))
                 {
                     File.Delete(Path.Combine(backupPalette.palettePath, tile));
-                    File.Delete(Path.Combine(backupPalette.palettePath, tile + "data"));
+                    File.Delete(Path.Combine(backupPalette.palettePath, Path.GetFileNameWithoutExtension(tile) + "data"));
                 }
             }
 
@@ -355,7 +356,7 @@ public class PaletteManager : MonoBehaviour
             if (!backupPalette.tList.ContainsValue(tile))
             {
                 File.Delete(Path.Combine(backupPalette.palettePath, tile));
-                File.Delete(Path.Combine(backupPalette.palettePath, tile + "data"));
+                File.Delete(Path.Combine(backupPalette.palettePath, Path.GetFileNameWithoutExtension(tile) + "data"));
             }
         }
 

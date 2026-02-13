@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.UIElements;
 
 public class GridManager : MonoBehaviour
 {
@@ -8,6 +10,7 @@ public class GridManager : MonoBehaviour
     public static GridManager Instance;
     [SerializeField] private TileButton tilePrefab;
     [SerializeField] private Transform tilePanel;
+    public GridTile selectedGridTile;
 
     private void Awake()
     {
@@ -50,27 +53,65 @@ public class GridManager : MonoBehaviour
         CursorController.Instance.SetCursor(ToolState.Select);
     }
 
-    private void Highlight()
+    public void UseTool(GridTile gridTile)
+    {
+        switch (CursorController.Instance.tool)
+        {
+            case ToolState.Select:
+                Select(gridTile);
+                break;
+            case ToolState.Paint:
+                Paint(gridTile);
+                break;
+            case ToolState.Box:
+                BoxFill(gridTile);
+                break;
+            case ToolState.Fill:
+                FloodFill(gridTile);    
+                break;
+            case ToolState.Erase:
+                Erase(gridTile);
+                break;
+            case ToolState.Drag:
+                break;
+            case ToolState.Paste:
+                Paste(gridTile);
+                break;
+
+        }
+    }
+
+    private void Select(GridTile gridTile)
+    {
+        selectedGridTile = gridTile;
+    }
+
+    private void Highlight(GridTile gridTile)
     {
 
     }
 
-    private void Paint()
+    private void Paint(GridTile gridTile)
+    {
+        gridTile.SetTile(selectedTile);
+    }
+
+    private void BoxFill(GridTile gridTile)
     {
 
     }
 
-    private void BoxFill()
+    private void FloodFill(GridTile gridTile)
     {
 
     }
 
-    private void FloodFill()
+    private void Erase(GridTile gridTile)
     {
 
     }
 
-    private void Erase()
+    private void Paste(GridTile gridTile)
     {
 
     }
