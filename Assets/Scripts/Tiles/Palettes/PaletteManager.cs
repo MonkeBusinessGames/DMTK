@@ -1,10 +1,11 @@
-using UnityEngine;
-using System.IO;
-using SFB;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System;
+using System.IO;
 using Newtonsoft.Json;
+using SFB;
+using UnityEditor.Experimental.GraphView;
+using UnityEngine;
 public class PaletteManager : MonoBehaviour
 {
     public static PaletteManager Instance;
@@ -20,10 +21,12 @@ public class PaletteManager : MonoBehaviour
     public PaletteData backupPalette = null;
 
     //Palette Selector Elements
-    public Transform selectorContent;
-    public Transform managerContent;
+    public RectTransform selectorContent;
+    public RectTransform managerContent;
+    public RectTransform tilePanel;
     public PaletteButton palettePrefab;
     public TilePreview tilePrefab;
+    public TileButton tileButtonPrefab;
     [SerializeField] private GameObject paletteSelector;
     [SerializeField] private GameObject paletteManager;
     [SerializeField] private DataNamer paletteNamer;
@@ -84,8 +87,11 @@ public class PaletteManager : MonoBehaviour
     public void SelectPalette(string paletteName)
     {
         CloseSelector();
-        GridManager.Instance.ClearTiles();
-        loadedPalette = JsonConvert.DeserializeObject<PaletteData>(File.ReadAllText(Path.Combine(palettesPath, paletteName, "PaletteData")));
+
+        foreach (Transform child in tilePanel)
+            Destroy(child.gameObject);
+
+    loadedPalette = JsonConvert.DeserializeObject<PaletteData>(File.ReadAllText(Path.Combine(palettesPath, paletteName, "PaletteData")));
 
         int i = 0;
         foreach (var tile in loadedPalette.tList)
@@ -99,11 +105,16 @@ public class PaletteManager : MonoBehaviour
 
             loadedTileSprites.Add(tile.Key, Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100));
             loadedTileData.Add(tile.Key, JsonConvert.DeserializeObject<TileData>(File.ReadAllText(Path.Combine(loadedPalette.palettePath, Path.GetFileNameWithoutExtension(tile.Value) + "data"))));
-            GridManager.Instance.LoadTile(tile.Key, i);
+
+            var btn = Instantiate(tileButtonPrefab, tilePanel);
+            btn.Setup(tile.Key, i);
+
             i++;
             Debug.Log("Loaded" + tile.Value);
         }
-        
+
+        //Resize scroll content transform
+        tilePanel.sizeDelta = new Vector2(0, 20 + (200 * Mathf.Ceil(i / 2)));
     }
 
     /// <summary>
@@ -164,6 +175,8 @@ public class PaletteManager : MonoBehaviour
             }
 
             i++;
+            //Resize scroll content transform
+            selectorContent.sizeDelta = new Vector2(0, 20 + (180 * i));
             Debug.Log("new plist item " + palette.paletteName);
         }
     }
@@ -438,13 +451,16 @@ public class PaletteManager : MonoBehaviour
             Texture2D tex = new Texture2D(2, 2);
             tex.LoadImage(data);
             tex.filterMode = FilterMode.Bilinear;
-
+            
             //Setup the preview object
             btn.Setup(tile.Key, tile.Value, Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100), i);
 
             i++;
             Debug.Log("new list item " + tile);
         }
+
+        //Resize scroll content transform
+        managerContent.sizeDelta = new Vector2(0, 20 + 400 * Mathf.Ceil((float)i / 5));
 
         //Set the null as the preview sprite if there are no more sprites.
         if (resetPreview)

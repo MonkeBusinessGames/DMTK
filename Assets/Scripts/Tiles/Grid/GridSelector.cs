@@ -14,7 +14,7 @@ public class GridSelector : MonoBehaviour
     [SerializeField] private GameObject selector;
     private string gridmapPath;
     public List<string> gridmapList = new();
-    public Transform content;
+    public RectTransform content;
     public GridButton buttonPrefab;
     public GridMap loadedGridMap;
     public DataNamer gridmapNamer;
@@ -95,6 +95,9 @@ public class GridSelector : MonoBehaviour
             i++;
             Debug.Log("new list item " + bg);   
         }
+
+        //Resize scroll content transform
+        content.sizeDelta = new Vector2(0, 20 + (180 * i));
     }
 
     public void SaveNewGridMap()

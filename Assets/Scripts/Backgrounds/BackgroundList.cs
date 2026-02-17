@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BackgroundList : MonoBehaviour
 {
-    public Transform content;
+    public RectTransform content;
     public BackgroundButton buttonPrefab;
     [SerializeField] private GameObject backgroundSelector;
 
@@ -32,6 +32,10 @@ public class BackgroundList : MonoBehaviour
             i++;
             Debug.Log("new list item " + bg);
         }
+
+
+        //Resize scroll content transform
+        content.sizeDelta = new Vector2(0,20 + (444 * Mathf.Ceil((float)i/3)));
     }
 
 }

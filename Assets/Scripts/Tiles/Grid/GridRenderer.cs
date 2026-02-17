@@ -1,7 +1,8 @@
-using UnityEngine;
-using System.Collections.Generic;
-using UnityEngine.InputSystem;
 using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class GridRenderer : MonoBehaviour
 {
@@ -35,23 +36,38 @@ public class GridRenderer : MonoBehaviour
 
     private void Update()
     {
-        Vector2 mousePosition = cam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        Vector2Int posInGrid = new Vector2Int(Mathf.FloorToInt(mousePosition.x) + tileMatrix.GetLength(0)/2, Mathf.FloorToInt(mousePosition.y) + tileMatrix.GetLength(1) / 2);
+        if (!EventSystem.current.IsPointerOverGameObject())
+        {
+            Debug.Log("Mouse is not over UI");
+            Vector2 mousePosition = cam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            Vector2Int posInGrid = new Vector2Int(Mathf.FloorToInt(mousePosition.x) + tileMatrix.GetLength(0) / 2, Mathf.FloorToInt(mousePosition.y) + tileMatrix.GetLength(1) / 2);
 
-        //Debug.Log("Mouse" + mousePosition + "| Grid " + posInGrid);
-        try
-        {
-            HoverOnTile(tileMatrix[posInGrid.x, posInGrid.y]);
-        }
-        catch (IndexOutOfRangeException)
-        {
-            //Debug.Log("No Tile");
+            //Debug.Log("Mouse" + mousePosition + "| Grid " + posInGrid);
+            try
+            {
+                HoverOnTile(tileMatrix[posInGrid.x, posInGrid.y]);
+            }
+            catch (IndexOutOfRangeException)
+            {
+                if (currentTile != null)
+                {
+                    currentTile.sRend.color = Color.white;
+                    currentTile = null;
+                }
+            }
+
+            if (leftClick.IsPressed())
+            {
+                GridManager.Instance.UseTool(currentTile);
+            }
         }
 
-        if (leftClick.IsPressed())
+        else if (currentTile != null)
         {
-            GridManager.Instance.UseTool(currentTile);
+            currentTile.sRend.color = Color.white;
+            currentTile = null;
         }
+
     }
 
     public void LoadGridMap(GridMap gridMap)

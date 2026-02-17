@@ -1,10 +1,14 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.EventSystems;
 
 public class DMManager : MonoBehaviour
 {
     [SerializeField] Camera dmCamera;
     [SerializeField] Camera playerCamera;
+    [SerializeField] PixelPerfectCamera dmCam;
+    [SerializeField] PixelPerfectCamera pCam;
     private InputAction scroll;
     private InputAction rightClick;
     private Vector2 mousePosition;
@@ -38,12 +42,21 @@ public class DMManager : MonoBehaviour
     {
 
         //Check if on the grid
-        if(onGrid)
+        if(!EventSystem.current.IsPointerOverGameObject())
         {
             //Zooms the camera if scroll value is found
-            if (dmCamera.orthographicSize > 0 && dmCamera.orthographicSize < 40)
-                playerCamera.orthographicSize = dmCamera.orthographicSize -= scroll.ReadValue<Vector2>().y;
-
+            int scrollValue = (int) (scroll.ReadValue<Vector2>().y * 500 * Time.deltaTime);
+            if (scrollValue != 0)
+            {
+                pCam.assetsPPU -= scrollValue;
+                //Debug.Log(scrollValue);
+                if (pCam.assetsPPU < 20)
+                    pCam.assetsPPU = dmCam.assetsPPU = 20;
+                else if (pCam.assetsPPU > 200)
+                    pCam.assetsPPU = dmCam.assetsPPU = 200;
+                else
+                    dmCam.assetsPPU = pCam.assetsPPU;
+            }
             //Click and drag the camera
             if (!isDragging)
             {

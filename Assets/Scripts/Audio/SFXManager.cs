@@ -11,7 +11,7 @@ public class SFXManager : MonoBehaviour
     public static SFXManager Instance;
     private string sfxPath;
     public List<string> sfxList = new();
-    public Transform content;
+    public RectTransform content;
     public SFXButton buttonPrefab;
     Dictionary<string, AudioClip> sfxCache = new();
 
@@ -141,5 +141,8 @@ public class SFXManager : MonoBehaviour
             i++;
             Debug.Log("new list item " + bg);
         }
+
+        //Resize scroll content transform
+        content.sizeDelta = new Vector2(0, 20 + (180 * i));
     }
 }

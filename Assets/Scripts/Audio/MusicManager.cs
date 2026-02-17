@@ -11,7 +11,7 @@ public class MusicManager : MonoBehaviour
     public static MusicManager Instance;
     private string musicPath;
     public List<string> musicList = new();
-    public Transform content;
+    public RectTransform content;
     public MusicButton buttonPrefab;
     Dictionary<string, AudioClip> musicCache = new();
 
@@ -144,5 +144,8 @@ public class MusicManager : MonoBehaviour
             i++;
             Debug.Log("new list item " + bg);
         }
+
+        //Resize scroll content transform
+        content.sizeDelta = new Vector2(0, 20 + (180 * i));
     }
 }

@@ -14,7 +14,7 @@ public class BackgroundButton : MonoBehaviour
         preview.sprite = BackgroundManager.Instance.LoadSprite(file);
         buttonName.text = fileName;
 
-        GetComponent<RectTransform>().anchoredPosition = new Vector2(-300 + 200 * (listPosition % 4), 50 - 100 * Mathf.Floor(listPosition / 4));
+        GetComponent<RectTransform>().anchoredPosition = new Vector2(-620 + 620 * (listPosition % 3), -20 - 444 * Mathf.Floor(listPosition / 3));
     }
 
     public void OnClick()

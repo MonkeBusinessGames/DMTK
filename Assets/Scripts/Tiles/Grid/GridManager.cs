@@ -8,8 +8,6 @@ public class GridManager : MonoBehaviour
     private float selectedTile;
     private TileButton selectedButton;
     public static GridManager Instance;
-    [SerializeField] private TileButton tilePrefab;
-    [SerializeField] private Transform tilePanel;
     public GridTile selectedGridTile;
 
     private void Awake()
@@ -124,16 +122,5 @@ public class GridManager : MonoBehaviour
         selectedButton = tileButton;
     }
 
-    public void ClearTiles()
-    {
-
-        foreach (Transform child in tilePanel)
-            Destroy(child.gameObject);
-    }
-
-    public void LoadTile(float tile, int placement)
-    {
-        var btn = Instantiate(tilePrefab, tilePanel);
-        btn.Setup(tile, placement);
-    }
+    
 }

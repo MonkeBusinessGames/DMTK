@@ -13,7 +13,9 @@ public class PaletteButton : MonoBehaviour
         preview.sprite = mainSprite;
         buttonName.text = palette;
 
-        GetComponent<RectTransform>().anchoredPosition = new Vector2(-300 + 200 * (listPosition % 4), 50 - 100 * Mathf.Floor(listPosition / 4));
+
+        GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0 - 180 * listPosition);
+
     }
 
     public void Setup(string paletteData, int listPosition)
