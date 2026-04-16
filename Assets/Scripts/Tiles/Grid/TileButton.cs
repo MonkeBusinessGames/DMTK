@@ -4,9 +4,9 @@ using UnityEngine.UI;
 public class TileButton : MonoBehaviour
 {
     [SerializeField] private Image preview;
-    public float tile;
+    public int tile;
 
-    public void Setup(float tileID, int listPosition)
+    public void Setup(int tileID, int listPosition)
     {
         tile = tileID;
         preview.sprite = PaletteManager.Instance.loadedTileSprites[tile];

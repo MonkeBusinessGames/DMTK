@@ -13,9 +13,9 @@ public class PaletteManager : MonoBehaviour
     //Palette Data Elements
     private string palettesPath;
     public Dictionary<string, PaletteData> palettes = new();
-    public Dictionary<float, Sprite> loadedTileSprites = new();
-    public Dictionary<float, TileData> loadedTileData = new();
-    public Dictionary<float, string> tileLibrary = new();
+    public Dictionary<int, Sprite> loadedTileSprites = new();
+    public Dictionary<int, TileData> loadedTileData = new();
+    public Dictionary<int, string> tileLibrary = new();
     public PaletteData loadedPalette = null;
     public PaletteData tempPalette = null;
     public PaletteData backupPalette = null;
@@ -51,7 +51,7 @@ public class PaletteManager : MonoBehaviour
             Directory.CreateDirectory(palettesPath);
 
         if(File.Exists(Path.Combine(palettesPath, "TileLibrary")))
-            tileLibrary = JsonConvert.DeserializeObject<Dictionary<float, string>>(File.ReadAllText(Path.Combine(palettesPath, "TileLibrary")));
+            tileLibrary = JsonConvert.DeserializeObject<Dictionary<int, string>>(File.ReadAllText(Path.Combine(palettesPath, "TileLibrary")));
 
 
         //Refresh the palettes list
@@ -291,9 +291,9 @@ public class PaletteManager : MonoBehaviour
             File.Copy(sourcePath, destPath, overwrite: true);
 
             //Generate a unique ID for the tile 
-            float tempID = UnityEngine.Random.value;
+            int tempID = UnityEngine.Random.Range(0, 99999);
             while (tileLibrary.ContainsKey(tempID))
-                tempID = UnityEngine.Random.value;
+                tempID = UnityEngine.Random.Range(0, 99999);
 
             //Create the tileData and add it to the paletteData
             File.WriteAllText(Path.Combine(backupPalette.palettePath, Path.GetFileNameWithoutExtension(fileName) + "data"), JsonConvert.SerializeObject(new TileData(fileName, tempID)));
@@ -381,7 +381,7 @@ public class PaletteManager : MonoBehaviour
     /// Delete a tile within a palette
     /// </summary>
     /// <param name="fileName">The tile to be deleted.</param>
-    public void DeleteTile(float tileKey)
+    public void DeleteTile(int tileKey)
     {
         //Remove the tile reference from the palette data
         tempPalette.tList.Remove(tileKey);

@@ -8,14 +8,14 @@ public class PaletteData
 {
     public string paletteName;
     public string palettePath;
-    public Dictionary<float, string> tList;
+    public Dictionary<int, string> tList;
     public string mainSprite;
 
     public PaletteData()
     {
         paletteName = "";
         palettePath = "";
-        tList = new Dictionary<float, string>();
+        tList = new Dictionary<int, string>();
         mainSprite = null;
     }
 
@@ -23,11 +23,11 @@ public class PaletteData
     {
         paletteName = "";
         palettePath = Path.Combine(path, "temp");
-        tList = new Dictionary<float, string>();
+        tList = new Dictionary<int, string>();
         mainSprite = null;
     }
 
-    public PaletteData(string name, Dictionary<float, string> tiles, string sprite)
+    public PaletteData(string name, Dictionary<int, string> tiles, string sprite)
     {
         paletteName = name;
         palettePath = Path.Combine(Application.persistentDataPath, "Palettes", paletteName);

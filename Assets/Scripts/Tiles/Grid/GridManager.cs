@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 public class GridManager : MonoBehaviour
 {
     [SerializeField] private GameObject gridManager;
-    private float selectedTile;
+    private int selectedTile;
     private TileButton selectedButton;
     public static GridManager Instance;
     public GridTile selectedGridTile;

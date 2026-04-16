@@ -3,13 +3,13 @@
 public class TileData
 {
     public string tileName;
-    public float tileID;
+    public int tileID;
     public bool isRule;
     public TileRules ruleData;
 
     public TileData() { }
 
-    public TileData(string name, float id)
+    public TileData(string name, int id)
     {
         tileName = name;
         tileID = id;
@@ -17,7 +17,7 @@ public class TileData
         ruleData = null;
     }
 
-    public TileData(string name, float id, TileRules rules)
+    public TileData(string name, int id, TileRules rules)
     {
         tileName = name;
         tileID = id;

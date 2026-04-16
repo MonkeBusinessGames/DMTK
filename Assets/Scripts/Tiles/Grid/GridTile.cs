@@ -7,7 +7,7 @@ public class GridTile : MonoBehaviour
     public Vector2Int gridPosition;
     public SpriteRenderer sRend;
     public TileData tileData;
-    public float tileID;
+    public int tileID;
 
     public void IsVisible(bool visible)
     {
@@ -19,7 +19,7 @@ public class GridTile : MonoBehaviour
         return gridPosition + sRend.name;
     }
 
-    public void SetTile(float tile)
+    public void SetTile(int tile)
     {
         if (tileID == tile)
             return;

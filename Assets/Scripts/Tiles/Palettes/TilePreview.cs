@@ -6,9 +6,9 @@ public class TilePreview : MonoBehaviour
 {
     [SerializeField] private Image preview;
     [SerializeField] private TMP_Text buttonName;
-    private float tile;
+    private int tile;
 
-    public void Setup(float tileID, string tileName, Sprite previewSprite, int listPosition)
+    public void Setup(int tileID, string tileName, Sprite previewSprite, int listPosition)
     {
         tile = tileID;
         preview.sprite = previewSprite;
