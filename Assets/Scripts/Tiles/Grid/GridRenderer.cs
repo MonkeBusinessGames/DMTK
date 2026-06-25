@@ -15,6 +15,7 @@ public class GridRenderer : MonoBehaviour
     [SerializeField] private GridTile tilePrefab;
     [SerializeField] private Transform tileParent;
     [SerializeField] Camera cam;
+    private bool onGrid;
 
     private void Awake()
     {
@@ -31,24 +32,37 @@ public class GridRenderer : MonoBehaviour
 
     private void Start()
     {
+        onGrid = false;
         leftClick = InputSystem.actions.FindAction("LeftClick");
     }
 
     private void Update()
     {
+
         if (!EventSystem.current.IsPointerOverGameObject())
         {
-            Debug.Log("Mouse is not over UI");
+            //Debug.Log("Mouse is not over UI");
+            
+            //Get the position in the grid based on the point position
             Vector2 mousePosition = cam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
             Vector2Int posInGrid = new Vector2Int(Mathf.FloorToInt(mousePosition.x) + tileMatrix.GetLength(0) / 2, Mathf.FloorToInt(mousePosition.y) + tileMatrix.GetLength(1) / 2);
 
             //Debug.Log("Mouse" + mousePosition + "| Grid " + posInGrid);
             try
             {
+                //Try showing the hover on the tile
                 HoverOnTile(tileMatrix[posInGrid.x, posInGrid.y]);
             }
             catch (IndexOutOfRangeException)
             {
+
+                //Resets the cursor to select
+                if (onGrid)
+                {
+                    GridManager.Instance.ResetCursor();
+                    onGrid = false;
+                }
+                //If the grid position is not valid, reset the current tile
                 if (currentTile != null)
                 {
                     currentTile.sRend.color = Color.white;
@@ -56,14 +70,23 @@ public class GridRenderer : MonoBehaviour
                 }
             }
 
+            //Use the tool on the selected tile
             if (leftClick.IsPressed())
             {
                 GridManager.Instance.UseTool(currentTile);
             }
         }
 
+        //Reset the current tile to null
         else if (currentTile != null)
         {
+            //Resets the cursor to select
+            if (onGrid)
+            {
+                GridManager.Instance.ResetCursor();
+                onGrid = false;
+            }
+
             currentTile.sRend.color = Color.white;
             currentTile = null;
         }
@@ -130,5 +153,14 @@ public class GridRenderer : MonoBehaviour
         currentTile = newTile;
         newTile.sRend.color = Color.gray;
 
+        //Sets the cursor to the appropriate icon
+        if (!onGrid) 
+        {
+            GridManager.Instance.SetCursor();
+            onGrid = true;
+        }
+
     }
+
+
 }

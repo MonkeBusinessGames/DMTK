@@ -5,6 +5,9 @@ using UnityEngine.UIElements;
 public class GridManager : MonoBehaviour
 {
     [SerializeField] private GameObject gridManager;
+    private ToolState currentTool;
+    [SerializeField] private RectTransform[] toolButtons;
+    [SerializeField] RectTransform toolSelectRect;
     private int selectedTile;
     private TileButton selectedButton;
     public static GridManager Instance;
@@ -23,6 +26,14 @@ public class GridManager : MonoBehaviour
         Instance = this;
     }
 
+    public void ToggleGridMap()
+    {
+        if (GridRenderer.Instance.gameObject.activeSelf)
+            GridRenderer.Instance.gameObject.SetActive(false);
+        else
+            GridRenderer.Instance.gameObject.SetActive(true);
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -36,7 +47,18 @@ public class GridManager : MonoBehaviour
 
     public void SetTool(int newTool)
     {
-        CursorController.Instance.SetCursor((ToolState) newTool);
+        toolSelectRect.position = toolButtons[newTool].position;
+        currentTool = (ToolState) newTool;
+    }
+
+    public void SetCursor()
+    {
+        CursorController.Instance.SetCursor(currentTool);
+    }
+
+    public void ResetCursor()
+    {
+        CursorController.Instance.SetCursor(0);
     }
 
     public void OpenGridTools()

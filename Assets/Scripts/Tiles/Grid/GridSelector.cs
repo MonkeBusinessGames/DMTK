@@ -93,7 +93,7 @@ public class GridSelector : MonoBehaviour
             var btn = Instantiate(buttonPrefab, content);
             btn.Setup(bg, i);
             i++;
-            Debug.Log("new list item " + bg);   
+            //Debug.Log("new list item " + bg);   
         }
 
         //Resize scroll content transform

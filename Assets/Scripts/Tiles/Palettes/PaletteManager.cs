@@ -72,7 +72,7 @@ public class PaletteManager : MonoBehaviour
 
         foreach (var palettePath in Directory.GetDirectories(palettesPath))
         {
-            palettes.Add(new DirectoryInfo(palettePath).Name, JsonConvert.DeserializeObject<PaletteData>(File.ReadAllText(Path.Combine(palettePath, "PaletteData"))));
+                palettes.Add(new DirectoryInfo(palettePath).Name, JsonConvert.DeserializeObject<PaletteData>(File.ReadAllText(Path.Combine(palettePath, "PaletteData"))));
         }
 
         //Refresh the selector;
