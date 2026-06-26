@@ -70,7 +70,7 @@ public class GridManager : MonoBehaviour
     public void CloseGridTools()
     {
         gridManager.SetActive(false);
-        CursorController.Instance.SetCursor(ToolState.Select);
+        SetTool(0);
     }
 
     public void UseTool(GridTile gridTile)

@@ -3,12 +3,19 @@ using System.IO;
 using Newtonsoft.Json;
 using TMPro;
 using UnityEngine;
+using static UnityEngine.LowLevelPhysics2D.PhysicsLayers;
 
 public class LayerSelector : MonoBehaviour
 {
 
     public static LayerSelector Instance;
     [SerializeField] private GameObject selector;
+    [SerializeField] private GameObject newLayerPopUp;
+    [SerializeField] private DataNamer layerNamer;
+    private string backUpName;
+    private string newLayerName;
+    [SerializeField] private GameObject deletePopUp;
+    [SerializeField] private TMP_Text deleteName;
     public List<string> layerList = new();
     public RectTransform content;
     public LayerButton buttonPrefab;
@@ -29,22 +36,40 @@ public class LayerSelector : MonoBehaviour
         RefreshSelector();
 
     }
+    public void Delete(string layerName)
+    {
+        backUpName = layerName;
+        deleteName.text = "Are you sure you want to delete " +backUpName + "? This action cannot be taken back.";
+        deletePopUp.SetActive(true);
+    }
 
-    public void Delete(string fileName)
+    public void ConfirmDelete()
     {
         //Remove layer from loaded gridmap
+        layerList.Remove(backUpName);
 
+        //Close the confirmation pop-up
+        deletePopUp.SetActive(false);
 
-        layerList.Remove(fileName);
         RefreshSelector();
+    }
+
+    public void CancelDelete()
+    {
+        //Close the confirmation pop-up
+        deletePopUp.SetActive(false);
     }
 
     public void OpenSelector()
     {
+        RefreshSelector();
+        
+        //Open the selector
         selector.SetActive(true);
     }
     public void CloseSelector()
     {
+        //Close the selector
         selector.SetActive(false);
     }
 
@@ -60,7 +85,7 @@ public class LayerSelector : MonoBehaviour
         foreach (var layer in layerList)
         {
             var btn = Instantiate(buttonPrefab, content);
-            btn.Setup(layer, i);
+            btn.Setup(layer, i, true);
             i++;
             Debug.Log("new list item " + layer);
         }
@@ -69,23 +94,111 @@ public class LayerSelector : MonoBehaviour
         content.sizeDelta = new Vector2(0, 20 + (120 * i));
     }
 
-    public void SelectLayer(string layerName)
-    {
-
-    }
-
     public void AddLayer()
     {
+        newLayerPopUp.SetActive(true);
+        backUpName = newLayerName = "";
+        layerNamer.SetName(backUpName);
+    }
 
+    public void EditLayerName(string layerName)
+    {
+        newLayerPopUp.SetActive(true);
+        backUpName = newLayerName = layerName;
+        layerNamer.SetName(backUpName);
+    }
+
+    public void ConfirmLayerAdd()
+    {
+        //If the name is empty, don't let them save
+        if (!layerNamer.RequiredCheck())
+            return;
+
+        //Close the layer namer
+        newLayerPopUp.SetActive(false);
+
+        //If this is a new layer, add the layer
+        if(backUpName == "")
+        {
+            layerList.Add(newLayerName);
+        }
+        //If this is an existing layer, update the layer name
+        else
+        {        
+            //Update the layer at the index of the old name
+            layerList[layerList.IndexOf(backUpName)] = newLayerName;
+        }
+
+
+        RefreshSelector();
+    }
+
+    public void EditName(string newName)
+    {
+        //If the name already exists, don't allow the new name
+        if (layerList.Contains(newName) && newName != backUpName)
+        {
+            layerNamer.DuplicateError(backUpName);
+
+            return;
+        }
+
+        layerNamer.NoError();
+
+        newLayerName = newName;
+    }
+
+    public void CancelNameEdit()
+    {
+        //Close the layer namer
+        newLayerPopUp.SetActive(false);
+
+        layerNamer.NoError();
     }
 
     public void MoveLayerUp(string layerName)
     {
+        //Get in current index of the layer
+        int i = layerList.IndexOf(layerName);
+        
+        //If layer is already at the top of the list, do nothing
+        if ((i == 0))
+            return;
+        
+        //Remove the layer and place it again on place up on the list
+        layerList.RemoveAt(i);
+        layerList.Insert(i-1, layerName);
 
+        //Refresh the selector
+        RefreshSelector();
     }
 
-    public void MoveLayerDown()
+    public void MoveLayerDown(string layerName)
+    {
+
+        //Get in current index of the layer
+        int i = layerList.IndexOf(layerName);
+
+        //If layer is already at the bottom of the list, do nothing
+        if ((i == layerList.Count - 1))
+            return;
+
+        //Remove the layer and place it again on place up on the list
+        layerList.RemoveAt(i);
+        layerList.Insert(i + 1, layerName);
+
+        //Refresh the selector
+        RefreshSelector();
+    }
+
+    public void HideLayer(string layerName)
     {
 
     }
+
+    public void ShowLayer(string layerName)
+    {
+
+    }
+
 }
