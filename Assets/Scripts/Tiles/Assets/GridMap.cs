@@ -35,6 +35,12 @@ public class GridMap
         tileLayers.Add(new TileLayer(name, new int[width * height], false));
     }
 
+
+    public void UpdateLayerName(string name, int index)
+    {
+        tileLayers[index].layerName = name;
+    }
+
     public void RemoveLayer(int index) 
     {
         if(index >= 0 && index < tileLayers.Count)
@@ -77,19 +83,33 @@ public class GridMap
 
     public void UpdateSize(int newWidth, int newHeight)
     {
+        UnityEngine.Debug.Log("Size Changed from " + width + ", " + height + " to " + newWidth + ", " + newHeight);
+
         int wOffset = (newWidth - width) / 2;
         int hOffset = (newHeight - height) / 2;
 
+        UnityEngine.Debug.Log("wOffset =  " + wOffset + " & hOffset = " + hOffset);
+
+
         foreach (TileLayer layer in tileLayers)
         {
+            UnityEngine.Debug.Log("Old Tile Layer " + layer);
+
             int[] temp = new int[newWidth  * newHeight];
 
             for (int y = 0; y < height; y++)
             {
                 for (int x = 0; x < width; x++)
                 {
+                    int oldIndex = x + y * width;
+
+                    if (layer.tiles[oldIndex] == 0)
+                        continue;
+
                     int newX = x + wOffset;
                     int newY = y + hOffset;
+
+                    UnityEngine.Debug.Log("newX =  " + newX + " & newY = " + newY);
 
                     if (newX < 0 || newX >= newWidth)
                         continue;
@@ -97,20 +117,28 @@ public class GridMap
                     if (newY < 0 || newY >= newHeight)
                         continue;
 
-                    int oldIndex = x + y * width;
                     int newIndex = newX + newY * newWidth;
 
                     temp[newIndex] = layer.tiles[oldIndex];
-                    UnityEngine.Debug.Log("Added back " + layer.tiles[oldIndex] + "from" + oldIndex + "to " + newIndex);
+
+                    UnityEngine.Debug.Log("Added back sprite " + layer.tiles[oldIndex] + " from index " + oldIndex + " to index " + newIndex);
                 }
             }
 
+            UnityEngine.Debug.Log("New Tile Layer " + string.Join(", " , temp));
+
             layer.tiles = temp;
+
+            UnityEngine.Debug.Log("Updated Tile Layer " + layer);
+
         }
 
         width = newWidth;
         height = newHeight;
     }
 
-
+    public void SetTile(int x, int y, int layer, int tileID)
+    {
+        tileLayers[layer].tiles[x + y * width] = tileID;
+    }
 }

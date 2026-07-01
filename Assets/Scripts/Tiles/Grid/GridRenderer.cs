@@ -100,37 +100,13 @@ public class GridRenderer : MonoBehaviour
         int gridHeight = gridMap.height;
 
         GridSizer.Instance.LoadSize(gridWidth, gridHeight);
-        
-        //Debug.Log("Loaded " + gridMap);
 
-        foreach (Transform child in tileParent)
-        {
-            Destroy(child.gameObject);
-        }
-
-        GridTile[,] newMatrix = new GridTile[gridWidth, gridHeight];
-
-        float xStartPos = 0.5f - gridWidth / 2;
-        float yStartPos = 0.5f - gridHeight / 2;
-        int iStartOld = tileMatrix.GetLength(0) / 2;
-        int jStartOld = tileMatrix.GetLength(1) / 2;
-
-        for (int i = 0; i < gridWidth; i++)
-        {
-            for (int j = 0; j < gridHeight; j++)
-            {
-                newMatrix[i, j] = Instantiate<GridTile>(tilePrefab, new Vector2(xStartPos + i, yStartPos + j), Quaternion.identity, tileParent);
-                newMatrix[i, j].SetTile(gridMap.tileLayers[0].tiles[i * j]);
-            }
-        }
-
-        tileMatrix = newMatrix;
-
-
+        ResetGridTiles(gridMap, gridWidth, gridHeight);
     }
 
-    public void UpdateGridSize(int gridWidth, int gridHeight)
+    public void ResetGridTiles(GridMap gridMap, int gridWidth, int gridHeight)
     {
+        Debug.Log("Loaded " + gridMap);
 
         foreach (Transform child in tileParent)
         {
@@ -138,18 +114,18 @@ public class GridRenderer : MonoBehaviour
         }
 
         GridTile[,] newMatrix = new GridTile[gridWidth, gridHeight];
-        
+
         float xStartPos = 0.5f - gridWidth / 2;
         float yStartPos = 0.5f - gridHeight / 2;
         int iStartOld = tileMatrix.GetLength(0) / 2;
         int jStartOld = tileMatrix.GetLength(1) / 2;
 
-        for(int i = 0; i < gridWidth; i++)
+        for (int j = 0; j < gridWidth; j++)
         {
-            for (int j = 0; j < gridHeight; j++) 
+            for (int i = 0; i < gridHeight; i++)
             {
                 newMatrix[i, j] = Instantiate<GridTile>(tilePrefab, new Vector2(xStartPos + i, yStartPos + j), Quaternion.identity, tileParent);
-                newMatrix[i, j].SetTile(GridSelector.Instance.loadedGridMap.tileLayers[0].tiles[i + j]);
+                newMatrix[i, j].Setup(gridMap.tileLayers[0].tiles[i + j * gridWidth], i, j);
             }
         }
 

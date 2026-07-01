@@ -150,12 +150,18 @@ public class LayerSelector : MonoBehaviour
         if(backUpName == "")
         {
             layerList.Add(newLayerName);
+
+            //Update the loaded GridMap
+            GridSelector.Instance.loadedGridMap.AddLayer(newLayerName);
         }
         //If this is an existing layer, update the layer name
         else
         {        
             //Update the layer at the index of the old name
             layerList[layerList.IndexOf(backUpName)] = newLayerName;
+
+            //Update the loaded GridMap
+            GridSelector.Instance.loadedGridMap.UpdateLayerName(newLayerName, layerList.IndexOf(newLayerName));
         }
 
         RefreshSelector();

@@ -28,6 +28,6 @@ public class TileLayer
 
     public override string ToString()
     {
-        return layerName + ", " + hide + ", " + tiles;
+        return layerName + ", " + hide + ", " + string.Join(", ", tiles);
     }
 }

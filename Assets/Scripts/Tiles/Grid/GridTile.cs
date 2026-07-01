@@ -7,7 +7,7 @@ public class GridTile : MonoBehaviour
     public Vector2Int gridPosition;
     public SpriteRenderer sRend;
     public TileData tileData;
-    public int tileID;
+    public int tileID = 0;
 
     public void IsVisible(bool visible)
     {
@@ -19,10 +19,27 @@ public class GridTile : MonoBehaviour
         return gridPosition + sRend.name;
     }
 
+    public void Setup(int tile, int positionX,  int positionY)
+    {
+        UpdateSprite(tile);
+        gridPosition = new Vector2Int(positionX, positionY);
+        
+        Debug.Log("Tile " + tile + " created at " +  gridPosition);
+    }
+
     public void SetTile(int tile)
+    {
+        UpdateSprite(tile);
+
+        //Update the tile in the GridMap data
+        GridSelector.Instance.loadedGridMap.SetTile(gridPosition.x, gridPosition.y, 0, tile);
+    }
+
+    private void UpdateSprite(int tile)
     {
         if (tileID == tile)
             return;
+
         sRend.sprite = PaletteManager.Instance.loadedTileSprites[tile];
 
         //Get the size of the sprite
@@ -43,9 +60,6 @@ public class GridTile : MonoBehaviour
         //Set the tile data
         tileID = tile;
         tileData = PaletteManager.Instance.loadedTileData[tile];
-
-        //Update the tile in the GridMap data
-        GridSelector.Instance.loadedGridMap.tileLayers[0].tiles[gridPosition.x * gridPosition.y] = tile;
     }
 
     public void EraseTile(SpriteRenderer whiteSprite)
@@ -55,10 +69,10 @@ public class GridTile : MonoBehaviour
         sRend.sprite = whiteSprite.sprite;
 
         //Set the tile data
-        tileID = new int();
+        tileID = 0;
         tileData = null;
 
         //Update the tile in the GridMap data
-        GridSelector.Instance.loadedGridMap.tileLayers[0].tiles[gridPosition.x * gridPosition.y] = new int();
+        GridSelector.Instance.loadedGridMap.tileLayers[0].tiles[gridPosition.x + gridPosition.y * GridSizer.gridWidth] = new int();
     }
 }
