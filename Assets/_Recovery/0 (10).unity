@@ -6455,7 +6455,6 @@ MonoBehaviour:
   - {fileID: 1094651002}
   - {fileID: 45215059}
   toolSelectRect: {fileID: 838612063}
-  defaultGrid: {fileID: 3411027175609545487, guid: ac9e5f74592893941847bd314050fc00, type: 3}
   selectedGridTile: {fileID: 0}
 --- !u!114 &536077048
 MonoBehaviour:

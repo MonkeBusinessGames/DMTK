@@ -4,10 +4,11 @@ using UnityEngine.UIElements;
 
 public class GridManager : MonoBehaviour
 {
-    [SerializeField] private GameObject gridManager;
+    [SerializeField] private GameObject gridManager; 
     private ToolState currentTool;
     [SerializeField] private RectTransform[] toolButtons;
     [SerializeField] RectTransform toolSelectRect;
+    [SerializeField] SpriteRenderer defaultGrid;
     private int selectedTile;
     private TileButton selectedButton;
     public static GridManager Instance;
@@ -128,6 +129,7 @@ public class GridManager : MonoBehaviour
 
     private void Erase(GridTile gridTile)
     {
+        gridTile.EraseTile(defaultGrid);
 
     }
 

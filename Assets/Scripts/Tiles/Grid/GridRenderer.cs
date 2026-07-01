@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -95,9 +96,37 @@ public class GridRenderer : MonoBehaviour
 
     public void LoadGridMap(GridMap gridMap)
     {
-        GridSizer.Instance.LoadSize(gridMap.width, gridMap.height);
-        UpdateGridSize(gridMap.width, gridMap.height);
+        int gridWidth = gridMap.width;
+        int gridHeight = gridMap.height;
+
+        GridSizer.Instance.LoadSize(gridWidth, gridHeight);
+        
         //Debug.Log("Loaded " + gridMap);
+
+        foreach (Transform child in tileParent)
+        {
+            Destroy(child.gameObject);
+        }
+
+        GridTile[,] newMatrix = new GridTile[gridWidth, gridHeight];
+
+        float xStartPos = 0.5f - gridWidth / 2;
+        float yStartPos = 0.5f - gridHeight / 2;
+        int iStartOld = tileMatrix.GetLength(0) / 2;
+        int jStartOld = tileMatrix.GetLength(1) / 2;
+
+        for (int i = 0; i < gridWidth; i++)
+        {
+            for (int j = 0; j < gridHeight; j++)
+            {
+                newMatrix[i, j] = Instantiate<GridTile>(tilePrefab, new Vector2(xStartPos + i, yStartPos + j), Quaternion.identity, tileParent);
+                newMatrix[i, j].SetTile(gridMap.tileLayers[0].tiles[i * j]);
+            }
+        }
+
+        tileMatrix = newMatrix;
+
+
     }
 
     public void UpdateGridSize(int gridWidth, int gridHeight)
@@ -120,6 +149,7 @@ public class GridRenderer : MonoBehaviour
             for (int j = 0; j < gridHeight; j++) 
             {
                 newMatrix[i, j] = Instantiate<GridTile>(tilePrefab, new Vector2(xStartPos + i, yStartPos + j), Quaternion.identity, tileParent);
+                newMatrix[i, j].SetTile(GridSelector.Instance.loadedGridMap.tileLayers[0].tiles[i + j]);
             }
         }
 

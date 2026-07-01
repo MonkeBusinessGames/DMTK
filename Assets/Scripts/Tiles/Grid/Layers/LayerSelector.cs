@@ -19,6 +19,7 @@ public class LayerSelector : MonoBehaviour
     public List<string> layerList = new();
     public RectTransform content;
     public LayerButton buttonPrefab;
+    private bool layersUpdated;
 
     private void Awake()
     {
@@ -36,8 +37,27 @@ public class LayerSelector : MonoBehaviour
         RefreshSelector();
 
     }
+
+    public void LoadLayerList(List<TileLayer> gridLayerList)
+    {
+        layerList = new List<string>();
+
+        foreach(TileLayer layer in gridLayerList)
+        {
+            layerList.Add(layer.layerName);
+        }
+
+        RefreshSelector();
+    }
+
     public void Delete(string layerName)
     {
+        //Prevent deletion if there is only one layer
+        if (layerList.Count == 1)
+        {
+            return;
+        }
+
         backUpName = layerName;
         deleteName.text = "Are you sure you want to delete " +backUpName + "? This action cannot be taken back.";
         deletePopUp.SetActive(true);
@@ -63,6 +83,8 @@ public class LayerSelector : MonoBehaviour
     public void OpenSelector()
     {
         RefreshSelector();
+
+        layersUpdated = false;
         
         //Open the selector
         selector.SetActive(true);
@@ -71,6 +93,11 @@ public class LayerSelector : MonoBehaviour
     {
         //Close the selector
         selector.SetActive(false);
+
+        //Refresh the Gridmap if changes were made
+        if(layersUpdated)
+            GridSelector.Instance.RefreshGridMap();
+
     }
 
     public void RefreshSelector()
@@ -92,6 +119,8 @@ public class LayerSelector : MonoBehaviour
 
         //Resize scroll content transform
         content.sizeDelta = new Vector2(0, 20 + (120 * i));
+
+        layersUpdated = true;
     }
 
     public void AddLayer()
@@ -129,7 +158,6 @@ public class LayerSelector : MonoBehaviour
             layerList[layerList.IndexOf(backUpName)] = newLayerName;
         }
 
-
         RefreshSelector();
     }
 
@@ -165,9 +193,12 @@ public class LayerSelector : MonoBehaviour
         if ((i == 0))
             return;
         
-        //Remove the layer and place it again on place up on the list
+        //Remove the layer and place it again on place up on the selector list
         layerList.RemoveAt(i);
         layerList.Insert(i-1, layerName);
+
+        //Update the loaded GridMap
+        GridSelector.Instance.loadedGridMap.MoveLayerUp(i);
 
         //Refresh the selector
         RefreshSelector();
@@ -187,17 +218,25 @@ public class LayerSelector : MonoBehaviour
         layerList.RemoveAt(i);
         layerList.Insert(i + 1, layerName);
 
+        //Update the loaded GridMap
+        GridSelector.Instance.loadedGridMap.MoveLayerDown(i);
+
         //Refresh the selector
         RefreshSelector();
     }
 
+    
     public void HideLayer(string layerName)
     {
+        //Update the loaded GridMap
+        GridSelector.Instance.loadedGridMap.HideLayer(layerList.IndexOf(layerName));
 
     }
 
     public void ShowLayer(string layerName)
     {
+        //Update the loaded GridMap
+        GridSelector.Instance.loadedGridMap.ShowLayer(layerList.IndexOf(layerName));
 
     }
 

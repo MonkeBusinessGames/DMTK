@@ -161,6 +161,7 @@ public class GridSelector : MonoBehaviour
         gridmapNamer.SetName("");
         GridSizer.Instance.LoadSize(10, 10);
         GridRenderer.Instance.LoadGridMap(loadedGridMap);
+        LayerSelector.Instance.LoadLayerList(loadedGridMap.tileLayers);
         CloseSelector();
         saveExisting.interactable = false;
         currentMapText.text = "New Grid Map";
@@ -173,7 +174,13 @@ public class GridSelector : MonoBehaviour
         currentMapText.text = backupGridMap;
         gridmapNamer.SetName(loadedGridMap.mapName);
         GridRenderer.Instance.LoadGridMap(loadedGridMap);
+        LayerSelector.Instance.LoadLayerList(loadedGridMap.tileLayers);
         CloseSelector();
         saveExisting.interactable = true;
+    }
+
+    public void RefreshGridMap()
+    {
+        GridRenderer.Instance.LoadGridMap(loadedGridMap);
     }
 }

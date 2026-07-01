@@ -8,19 +8,24 @@ public class TileLayer
     public int[] tiles;
     public bool hide;
 
+    /// <summary>
+    /// Create an empty tile layer
+    /// </summary>
     public TileLayer()
     {
+        layerName = "New";
         tiles = new int[0];
+        hide = false;
     }
 
-
+    ///Create a tile layer with known tiles
     public TileLayer(string newName, int[] tileList, bool isHidden)
     {
         layerName = newName;
-        tiles = new int[tileList.Length];
+        tiles = tileList;
         hide = isHidden;
     }
-    
+
     public override string ToString()
     {
         return layerName + ", " + hide + ", " + tiles;

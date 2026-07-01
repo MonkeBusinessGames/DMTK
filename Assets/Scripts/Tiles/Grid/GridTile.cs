@@ -40,6 +40,25 @@ public class GridTile : MonoBehaviour
 
         transform.localScale = new Vector3(scaleX, scaleY, 1f);
 
+        //Set the tile data
+        tileID = tile;
         tileData = PaletteManager.Instance.loadedTileData[tile];
+
+        //Update the tile in the GridMap data
+        GridSelector.Instance.loadedGridMap.tileLayers[0].tiles[gridPosition.x * gridPosition.y] = tile;
+    }
+
+    public void EraseTile(SpriteRenderer whiteSprite)
+    {
+
+        //Clear the sprite
+        sRend.sprite = whiteSprite.sprite;
+
+        //Set the tile data
+        tileID = new int();
+        tileData = null;
+
+        //Update the tile in the GridMap data
+        GridSelector.Instance.loadedGridMap.tileLayers[0].tiles[gridPosition.x * gridPosition.y] = new int();
     }
 }

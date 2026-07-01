@@ -58,13 +58,13 @@ public class GridSizer : MonoBehaviour
 
         //Hide the error text
         errorText.SetActive(false);
-        
-        //Set the size of the grid renderer object
-        GridSelector.Instance.loadedGridMap.width = gridSize.x;
-        GridSelector.Instance.loadedGridMap.height = gridSize.y;
+
+        //Set the size of the grid loaded gridMap
+        GridSelector.Instance.loadedGridMap.UpdateSize(gridSize.x, gridSize.y);
 
         //Change the size of the grid itself
         sRend.size = gridSize;
+        GridRenderer.Instance.UpdateGridSize(gridSize.x, gridSize.y);
 
         CloseWindow();
     }

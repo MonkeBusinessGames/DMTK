@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 [System.Serializable]
 public class GridMap
@@ -21,6 +22,7 @@ public class GridMap
         height = gridHeight;
 
         tileLayers = new List<TileLayer> ();
+        tileLayers.Add(new TileLayer("Default Layer", new int[gridWidth *  gridHeight], false));
     }
 
     public override string ToString()
@@ -62,5 +64,53 @@ public class GridMap
 
         }
     }
+
+    public void HideLayer(int index)
+    {
+        tileLayers[index].hide = true;
+    }
+
+    public void ShowLayer(int index)
+    {
+        tileLayers[index].hide = false;
+    }
+
+    public void UpdateSize(int newWidth, int newHeight)
+    {
+        int wOffset = (newWidth - width) / 2;
+        int hOffset = (newHeight - height) / 2;
+
+        foreach (TileLayer layer in tileLayers)
+        {
+            int[] temp = new int[newWidth  * newHeight];
+
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    int newX = x + wOffset;
+                    int newY = y + hOffset;
+
+                    if (newX < 0 || newX >= newWidth)
+                        continue;
+
+                    if (newY < 0 || newY >= newHeight)
+                        continue;
+
+                    int oldIndex = x + y * width;
+                    int newIndex = newX + newY * newWidth;
+
+                    temp[newIndex] = layer.tiles[oldIndex];
+                    UnityEngine.Debug.Log("Added back " + layer.tiles[oldIndex] + "from" + oldIndex + "to " + newIndex);
+                }
+            }
+
+            layer.tiles = temp;
+        }
+
+        width = newWidth;
+        height = newHeight;
+    }
+
 
 }
