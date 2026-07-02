@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 732947402255087442}
   - component: {fileID: 1887059513267845138}
   - component: {fileID: 4880077723754915031}
+  - component: {fileID: -5609018455907135295}
   m_Layer: 5
   m_Name: Tile Button
   m_TagString: Untagged
@@ -147,3 +148,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TileButton
   preview: {fileID: 732947402255087442}
   tile: 0
+--- !u!114 &-5609018455907135295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2790024121236050757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: 180
+  m_PreferredHeight: 180
+  m_FlexibleWidth: 1
+  m_FlexibleHeight: 1
+  m_LayoutPriority: 1

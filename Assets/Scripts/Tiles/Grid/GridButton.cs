@@ -12,7 +12,7 @@ public class GridButton : MonoBehaviour
         gridName = name;
         buttonName.text = gridName;
 
-        GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -20 - 180 * listPosition);
+        //GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -20 - 180 * listPosition);
     }
 
     public void OnClick()

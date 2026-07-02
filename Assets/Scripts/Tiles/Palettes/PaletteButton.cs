@@ -14,7 +14,7 @@ public class PaletteButton : MonoBehaviour
         buttonName.text = palette;
 
 
-        GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0 - 180 * listPosition);
+        //GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0 - 180 * listPosition);
 
     }
 
@@ -25,7 +25,7 @@ public class PaletteButton : MonoBehaviour
 
         preview.gameObject.SetActive(false);
 
-        GetComponent<RectTransform>().anchoredPosition = new Vector2(-300 + 200 * (listPosition % 4), 50 - 100 * Mathf.Floor(listPosition / 4));
+        //GetComponent<RectTransform>().anchoredPosition = new Vector2(-300 + 200 * (listPosition % 4), 50 - 100 * Mathf.Floor(listPosition / 4));
     }
 
     public void OnClick()

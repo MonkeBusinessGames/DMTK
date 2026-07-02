@@ -847,6 +847,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8659213580316762005}
   - component: {fileID: 5002791554950071089}
+  - component: {fileID: 858740702342426683}
   m_Layer: 5
   m_Name: Layer Button
   m_TagString: Untagged
@@ -892,6 +893,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LayerButton
   buttonName: {fileID: 6423228406893872581}
   hiddenIcon: {fileID: 575975074401789314}
+--- !u!114 &858740702342426683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7376087273844368157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: -1
+  m_PreferredHeight: 100
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: 1
+  m_LayoutPriority: 1
 --- !u!1 &7607696113130038686
 GameObject:
   m_ObjectHideFlags: 0

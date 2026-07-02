@@ -16,7 +16,7 @@ public class LayerButton : MonoBehaviour
         else
             hiddenIcon.SetActive(false);
 
-        GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -20 - 120 * listPosition);
+        //GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -20 - 120 * listPosition);
     }
 
     public void Delete()
