@@ -24,6 +24,14 @@ public class CursorController : MonoBehaviour
     [SerializeField] Texture2D drag;
     [SerializeField] Texture2D paste;
 
+    private Vector2 selectPointer = Vector2.zero;
+    private Vector2 paintPointer = new Vector2(0, 64);
+    private Vector2 boxPointer = new Vector2(0, 64);
+    private Vector2 fillPointer = new Vector2(32, 55);
+    private Vector2 erasePointer = new Vector2(0, 64);
+    private Vector2 dragPointer = new Vector2(32, 32);
+    private Vector2 pastePointer = new Vector2(0, 64);
+
     public static CursorController Instance;
 
     private void Awake()
@@ -46,25 +54,25 @@ public class CursorController : MonoBehaviour
         switch (newState)
         {
             case ToolState.Select:
-                Cursor.SetCursor(select, Vector2.zero, CursorMode.Auto);
+                Cursor.SetCursor(select, selectPointer, CursorMode.Auto);
                 break;
             case ToolState.Paint:
-                Cursor.SetCursor(paint, Vector2.zero, CursorMode.Auto);
+                Cursor.SetCursor(paint, paintPointer, CursorMode.Auto);
                 break;
             case ToolState.Box:
-                Cursor.SetCursor(box, Vector2.zero, CursorMode.Auto);
+                Cursor.SetCursor(box, boxPointer, CursorMode.Auto);
                 break;
             case ToolState.Fill:
-                Cursor.SetCursor(fill, Vector2.zero, CursorMode.Auto);
+                Cursor.SetCursor(fill, fillPointer, CursorMode.Auto);
                 break;
             case ToolState.Erase:
-                Cursor.SetCursor(erase, Vector2.zero, CursorMode.Auto);
+                Cursor.SetCursor(erase, erasePointer, CursorMode.Auto);
                 break;
             case ToolState.Drag:
-                Cursor.SetCursor(drag, Vector2.zero, CursorMode.Auto);
+                Cursor.SetCursor(drag, dragPointer, CursorMode.Auto);
                 break;
             case ToolState.Paste:
-                Cursor.SetCursor(paste, Vector2.zero, CursorMode.Auto);
+                Cursor.SetCursor(paste, pastePointer, CursorMode.Auto);
                 break;
 
         }

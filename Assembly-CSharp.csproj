@@ -78,7 +78,7 @@
     <Compile Include="Assets\Scripts\Tiles\ObjectRenderer.cs" />
     <Compile Include="Assets\Scripts\Tiles\Assets\GridObject.cs" />
     <Compile Include="Assets\Scripts\Tiles\Grid\Layers\LayerSelector.cs" />
-    <Compile Include="Assets\Scripts\CursorManager.cs" />
+    <Compile Include="Assets\Scripts\CursorController.cs" />
     <Compile Include="Assets\Scripts\DataNamer.cs" />
     <Compile Include="Assets\Scripts\Tiles\Grid\Layers\LayerButton.cs" />
     <Compile Include="Assets\Scripts\DM Manager.cs" />
