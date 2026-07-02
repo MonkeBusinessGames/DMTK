@@ -156,10 +156,10 @@ public class GridSelector : MonoBehaviour
 
     public void NewGridMap()
     {
-        loadedGridMap = new GridMap("", 10, 10);
+        loadedGridMap = new GridMap("", 2, 2);
         backupGridMap = new string(loadedGridMap.mapName);
         gridmapNamer.SetName("");
-        GridSizer.Instance.LoadSize(10, 10);
+        GridSizer.Instance.LoadSize(2, 2);
         GridRenderer.Instance.LoadGridMap(loadedGridMap);
         LayerSelector.Instance.LoadLayerList(loadedGridMap.tileLayers);
         CloseSelector();

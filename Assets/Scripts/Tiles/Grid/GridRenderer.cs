@@ -15,6 +15,7 @@ public class GridRenderer : MonoBehaviour
     public GridTile selectedTile = null;
     [SerializeField] private GridTile tilePrefab;
     [SerializeField] private Transform tileParent;
+    [SerializeField] private Transform layerPrefab;
     [SerializeField] Camera cam;
     private bool onGrid;
 
@@ -106,7 +107,7 @@ public class GridRenderer : MonoBehaviour
 
     public void ResetGridTiles(GridMap gridMap, int gridWidth, int gridHeight)
     {
-        Debug.Log("Loaded " + gridMap);
+        //Debug.Log("Loaded " + gridMap);
 
         foreach (Transform child in tileParent)
         {
@@ -120,13 +121,32 @@ public class GridRenderer : MonoBehaviour
         int iStartOld = tileMatrix.GetLength(0) / 2;
         int jStartOld = tileMatrix.GetLength(1) / 2;
 
-        for (int j = 0; j < gridWidth; j++)
+        foreach (TileLayer layer in gridMap.tileLayers)
         {
-            for (int i = 0; i < gridHeight; i++)
+            int l = 0;
+
+            Transform layerParent = Instantiate<Transform>(layerPrefab, tileParent);
+            layerParent.name = layer.layerName;
+
+            if (layer.hide)
             {
-                newMatrix[i, j] = Instantiate<GridTile>(tilePrefab, new Vector2(xStartPos + i, yStartPos + j), Quaternion.identity, tileParent);
-                newMatrix[i, j].Setup(gridMap.tileLayers[0].tiles[i + j * gridWidth], i, j);
+                layerParent.gameObject.SetActive(false);
             }
+
+            Debug.Log("Setting up layer #" + l + ": " + layer);
+
+            for (int j = 0; j < gridHeight; j++)
+            {
+                for (int i = 0; i < gridWidth; i++)
+                {
+                    newMatrix[i, j] = Instantiate<GridTile>(tilePrefab, new Vector2(xStartPos + i, yStartPos + j), Quaternion.identity, layerParent);
+                    newMatrix[i, j].Setup(gridMap.tileLayers[l].tiles[i + j * gridWidth], i, j);
+                }
+            }
+
+            l++;
+
+
         }
 
         tileMatrix = newMatrix;
@@ -157,7 +177,7 @@ public class GridRenderer : MonoBehaviour
         if(currentTile!= null)
             currentTile.sRend.color = Color.white;
         currentTile = newTile;
-        newTile.sRend.color = Color.gray;
+        newTile.sRend.color = Color.grey;
 
         //Sets the cursor to the appropriate icon
         if (!onGrid) 

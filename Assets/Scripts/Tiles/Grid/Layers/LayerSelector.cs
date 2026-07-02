@@ -109,12 +109,12 @@ public class LayerSelector : MonoBehaviour
         }
 
         int i = 0;
-        foreach (var layer in layerList)
+        foreach (var layer in GridSelector.Instance.loadedGridMap.tileLayers )
         {
             var btn = Instantiate(buttonPrefab, content);
-            btn.Setup(layer, i, true);
+            btn.Setup(layer.layerName, i, layer.hide);
             i++;
-            Debug.Log("new list item " + layer);
+            //Debug.Log("new list item " + layer);
         }
 
         //Resize scroll content transform
@@ -235,6 +235,7 @@ public class LayerSelector : MonoBehaviour
     public void HideLayer(string layerName)
     {
         //Update the loaded GridMap
+        layersUpdated = true;
         GridSelector.Instance.loadedGridMap.HideLayer(layerList.IndexOf(layerName));
 
     }
@@ -242,6 +243,7 @@ public class LayerSelector : MonoBehaviour
     public void ShowLayer(string layerName)
     {
         //Update the loaded GridMap
+        layersUpdated = true;
         GridSelector.Instance.loadedGridMap.ShowLayer(layerList.IndexOf(layerName));
 
     }

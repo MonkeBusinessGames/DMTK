@@ -72,7 +72,7 @@ public class GridSizer : MonoBehaviour
         //Change the size of the grid itself
         sRend.size = new Vector2(gridWidth, gridHeight);
         GridRenderer.Instance.ResetGridTiles(GridSelector.Instance.loadedGridMap, gridWidth, gridHeight);
-        UnityEngine.Debug.Log("Check2 Tile Layer " + GridSelector.Instance.loadedGridMap.tileLayers[0]);
+        //UnityEngine.Debug.Log("Check2 Tile Layer " + GridSelector.Instance.loadedGridMap.tileLayers[0]);
 
         CloseWindow();
     }
