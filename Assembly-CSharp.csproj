@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Tiles\Assets\TileData.cs" />
+    <Compile Include="Assets\Scripts\Image Download\PixabayResponse.cs" />
     <Compile Include="Assets\StandaloneFileBrowser\StandaloneFileBrowserWindows.cs" />
     <Compile Include="Assets\Scripts\SceneManager.cs" />
     <Compile Include="Assets\Scripts\Audio\SFXManager.cs" />
@@ -62,17 +63,20 @@
     <Compile Include="Assets\StandaloneFileBrowser\StandaloneFileBrowserEditor.cs" />
     <Compile Include="Assets\Scripts\Tiles\Grid\GridSelector.cs" />
     <Compile Include="Assets\Scripts\Backgrounds\BackgroundManager.cs" />
+    <Compile Include="Assets\Scripts\Image Download\Image Search Manager.cs" />
     <Compile Include="Assets\Scripts\Backgrounds\BackgroundButton.cs" />
     <Compile Include="Assets\Scripts\Tiles\Grid\GridRenderer.cs" />
     <Compile Include="Assets\Scripts\Tiles\Assets\GridMap.cs" />
     <Compile Include="Assets\Scripts\Tiles\Grid\GridButton.cs" />
     <Compile Include="Assets\Scripts\Tiles\Grid\GridSizer.cs" />
+    <Compile Include="Assets\Scripts\Image Download\IImageSearchProvider.cs" />
     <Compile Include="Assets\Scripts\Audio\MusicManager.cs" />
     <Compile Include="Assets\StandaloneFileBrowser\IStandaloneFileBrowser.cs" />
     <Compile Include="Assets\StandaloneFileBrowser\StandaloneFileBrowserLinux.cs" />
     <Compile Include="Assets\Scripts\Backgrounds\BackgroundList.cs" />
     <Compile Include="Assets\StandaloneFileBrowser\Sample\CanvasSampleOpenFileText.cs" />
     <Compile Include="Assets\Scripts\Audio\SFXButton.cs" />
+    <Compile Include="Assets\Scripts\Image Download\Image Result.cs" />
     <Compile Include="Assets\Scripts\Tiles\Assets\ObjectData.cs" />
     <Compile Include="Assets\StandaloneFileBrowser\StandaloneFileBrowserMac.cs" />
     <Compile Include="Assets\Scripts\Tiles\ObjectRenderer.cs" />
@@ -80,6 +84,8 @@
     <Compile Include="Assets\Scripts\Tiles\Grid\Layers\LayerSelector.cs" />
     <Compile Include="Assets\Scripts\CursorController.cs" />
     <Compile Include="Assets\Scripts\DataNamer.cs" />
+    <Compile Include="Assets\Scripts\Image Download\PixabaySearch.cs" />
+    <Compile Include="Assets\Scripts\Image Download\ResultButton.cs" />
     <Compile Include="Assets\Scripts\Tiles\Grid\Layers\LayerButton.cs" />
     <Compile Include="Assets\Scripts\DM Manager.cs" />
     <Compile Include="Assets\Scripts\Tiles\Grid\GridTile.cs" />

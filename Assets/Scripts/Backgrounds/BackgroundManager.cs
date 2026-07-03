@@ -1,7 +1,10 @@
-using UnityEngine;
-using System.IO;
-using SFB;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+using SFB;
+using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UIElements;
 
 public class BackgroundManager : MonoBehaviour
@@ -56,6 +59,41 @@ public class BackgroundManager : MonoBehaviour
 
         Refresh();
 
+    }
+
+    /// <summary>
+    /// Allow users to add a new background image.
+    /// </summary>
+    public async void ImportBackgroundfromURL(string fileName, string downloadURL)
+    {
+        Texture2D texture = await DownloadTexture(downloadURL);
+
+        Debug.Log("Saving " + fileName);
+        string destPath = Path.Combine(backgroundsPath, fileName + ".png");
+        Debug.Log("Downloading from " + downloadURL + " to " + fileName + " | " + destPath);
+        File.WriteAllBytes(destPath, texture.EncodeToPNG());
+        
+        Refresh();
+    }
+
+    public async Task<Texture2D> DownloadTexture(string url)
+    {
+        using UnityWebRequest request = UnityWebRequestTexture.GetTexture(url);
+
+        var operation = request.SendWebRequest();
+
+        while (!operation.isDone)
+        {
+            await Task.Yield();
+        }
+
+        if (request.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError(request.error);
+            return null;
+        }
+
+        return DownloadHandlerTexture.GetContent(request);
     }
 
     /// <summary>
