@@ -24,7 +24,7 @@ public class GridTile : MonoBehaviour
         UpdateSprite(tile);
         gridPosition = new Vector2Int(positionX, positionY);
         
-        Debug.Log("Tile " + tile + " created at " +  gridPosition);
+        //Debug.Log("Tile " + tile + " created at " +  gridPosition);
     }
 
     public void SetTile(int tile)

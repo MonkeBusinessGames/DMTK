@@ -148,4 +148,33 @@ public class MusicManager : MonoBehaviour
         //Resize scroll content transform
         content.sizeDelta = new Vector2(0, 20 + (180 * i));
     }
+
+    public async void ImportMusicfromURL(string fileName, string downloadURL)
+    {
+        byte[] music = await DownloadClip(downloadURL);
+
+        Debug.Log("Saving " + fileName);
+        string destPath = Path.Combine(musicPath, fileName + ".mp3");
+        Debug.Log("Downloading from " + downloadURL + " to " + fileName + " | " + destPath);
+        File.WriteAllBytes(destPath, music);
+
+        Refresh();
+    }
+
+    public async Task<byte[]> DownloadClip(string url)
+    {
+        using UnityWebRequest req = UnityWebRequestMultimedia.GetAudioClip(url, AudioType.MPEG);
+
+        var op = req.SendWebRequest();
+        while (!op.isDone)
+            await Task.Yield();
+
+        if (req.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError(req.error);
+            return null;
+        }
+
+        return req.downloadHandler.data;
+    }
 }

@@ -104,7 +104,7 @@ public class SFXManager : MonoBehaviour
             return null;
         }
 
-        AudioClip clip = DownloadHandlerAudioClip.GetContent(req);
+        AudioClip clip = DownloadHandlerAudioClip.GetContent(req);  
         sfxCache[fileName] = clip;
         return clip;
     }
@@ -145,4 +145,38 @@ public class SFXManager : MonoBehaviour
         //Resize scroll content transform
         content.sizeDelta = new Vector2(0, 20 + (180 * i));
     }
+
+    /// <summary>
+    /// Allow users to add a new background image.
+    /// </summary>
+    public async void ImportSFXfromURL(string fileName, string downloadURL)
+    {
+        byte[] sfx = await DownloadClip(downloadURL);
+
+        Debug.Log("Saving " + fileName);
+        string destPath = Path.Combine(sfxPath, fileName + ".mp3");
+        Debug.Log("Downloading from " + downloadURL + " to " + fileName + " | " + destPath);
+        File.WriteAllBytes(destPath, sfx);
+
+        Refresh();
+    }
+
+    public async Task<byte[]> DownloadClip(string url)
+    {
+        using UnityWebRequest req = UnityWebRequestMultimedia.GetAudioClip(url, AudioType.MPEG);
+
+        var op = req.SendWebRequest();
+        while (!op.isDone)
+            await Task.Yield();
+
+        if (req.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError(req.error);
+            return null;
+        }
+
+        return req.downloadHandler.data;
+    }
+
 }
+

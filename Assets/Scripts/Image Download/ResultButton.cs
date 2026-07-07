@@ -14,18 +14,17 @@ namespace Assets.Scripts.Image_Download
         private string title;
         private string downloadURL;
 
-        public void Setup(string name, Sprite previewSprite, string imageURL)
+        public void Setup(string name, Sprite previewSprite, string downl)
         {
             title = name;
             preview.sprite = previewSprite;
             buttonName.text = name;
-            downloadURL = imageURL;
 
         }
 
         public void Download()
         {
-            ImageSearchManager.Instance.SelectSearchResult(title, downloadURL);
+            //Download Image and Use
         }
 
         private void OnDestroy()
