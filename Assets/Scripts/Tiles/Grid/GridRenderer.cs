@@ -22,7 +22,12 @@ public class GridRenderer : MonoBehaviour
     private bool onGrid;
     private int topLayerIndex = 0;
     private Color defaultColor = new Color(0, 0, 0, 0f);
-    private Color hoverColor = new Color(0, 0, 0, .5f);
+    private Color hoverColor = new Color(0, 0, 0, .3f);
+    private Color highlightColor = new Color(0, 0, 0, .5f);
+    public ToolState selectState = ToolState.None;
+    private GridTile startGridTile = null;
+    private GridTile endGridTile = null;
+    private List<GridTile> highlightedTiles = new List<GridTile>();
     private GridTile[] adjacentTiles = new GridTile[4];
     private void Awake()
     {
@@ -57,8 +62,17 @@ public class GridRenderer : MonoBehaviour
             //Debug.Log("Mouse" + mousePosition + "| Grid " + posInGrid);
             try
             {
+                //Highlight all the tiles being selected
+                if (selectState == ToolState.Select)
+                    HighlightTile(overLayMatrix[posInGrid.x, posInGrid.y]);
+
+                //Highlight all the tiles between gridTiles
+                else if(selectState == ToolState.Box)
+                    HighlightBox(overLayMatrix[posInGrid.x, posInGrid.y]);
+
+                else
                 //Try showing the hover on the tile
-                HoverOnTile(overLayMatrix[posInGrid.x, posInGrid.y]);
+                    HoverOnTile(overLayMatrix[posInGrid.x, posInGrid.y]);
             }
             catch (IndexOutOfRangeException)
             {
@@ -78,10 +92,43 @@ public class GridRenderer : MonoBehaviour
             }
 
             //Use the tool on the selected tile
-            if (leftClick.IsPressed() && currentTile != null)
+            if (leftClick.WasPressedThisFrame() && currentTile != null)
             {
-                GridManager.Instance.UseTool(tileMatrix[currentTile.gridX, currentTile.gridY, topLayerIndex]);
+                ClearHighlight();
+                selectState = GridManager.Instance.UseTool(tileMatrix[currentTile.gridX, currentTile.gridY, topLayerIndex]);
             }
+
+            else if (leftClick.WasReleasedThisFrame())
+            {
+                switch (selectState)
+                {
+                    case ToolState.Select:
+                        break;
+                    case ToolState.Paint:
+                        break;
+                    case ToolState.Box:
+                        //Paint all the highlighted tiles in the box
+                        foreach (GridTile tile in highlightedTiles)
+                        {
+                            tile.sRend.color = defaultColor;
+                            GridManager.Instance.Paint(tileMatrix[tile.gridX, tile.gridY, topLayerIndex]);
+                        }
+
+                        highlightedTiles = new List<GridTile>();
+                        break;
+                    case ToolState.Fill:
+                        break;
+                    case ToolState.Erase:
+                        break;
+                    case ToolState.Drag:
+                        break;
+                    case ToolState.Paste:
+                        break;
+                }
+
+                selectState = ToolState.None;
+            }
+
         }
 
         //Reset the current tile to null
@@ -176,7 +223,14 @@ public class GridRenderer : MonoBehaviour
     {
         //Debug.Log(newTile);
         if(currentTile!= null)
-            currentTile.sRend.color = defaultColor;
+        {
+            if (highlightedTiles.Contains(currentTile))
+                currentTile.sRend.color = highlightColor;
+
+            else
+                currentTile.sRend.color = defaultColor;
+
+        }
         currentTile = newTile;
         newTile.sRend.color = hoverColor;
 
@@ -187,6 +241,63 @@ public class GridRenderer : MonoBehaviour
             onGrid = true;
         }
 
+    }
+
+    public void HighlightTile(GridTile newTile)
+    {
+        currentTile = newTile;
+        highlightedTiles.Add(newTile);
+        newTile.sRend.color = highlightColor;
+    }
+
+    public void SetBoxStart()
+    {
+        startGridTile = overLayMatrix[currentTile.gridX, currentTile.gridY];
+        startGridTile.sRend.color = highlightColor;
+        Debug.Log("Box Start set to " + startGridTile);
+    }
+
+    public void HighlightBox(GridTile newTile)
+    {
+        if (newTile != endGridTile)
+        {
+            List<GridTile> tempTiles = new List<GridTile>();
+
+            endGridTile = newTile;
+            int minX = Mathf.Min(endGridTile.gridX, startGridTile.gridX);
+            int maxX = Mathf.Max(endGridTile.gridX, startGridTile.gridX);
+            int minY = Mathf.Min(endGridTile.gridY, startGridTile.gridY);
+            int maxY = Mathf.Max(endGridTile.gridY, startGridTile.gridY);
+
+            //create a list of all tiles in box
+            for (int y = minY; y <= maxY; y++)
+            {
+                for (int x = minX; x <= maxX; x++)
+                {
+                    overLayMatrix[x, y].sRend.color = highlightColor;
+                    tempTiles.Add(overLayMatrix[x, y]);
+                }
+            }
+
+            //reset colors for previous highlighted tiles no longer in box
+            foreach (GridTile tile in highlightedTiles)
+            {
+                if (!tempTiles.Contains(tile))
+                    tile.sRend.color = defaultColor;
+            }
+
+            //set highlighted tiles = new box
+            highlightedTiles = tempTiles;
+        }
+    }
+
+    public void ClearHighlight()
+    {
+        //reset colors for previous highlighted tiles no longer in box
+        foreach (GridTile tile in highlightedTiles)
+        {  
+            tile.sRend.color = defaultColor;
+        }
     }
 
     public GridTile[] GetAdjacentTiles(int x, int y, int z)

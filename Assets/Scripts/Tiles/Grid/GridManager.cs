@@ -14,7 +14,7 @@ public class GridManager : MonoBehaviour
     private int selectedTile;
     private TileButton selectedButton;
     public static GridManager Instance;
-    public GridTile selectedGridTile;
+    public List<GridTile> selectedGridTiles;
     private List<GridTile> filledTiles = new List<GridTile>();
 
     private void Awake()
@@ -77,8 +77,9 @@ public class GridManager : MonoBehaviour
         SetTool(0);
     }
 
-    public void UseTool(GridTile gridTile)
+    public ToolState UseTool(GridTile gridTile)
     {
+
         switch (CursorController.Instance.tool)
         {
             case ToolState.Select:
@@ -103,26 +104,21 @@ public class GridManager : MonoBehaviour
                 break;
 
         }
+        return currentTool;
     }
 
     private void Select(GridTile gridTile)
     {
-        selectedGridTile = gridTile;
     }
 
-    private void Highlight(GridTile gridTile)
-    {
-
-    }
-
-    private void Paint(GridTile gridTile)
+    public void Paint(GridTile gridTile)
     {
         gridTile.SetTile(selectedTile);
     }
 
     private void BoxFill(GridTile gridTile)
     {
-
+        GridRenderer.Instance.SetBoxStart();
     }
 
     private void FloodFill(GridTile gridTile)
