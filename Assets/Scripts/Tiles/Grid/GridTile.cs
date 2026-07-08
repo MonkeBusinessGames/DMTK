@@ -40,7 +40,7 @@ public class GridTile : MonoBehaviour
         if (tileID == tile)
             return;
 
-        sRend.sprite = PaletteManager.Instance.loadedTileSprites[tile];
+        sRend.sprite = PaletteManager.Instance.GetTileSprite(tile);
 
         //Get the size of the sprite
         Vector2 spriteWorldSize = sRend.sprite.bounds.size;
@@ -59,7 +59,7 @@ public class GridTile : MonoBehaviour
 
         //Set the tile data
         tileID = tile;
-        tileData = PaletteManager.Instance.loadedTileData[tile];
+        tileData = PaletteManager.Instance.tileDataCache[tile];
     }
 
     public void EraseTile(SpriteRenderer whiteSprite)

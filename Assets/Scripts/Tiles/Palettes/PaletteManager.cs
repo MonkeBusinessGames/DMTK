@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using SFB;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 public class PaletteManager : MonoBehaviour
@@ -13,8 +15,8 @@ public class PaletteManager : MonoBehaviour
     //Palette Data Elements
     private string palettesPath;
     public Dictionary<string, PaletteData> palettes = new();
-    public Dictionary<int, Sprite> loadedTileSprites = new();
-    public Dictionary<int, TileData> loadedTileData = new();
+    public Dictionary<int, Sprite> tileSpriteCache = new();
+    public Dictionary<int, TileData> tileDataCache = new();
     public Dictionary<int, string> tileLibrary = new();
     public PaletteData loadedPalette = null;
     public PaletteData tempPalette = null;
@@ -103,15 +105,21 @@ public class PaletteManager : MonoBehaviour
             tex.LoadImage(data);
             tex.filterMode = FilterMode.Bilinear;
 
-            loadedTileSprites.Add(tile.Key, Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100));
-            loadedTileData.Add(tile.Key, JsonConvert.DeserializeObject<TileData>(File.ReadAllText(Path.Combine(loadedPalette.palettePath, Path.GetFileNameWithoutExtension(tile.Value) + "data"))));
+            tileSpriteCache.Add(tile.Key, Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100));
+            tileDataCache.Add(tile.Key, JsonConvert.DeserializeObject<TileData>(File.ReadAllText(Path.Combine(loadedPalette.palettePath, Path.GetFileNameWithoutExtension(tile.Value) + "data"))));
 
             var btn = Instantiate(tileButtonPrefab, tilePanel);
             btn.Setup(tile.Key, i);
 
             i++;
             Debug.Log("Loaded" + tile.Value);
+
+            if (!tileLibrary.ContainsKey(tile.Key))
+                tileLibrary.Add(tile.Key, Path.Combine(loadedPalette.palettePath, tile.Value));
         }
+
+        //Update the Tile Library json
+        File.WriteAllText(Path.Combine(palettesPath, "TileLibrary"), JsonConvert.SerializeObject(tileLibrary));
 
         //Resize scroll content transform
         tilePanel.sizeDelta = new Vector2(0, 20 + (200 * Mathf.Ceil(i / 2)));
@@ -350,6 +358,10 @@ public class PaletteManager : MonoBehaviour
         //Create or Update the palette data json
         File.WriteAllText(Path.Combine(tempPalette.palettePath, "PaletteData"), JsonConvert.SerializeObject(tempPalette, Formatting.Indented));
         Debug.Log(tempPalette);
+
+        //Update the Tile Library json
+        File.WriteAllText(Path.Combine(palettesPath, "TileLibrary"), JsonConvert.SerializeObject(tileLibrary));
+
         //Refresh the selector;
         RefreshPaletteList();
     }
@@ -503,5 +515,33 @@ public class PaletteManager : MonoBehaviour
 
         Resources.UnloadUnusedAssets();
         GC.Collect();
+    }
+
+    public Sprite GetTileSprite(int tileID)
+    {
+        if(tileSpriteCache.TryGetValue(tileID, out var sprite))
+        {
+            Debug.Log(tileID + " found in cache");
+            return sprite;
+        }
+
+        if (tileLibrary.TryGetValue(tileID, out var path))
+        {
+            byte[] data = File.ReadAllBytes(path);
+            Texture2D tex = new Texture2D(2, 2);
+
+            tex.LoadImage(data);
+            tex.filterMode = FilterMode.Bilinear;
+
+            tileSpriteCache.Add(tileID, Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100));
+            tileDataCache.Add(tileID, JsonConvert.DeserializeObject<TileData>(File.ReadAllText((path.TrimEnd(Path.GetExtension(path)) + "data"))));
+
+            Debug.Log(tileID + " added to cache from " + path);
+            return tileSpriteCache[tileID];
+        }
+
+        Debug.Log(tileID + " not found in cache or library");
+        return null;
+
     }
 }

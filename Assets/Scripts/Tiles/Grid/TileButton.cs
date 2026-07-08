@@ -9,7 +9,7 @@ public class TileButton : MonoBehaviour
     public void Setup(int tileID, int listPosition)
     {
         tile = tileID;
-        preview.sprite = PaletteManager.Instance.loadedTileSprites[tile];
+        preview.sprite = PaletteManager.Instance.GetTileSprite(tile);
 
         GetComponent<RectTransform>().anchoredPosition = new Vector2(-100 + 200 * (listPosition % 2), -20 - 200 * Mathf.Floor(listPosition / 2));
     }
