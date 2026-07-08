@@ -10,7 +10,8 @@ public enum ToolState
     Fill,
     Erase,
     Drag,
-    Paste
+    Paste,
+    None
 }
 
 public class CursorController : MonoBehaviour
