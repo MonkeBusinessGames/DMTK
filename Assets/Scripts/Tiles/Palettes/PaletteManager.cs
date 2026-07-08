@@ -5,8 +5,6 @@ using System.IO;
 using Newtonsoft.Json;
 using SFB;
 using Unity.VisualScripting;
-using UnityEditor;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 public class PaletteManager : MonoBehaviour
 {
@@ -98,6 +96,7 @@ public class PaletteManager : MonoBehaviour
         int i = 0;
         foreach (var tile in loadedPalette.tList)
         {
+
             byte[] data = File.ReadAllBytes(Path.Combine(loadedPalette.palettePath, tile.Value));
             
             Texture2D tex = new Texture2D(2, 2);
@@ -105,14 +104,14 @@ public class PaletteManager : MonoBehaviour
             tex.LoadImage(data);
             tex.filterMode = FilterMode.Bilinear;
 
-            tileSpriteCache.Add(tile.Key, Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100));
-            tileDataCache.Add(tile.Key, JsonConvert.DeserializeObject<TileData>(File.ReadAllText(Path.Combine(loadedPalette.palettePath, Path.GetFileNameWithoutExtension(tile.Value) + "data"))));
+            tileSpriteCache[tile.Key] = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100);
+            tileDataCache[tile.Key] = JsonConvert.DeserializeObject<TileData>(File.ReadAllText(Path.Combine(loadedPalette.palettePath, Path.GetFileNameWithoutExtension(tile.Value) + "data")));
 
             var btn = Instantiate(tileButtonPrefab, tilePanel);
             btn.Setup(tile.Key, i);
 
             i++;
-            Debug.Log("Loaded" + tile.Value);
+            //Debug.Log("Loaded" + tile.Value);
 
             if (!tileLibrary.ContainsKey(tile.Key))
                 tileLibrary.Add(tile.Key, Path.Combine(loadedPalette.palettePath, tile.Value));
@@ -521,7 +520,7 @@ public class PaletteManager : MonoBehaviour
     {
         if(tileSpriteCache.TryGetValue(tileID, out var sprite))
         {
-            Debug.Log(tileID + " found in cache");
+            //Debug.Log(tileID + " found in cache");
             return sprite;
         }
 

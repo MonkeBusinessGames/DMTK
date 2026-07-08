@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UIElements;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 
 public class GridManager : MonoBehaviour
 {
@@ -12,7 +14,8 @@ public class GridManager : MonoBehaviour
     private int selectedTile;
     private TileButton selectedButton;
     public static GridManager Instance;
-    public GridTile selectedGridTile;
+    public List<GridTile> selectedGridTiles;
+    private List<GridTile> filledTiles = new List<GridTile>();
 
     private void Awake()
     {
@@ -74,8 +77,9 @@ public class GridManager : MonoBehaviour
         SetTool(0);
     }
 
-    public void UseTool(GridTile gridTile)
+    public ToolState UseTool(GridTile gridTile)
     {
+
         switch (CursorController.Instance.tool)
         {
             case ToolState.Select:
@@ -100,31 +104,89 @@ public class GridManager : MonoBehaviour
                 break;
 
         }
+        return currentTool;
     }
 
     private void Select(GridTile gridTile)
     {
-        selectedGridTile = gridTile;
     }
 
-    private void Highlight(GridTile gridTile)
-    {
-
-    }
-
-    private void Paint(GridTile gridTile)
+    public void Paint(GridTile gridTile)
     {
         gridTile.SetTile(selectedTile);
     }
 
     private void BoxFill(GridTile gridTile)
     {
-
+        GridRenderer.Instance.SetBoxStart();
     }
 
     private void FloodFill(GridTile gridTile)
     {
+        int checkTile = gridTile.tileID;
+        if (checkTile == selectedTile)
+            return;
 
+            FloodCheck(checkTile, gridTile);
+        
+
+        filledTiles = new List<GridTile>();
+    }
+
+    private void FloodCheck(int checkID, GridTile gridTile)
+    {
+        if (filledTiles.Contains(gridTile))
+            return;
+
+        filledTiles.Add(gridTile);
+
+        Debug.Log("Starting flood check for against " + checkID + " for tile: " + gridTile);
+  
+        if(checkID == gridTile.tileID)
+        {
+            Paint(gridTile);
+
+            Debug.Log(gridTile + " was flood filled with " + selectedTile);
+
+            GridTile check = null;
+
+            if (GridRenderer.Instance.CheckTile(gridTile.gridX - 1, gridTile.gridY, gridTile.gridLayer, out check))
+                FloodCheck(checkID, check);
+
+            if (GridRenderer.Instance.CheckTile(gridTile.gridX + 1, gridTile.gridY, gridTile.gridLayer, out check))
+                FloodCheck(checkID, check);
+
+            if (GridRenderer.Instance.CheckTile(gridTile.gridX, gridTile.gridY - 1, gridTile.gridLayer, out check))
+                FloodCheck(checkID, check);
+
+            if (GridRenderer.Instance.CheckTile(gridTile.gridX, gridTile.gridY + 1, gridTile.gridLayer, out check))
+                FloodCheck(checkID, check);
+
+        }
+
+        /*      foreach (GridTile tile in GridRenderer.Instance.GetAdjacentTiles(gridTile.gridX, gridTile.gridY, gridTile.gridLayer))
+        {
+            if (tile == null)
+            {
+                Debug.Log("Tile was null");
+                continue;
+            }
+
+            if (filledTiles.Contains(tile))
+            {
+                Debug.Log("Tile was already checked");
+                continue;
+            }
+
+            filledTiles.Add(tile);
+                
+            if (tile.tileID == checkID)
+            {
+                gridTile.SetTile(selectedTile);
+                FloodCheck(checkID, tile);
+                Debug.Log(tile + " was flood filled with " + selectedTile);
+            }                
+        }*/
     }
 
     private void Erase(GridTile gridTile)
