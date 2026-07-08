@@ -20,10 +20,10 @@ public class GridRenderer : MonoBehaviour
     [SerializeField] private Transform layerPrefab;
     [SerializeField] Camera cam;
     private bool onGrid;
-
+    private int topLayerIndex = 0;
     private Color defaultColor = new Color(0, 0, 0, 0f);
     private Color hoverColor = new Color(0, 0, 0, .5f);
-
+    private GridTile[] adjacentTiles = new GridTile[4];
     private void Awake()
     {
         //Prevent duplicates of this object from existing
@@ -80,7 +80,7 @@ public class GridRenderer : MonoBehaviour
             //Use the tool on the selected tile
             if (leftClick.IsPressed() && currentTile != null)
             {
-                GridManager.Instance.UseTool(tileMatrix[currentTile.gridPosition.x, currentTile.gridPosition.y, 0]);
+                GridManager.Instance.UseTool(tileMatrix[currentTile.gridX, currentTile.gridY, topLayerIndex]);
             }
         }
 
@@ -133,13 +133,13 @@ public class GridRenderer : MonoBehaviour
             for (int i = 0; i < gridWidth; i++)
             {
                 overLayMatrix[i, j] = Instantiate<GridTile>(overlayPrefab, new Vector2(xStartPos + i, yStartPos + j), Quaternion.identity, overlayParent);
-                overLayMatrix[i, j].Setup(0, i, j);
+                overLayMatrix[i, j].Setup(0, i, j, 0);
             }
         }
 
 
         int l = 0;
-
+        topLayerIndex = 0;
         foreach (TileLayer layer in gridMap.tileLayers)
         {
 
@@ -149,6 +149,8 @@ public class GridRenderer : MonoBehaviour
             if (layer.hide)
             {
                 layerParent.gameObject.SetActive(false);
+                if(topLayerIndex == l)
+                    topLayerIndex++;
             }
 
             Debug.Log("Setting up layer #" + l + ": " + layer);
@@ -158,7 +160,8 @@ public class GridRenderer : MonoBehaviour
                 for (int i = 0; i < gridWidth; i++)
                 {
                     newMatrix[i, j, l] = Instantiate<GridTile>(tilePrefab, new Vector2(xStartPos + i, yStartPos + j), Quaternion.identity, layerParent);
-                    newMatrix[i, j, l].Setup(gridMap.tileLayers[l].tiles[i + j * gridWidth], i, j);
+                    newMatrix[i, j, l].Setup(gridMap.tileLayers[l].tiles[i + j * gridWidth], i, j, l);
+                    Debug.Log("GridTile set up at " + i + ", " + j + ", " + l + ": " + newMatrix[i, j, l]);
                 }
             }
 
@@ -186,5 +189,62 @@ public class GridRenderer : MonoBehaviour
 
     }
 
+    public GridTile[] GetAdjacentTiles(int x, int y, int z)
+    {
+        Debug.Log("Checking adjacent tiles for " + x + "," + y + "," + z);
+
+        try
+        {
+            adjacentTiles[0] = tileMatrix[x - 1, y , z];
+            Debug.Log("Adjacent tile found for " + (x - 1)  + "," + y+ "," + z + " ; " + adjacentTiles[0]);
+        }
+        catch (IndexOutOfRangeException)
+        {
+            adjacentTiles[0] = null;
+        }
+        try
+        {
+            adjacentTiles[1] = tileMatrix[x + 1, y, z];
+            Debug.Log("Adjacent tile found for " + (x + 1) + "," + y + "," + z + " ; " + adjacentTiles[0]);
+        }
+        catch (IndexOutOfRangeException)
+        {
+            adjacentTiles[1] = null;
+        }
+        try
+        {
+            adjacentTiles[2] = tileMatrix[x, y - 1, z];
+            Debug.Log("Adjacent tile found for " + x+ "," + (y - 1) + "," + z + " ; " + adjacentTiles[0]);
+        }
+        catch (IndexOutOfRangeException)
+        {
+            adjacentTiles[2] = null;
+        }
+        try
+        {
+            adjacentTiles[3] = tileMatrix[x, y + 1, z];
+            Debug.Log("Adjacent tile found for " + x + "," + (y + 1) + "," + z + " ; " + adjacentTiles[0]);
+        }
+        catch (IndexOutOfRangeException)
+        {
+            adjacentTiles[3] = null;
+        }
+        return adjacentTiles;
+    }
+
+    public bool CheckTile(int x, int y, int z, out GridTile tile)
+    {
+        tile = null;
+        try
+        {
+            tile = tileMatrix[x, y, z];
+            Debug.Log("Adjacent tile found for " + x + "," + y + "," + z + " ; " + tile);
+            return true;
+        }
+        catch (IndexOutOfRangeException)
+        {
+            return false;
+        }
+    }
 
 }

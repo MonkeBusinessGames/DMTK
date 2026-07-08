@@ -5,8 +5,6 @@ using System.IO;
 using Newtonsoft.Json;
 using SFB;
 using Unity.VisualScripting;
-using UnityEditor;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 public class PaletteManager : MonoBehaviour
 {
@@ -112,7 +110,7 @@ public class PaletteManager : MonoBehaviour
             btn.Setup(tile.Key, i);
 
             i++;
-            Debug.Log("Loaded" + tile.Value);
+            //Debug.Log("Loaded" + tile.Value);
 
             if (!tileLibrary.ContainsKey(tile.Key))
                 tileLibrary.Add(tile.Key, Path.Combine(loadedPalette.palettePath, tile.Value));
@@ -521,7 +519,7 @@ public class PaletteManager : MonoBehaviour
     {
         if(tileSpriteCache.TryGetValue(tileID, out var sprite))
         {
-            Debug.Log(tileID + " found in cache");
+            //Debug.Log(tileID + " found in cache");
             return sprite;
         }
 

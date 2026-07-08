@@ -4,7 +4,9 @@ using UnityEngine.UIElements;
 
 public class GridTile : MonoBehaviour
 {
-    public Vector2Int gridPosition;
+    public int gridX;
+    public int gridY;
+    public int gridLayer;
     public SpriteRenderer sRend;
     public TileData tileData;
     public int tileID = 0;
@@ -16,13 +18,15 @@ public class GridTile : MonoBehaviour
 
     public override string ToString()
     {
-        return gridPosition + sRend.name;
+        return gridX + "," + gridY + "," + gridLayer + "," + sRend.name;
     }
 
-    public void Setup(int tile, int positionX,  int positionY)
+    public void Setup(int tile, int positionX,  int positionY, int layerPos)
     {
         UpdateSprite(tile);
-        gridPosition = new Vector2Int(positionX, positionY);
+        gridX = positionX;
+        gridY = positionY;
+        gridLayer = layerPos;
         
         //Debug.Log("Tile " + tile + " created at " +  gridPosition);
     }
@@ -32,7 +36,8 @@ public class GridTile : MonoBehaviour
         UpdateSprite(tile);
 
         //Update the tile in the GridMap data
-        GridSelector.Instance.loadedGridMap.SetTile(gridPosition.x, gridPosition.y, 0, tile);
+        GridSelector.Instance.loadedGridMap.SetTile(gridX, gridY, gridLayer, tile);
+        Debug.Log(this + " updated with " + tile);
     }
 
     private void UpdateSprite(int tile)
@@ -73,6 +78,6 @@ public class GridTile : MonoBehaviour
         tileData = null;
 
         //Update the tile in the GridMap data
-        GridSelector.Instance.loadedGridMap.tileLayers[0].tiles[gridPosition.x + gridPosition.y * GridSizer.gridWidth] = new int();
+        GridSelector.Instance.loadedGridMap.tileLayers[0].tiles[gridX + gridY * GridSizer.gridWidth] = new int();
     }
 }
