@@ -36,6 +36,11 @@ public class SceneManager : MonoBehaviour
         dmBackground.sprite = playerBackground.sprite = sprite;
     }
 
+    public void StretchToFit(bool stretch)
+    {
+        dmBackground.preserveAspect = playerBackground.preserveAspect = !stretch;
+    }
+
     public async void SetMusic(string fileName)
     {
         AudioClip clip = await MusicManager.Instance.LoadMusic(fileName);

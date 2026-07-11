@@ -14,7 +14,6 @@ public class BackgroundManager : MonoBehaviour
     private string backgroundsPath;
     public List<string> backgrounds = new();
 
-
     private void Awake()
     {
         //Prevent duplicates of this object from existing
