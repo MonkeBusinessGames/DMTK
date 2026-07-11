@@ -48,14 +48,74 @@ public class PaletteManager : MonoBehaviour
 
         //If the folder for storing palettes doesn't exist, create it.
         if (!Directory.Exists(palettesPath))
+        {
             Directory.CreateDirectory(palettesPath);
+            InitializeDefaultContent();
+        }
 
-        if(File.Exists(Path.Combine(palettesPath, "TileLibrary")))
+        if (File.Exists(Path.Combine(palettesPath, "TileLibrary")))
             tileLibrary = JsonConvert.DeserializeObject<Dictionary<int, string>>(File.ReadAllText(Path.Combine(palettesPath, "TileLibrary")));
 
 
         //Refresh the palettes list
         RefreshPaletteList();
+    }
+
+    private void InitializeDefaultContent()
+    {
+        string[] folderPaths = Directory.GetDirectories(Path.Combine(Application.streamingAssetsPath, "Palettes"));
+
+        if (folderPaths.Length == 0) return;
+
+        foreach (var pSPath in folderPaths)
+        {
+            string pPath = Path.Combine(palettesPath, Path.GetFileName(pSPath));
+
+            string[] tilePaths = Directory.GetFiles(pSPath);
+
+            //Create the palette folder
+            Directory.CreateDirectory(pPath);
+
+            //Create the palette dictionary
+            Dictionary<int, string> pDictionary = new Dictionary<int, string>();
+
+            foreach (var sourcePath in tilePaths)
+            {
+                //Copy the file over to the palette's folder
+                string fileName = Path.GetFileName(sourcePath);
+
+                if (!fileName.EndsWith(".png") && !fileName.EndsWith(".jpg") && !fileName.EndsWith(".jpeg") && !fileName.EndsWith(".webp") && !fileName.EndsWith(".PNG") && !fileName.EndsWith(".JPG") && !fileName.EndsWith(".JPEG") && !fileName.EndsWith(".WEBP"))
+                    continue;
+
+                string destPath = Path.Combine(pPath, fileName);
+                Debug.Log(sourcePath + " | " + fileName + " | " + destPath);
+                File.Copy(sourcePath, destPath, overwrite: true);
+
+                //Generate a unique ID for the tile 
+                int tempID = UnityEngine.Random.Range(0, 99999);
+                while (tileLibrary.ContainsKey(tempID))
+                    tempID = UnityEngine.Random.Range(0, 99999);
+
+                //Create the tileData and add it to the paletteData
+                File.WriteAllText(Path.Combine(pPath, Path.GetFileNameWithoutExtension(fileName) + "data"), JsonConvert.SerializeObject(new TileData(fileName, tempID)));
+                pDictionary[tempID] = fileName;
+            }
+
+
+            //Create the palette data json
+            File.WriteAllText(Path.Combine(pPath, "PaletteData"), JsonConvert.SerializeObject(new PaletteData(Path.GetFileName(pSPath), pDictionary, null), Formatting.Indented));
+
+            //Make sure the tileLibrary is updated with all the tiles and their paths.
+            foreach (var tile in pDictionary)
+            {
+                tileLibrary[tile.Key] = Path.Combine(pPath, tile.Value);
+            }
+
+            //Update the Tile Library json
+            File.WriteAllText(Path.Combine(palettesPath, "TileLibrary"), JsonConvert.SerializeObject(tileLibrary));
+
+        }
+
     }
 
     /// <summary>
