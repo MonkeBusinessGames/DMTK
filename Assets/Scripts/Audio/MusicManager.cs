@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine.UIElements;
 using UnityEngine.Networking;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 
 public class MusicManager : MonoBehaviour
 {
@@ -33,11 +34,31 @@ public class MusicManager : MonoBehaviour
 
         //If the folder for storing musics doesn't exist, create it.
         if (!Directory.Exists(musicPath))
+        {
             Directory.CreateDirectory(musicPath);
+            InitializeDefaultContent();
+        }
 
         //Refresh the musics list
         Refresh();
 
+    }
+
+    private void InitializeDefaultContent()
+    {
+        string[] paths = Directory.GetFiles(Path.Combine(Application.streamingAssetsPath, "Music"));
+
+        if (paths.Length == 0) return;
+
+        foreach (var sourcePath in paths)
+        {
+            string fileName = Path.GetFileName(sourcePath);
+            if (!fileName.EndsWith(".mp3") && !fileName.EndsWith(".MP#") && !fileName.EndsWith(".wav") && !fileName.EndsWith(".WAV") && !fileName.EndsWith(".ogg") && !fileName.EndsWith(".OGG"))
+                continue;
+            string destPath = Path.Combine(musicPath, fileName);
+            Debug.Log(sourcePath + " | " + fileName + " | " + destPath);
+            File.Copy(sourcePath, destPath, overwrite: true);
+        }
     }
 
     /// <summary>
@@ -76,7 +97,7 @@ public class MusicManager : MonoBehaviour
         foreach (var file in Directory.GetFiles(musicPath))
         {
             Debug.Log(file);
-            if (!file.EndsWith(".png") && !file.EndsWith(".mp3") && !file.EndsWith(".MP#") && !file.EndsWith(".wav") && !file.EndsWith(".WAV") && !file.EndsWith(".ogg") && !file.EndsWith(".OGG"))
+            if (!file.EndsWith(".mp3") && !file.EndsWith(".MP#") && !file.EndsWith(".wav") && !file.EndsWith(".WAV") && !file.EndsWith(".ogg") && !file.EndsWith(".OGG"))
                 continue;
             musicList.Add(new string(Path.GetFileName(file)));
             Debug.Log(Path.GetFileName(file));
@@ -106,6 +127,7 @@ public class MusicManager : MonoBehaviour
 
         AudioClip clip = DownloadHandlerAudioClip.GetContent(req);
         musicCache[fileName] = clip;
+        SceneManager.Instance.AddOptionData(fileName);
         return clip;
     }
 

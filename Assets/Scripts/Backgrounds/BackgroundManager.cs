@@ -14,7 +14,6 @@ public class BackgroundManager : MonoBehaviour
     private string backgroundsPath;
     public List<string> backgrounds = new();
 
-
     private void Awake()
     {
         //Prevent duplicates of this object from existing
@@ -33,11 +32,33 @@ public class BackgroundManager : MonoBehaviour
 
         //If the folder for storing backgrounds doesn't exist, create it.
         if (!Directory.Exists(backgroundsPath))
+        {
             Directory.CreateDirectory(backgroundsPath);
+            InitializeDefaultContent();
+        }
+
+
 
         //Refresh the backgrounds list
         Refresh();
 
+    }
+
+    private void InitializeDefaultContent()
+    {
+        string[] paths = Directory.GetFiles(Path.Combine(Application.streamingAssetsPath, "Backgrounds"));
+
+        if (paths.Length == 0) return;
+
+        foreach (var sourcePath in paths)
+        {
+            string fileName = Path.GetFileName(sourcePath); 
+            if (!fileName.EndsWith(".png") && !fileName.EndsWith(".jpg") && !fileName.EndsWith(".jpeg") && !fileName.EndsWith(".webp") && !fileName.EndsWith(".PNG") && !fileName.EndsWith(".JPG") && !fileName.EndsWith(".JPEG") && !fileName.EndsWith(".WEBP"))
+                continue;
+            string destPath = Path.Combine(backgroundsPath, fileName);
+            Debug.Log(sourcePath + " | " + fileName + " | " + destPath);
+            File.Copy(sourcePath, destPath, overwrite: true);
+        }
     }
 
     /// <summary>
