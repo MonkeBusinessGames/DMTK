@@ -14,6 +14,12 @@
     <Compile Update="Assets\Scripts\Image Download\PixabaySearch.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Assets\Scripts\ManagerData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\SceneInput.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Assets\Scripts\Tiles\Assets\TileLayer.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -3,11 +3,10 @@ using System.IO;
 using Newtonsoft.Json;
 using TMPro;
 using UnityEngine;
-using static UnityEngine.LowLevelPhysics2D.PhysicsLayers;
+using static Unity.U2D.Physics.PhysicsLayers;
 
 public class LayerSelector : MonoBehaviour
 {
-
     public static LayerSelector Instance;
     [SerializeField] private GameObject selector;
     [SerializeField] private GameObject newLayerPopUp;

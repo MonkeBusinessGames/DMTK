@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Assets.Scripts;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -13,6 +14,7 @@ public class GridRenderer : MonoBehaviour
     private InputAction leftClick;
     public GridTile currentTile = null;
     public GridTile selectedTile = null;
+    [SerializeField] private SceneInput sceneData;
     [SerializeField] private GridTile tilePrefab;
     [SerializeField] private GridTile overlayPrefab;
     [SerializeField] private Transform overlayParent;
@@ -29,6 +31,7 @@ public class GridRenderer : MonoBehaviour
     private GridTile endGridTile = null;
     private List<GridTile> highlightedTiles = new List<GridTile>();
     private GridTile[] adjacentTiles = new GridTile[4];
+
     private void Awake()
     {
         //Prevent duplicates of this object from existing
@@ -51,13 +54,16 @@ public class GridRenderer : MonoBehaviour
     private void Update()
     {
 
-        if (!EventSystem.current.IsPointerOverGameObject())
+        if (sceneData.isHoveringViewport)
         {
             //Debug.Log("Mouse is not over UI");
             
             //Get the position in the grid based on the point position
             Vector2 mousePosition = cam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-            Vector2Int posInGrid = new Vector2Int(Mathf.FloorToInt(mousePosition.x) + tileMatrix.GetLength(0) / 2, Mathf.FloorToInt(mousePosition.y) + tileMatrix.GetLength(1) / 2);
+            //Vector2Int posInGrid = new Vector2Int(Mathf.FloorToInt(mousePosition.x) + tileMatrix.GetLength(0) / 2, Mathf.FloorToInt(mousePosition.y) + tileMatrix.GetLength(1) / 2);
+
+            Vector2Int posInGrid = sceneData.gridPosition;
+            Debug.Log(posInGrid.ToString());
 
             //Debug.Log("Mouse" + mousePosition + "| Grid " + posInGrid);
             try
@@ -152,6 +158,7 @@ public class GridRenderer : MonoBehaviour
         int gridWidth = gridMap.width;
         int gridHeight = gridMap.height;
 
+
         GridSizer.Instance.LoadSize(gridWidth, gridHeight);
 
         ResetGridTiles(gridMap, gridWidth, gridHeight);
@@ -160,6 +167,8 @@ public class GridRenderer : MonoBehaviour
     public void ResetGridTiles(GridMap gridMap, int gridWidth, int gridHeight)
     {
         //Debug.Log("Loaded " + gridMap);
+        sceneData.xOffset = gridWidth / 2;
+        sceneData.yOffset = gridHeight / 2;
 
         foreach (Transform child in tileParent)
         {

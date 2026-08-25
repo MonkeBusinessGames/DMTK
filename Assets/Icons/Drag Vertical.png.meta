@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: fcbdbd5cadd28cb44aad24e0b2b764de
+guid: 5e4404b06825c1f44bb48d49b44e3a10
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6392591758632051722
-    second: Drag_0
+      213: 8783856957606736008
+    second: Drag Vertical_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,9 +46,9 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -102,12 +102,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Drag_0
+      name: Drag Vertical_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 15
         y: 0
-        width: 64
+        width: 34
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -117,8 +117,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a046a57c55c07b850800000000000000
-      internalID: 6392591758632051722
+      spriteID: 8803ef33d5786e970800000000000000
+      internalID: 8783856957606736008
       vertices: []
       indices: 
       edges: []
@@ -127,7 +127,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -137,7 +137,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Drag_0: 6392591758632051722
+      Drag Vertical_0: 8783856957606736008
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -11,6 +11,7 @@ public class GridSizer : MonoBehaviour
 
     [SerializeField] private SpriteRenderer sRend;
 
+
     [SerializeField] private TMP_InputField widthInput;
     [SerializeField] private TMP_InputField heightInput;
     [SerializeField] private GameObject errorText;
