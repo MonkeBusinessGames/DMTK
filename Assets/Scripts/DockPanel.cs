@@ -2,6 +2,7 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class DockPanel : MonoBehaviour
 {
@@ -43,10 +44,21 @@ public class DockPanel : MonoBehaviour
     public void SetMaxAnchor(float ratio)
     {
         rect.anchorMax = new Vector2(1, ratio);
+        height = ratio - rect.anchorMin.y;
+        if (panelLeft)
+            PanelManager.Instance.data.leftHeights[PanelManager.Instance.data.leftPanels.IndexOf(type)] = height;
+        else
+            PanelManager.Instance.data.rightHeights[PanelManager.Instance.data.rightPanels.IndexOf(type)] = height;
     }
     public void SetMinAnchor(float ratio)
     {
-        rect.anchorMin = new Vector2(0, ratio);
+        rect.anchorMin = new Vector2(0, ratio); 
+        height = rect.anchorMax.y - ratio;
+        if (panelLeft)
+            PanelManager.Instance.data.leftHeights[PanelManager.Instance.data.leftPanels.IndexOf(type)] = height;
+        else
+            PanelManager.Instance.data.rightHeights[PanelManager.Instance.data.rightPanels.IndexOf(type)] = height;
+
     }
 
     public void MoveUp()
@@ -87,8 +99,8 @@ public class DockPanel : MonoBehaviour
         panelLeft = left;
         position = pos;
 
-        SetMinAnchor(bottom);
-        SetMaxAnchor(top);
+        rect.anchorMax = new Vector2(1, top);
+        rect.anchorMin = new Vector2(0, bottom);
 
         height = top - bottom;
         

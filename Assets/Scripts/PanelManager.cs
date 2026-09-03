@@ -28,15 +28,11 @@ public class PanelManager : MonoBehaviour
     [SerializeField] private DividerController dividerPrefab;
 
     public Image widthDivider;
-
-    private float baseHeight = 1080;
-    private float baseWidth = 1920;
     private bool isHoveringDivider;
     private bool isDragging;
     private Vector2 localPosition;
-    private InputAction leftClick;
+    public InputAction leftClick;
     private Vector2 mousePosition;
-    private float dragSpeed = 1f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -205,7 +201,7 @@ public class PanelManager : MonoBehaviour
         for (int i = 0; i < data.leftPanels.Count; i++)
         {
             panels[data.leftPanels[i]].transform.SetParent(leftPanelParent.transform, false);
-            panels[data.leftPanels[i]].ResetRect();
+            //panels[data.leftPanels[i]].ResetRect();
 
             if (i > 0)
             {
@@ -237,7 +233,7 @@ public class PanelManager : MonoBehaviour
         for (int i = 0; i < data.rightPanels.Count; i++)
         {
             panels[data.rightPanels[i]].transform.SetParent(rightPanelParent.transform, false);
-            panels[data.rightPanels[i]].ResetRect();
+            //panels[data.rightPanels[i]].ResetRect();
             Debug.Log("New Panel added to right " + data.rightPanels[i]);
 
             if (i > 0)
