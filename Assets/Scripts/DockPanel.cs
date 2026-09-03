@@ -1,15 +1,16 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DockPanel : MonoBehaviour
 {
-    [SerializeField] private LayoutElement layout;
-    [SerializeField] private Button upButton;
-    [SerializeField] private Button downButton;
-    [SerializeField] private Button leftButton;
-    [SerializeField] private Button rightButton;
-    [SerializeField] private Button closeButton;
+    [SerializeField] private RectTransform rect;
+    [SerializeField] private GameObject upButton;
+    [SerializeField] private GameObject downButton;
+    [SerializeField] private GameObject leftButton;
+    [SerializeField] private GameObject rightButton;
+    [SerializeField] private GameObject closeButton;
 
     [SerializeField] private PanelType type;
 
@@ -24,69 +25,115 @@ public class DockPanel : MonoBehaviour
 
     public void OnUnfocused() { }
 
-    public void SetHeight(float height)
+    public int position;
+    public float height;
+    public static int leftCount;
+    public static int rightCount;
+
+    public void ResetRect()
     {
-        layout.preferredHeight = height;
+        rect.localPosition = Vector3.zero;
+        rect.anchoredPosition = Vector3.zero;
+        SetMaxAnchor(1);
+        SetMinAnchor(0);
+        height = 1;
+//        Debug.Log(type + "Panel Reset: " + rect);
+    }
+
+    public void SetMaxAnchor(float ratio)
+    {
+        rect.anchorMax = new Vector2(1, ratio);
+    }
+    public void SetMinAnchor(float ratio)
+    {
+        rect.anchorMin = new Vector2(0, ratio);
     }
 
     public void MoveUp()
     {
-        if(PanelManager.Instance.MoveUp(type, panelLeft))
-        {
-            upButton.enabled = false;
-            downButton.enabled = true;
-        }
-        else
-        {
-            upButton.enabled = true;
-            downButton.enabled = false;
-        }
+        if (position == 0)
+            return;
+        
+        PanelManager.Instance.MoveUp(type, panelLeft) ;
+
     }
 
     public void MoveDown()
     {
-        if (PanelManager.Instance.MoveDown(type, panelLeft))
+        if (panelLeft)
         {
-            upButton.enabled = true;
-            downButton.enabled = false;
+            if (position >= leftCount - 1)
+                return;
         }
         else
         {
-            upButton.enabled = false;
-            downButton.enabled = true;
+            if (position >= rightCount - 1)
+                return;
         }
+
+        PanelManager.Instance.MoveDown(type, panelLeft);
     }
     public void MoveSideWays()
     {
         PanelManager.Instance.MoveSideways(type, panelLeft);
-        if (panelLeft)
-        {
-            panelLeft = false;
-            rightButton.enabled = false;
-            leftButton.enabled = true;
-        }
-        else
-        {
-            panelLeft = true;
-            rightButton.enabled = true;
-            leftButton.enabled = false;
-        }
     }
     public void Close()
     {
         PanelManager.Instance.RemovePanel(type, panelLeft);
     }
 
-    public void Initialize(bool left, bool top, bool bottom)
+    public void Initialize(bool left, int pos, float top, float bottom)
     {
         panelLeft = left;
-        if (left)
-            leftButton.enabled = false;
+        position = pos;
+
+        SetMinAnchor(bottom);
+        SetMaxAnchor(top);
+
+        height = top - bottom;
+        
+        //The down button is visible if the panel is not at the bottom
+        if (panelLeft)
+            downButton.SetActive(position != leftCount - 1);
         else
-            rightButton.enabled = false;
-        if (top)
-            upButton.enabled = false;
-        if(bottom)
-            downButton.enabled = false;
+            downButton.SetActive(position != rightCount - 1);
+
+        //The up button is visible if the panel is not at the top
+        upButton.SetActive(position != 0);
+
+        //The left buttom is visible if the panel is on the right
+        leftButton.SetActive(!panelLeft);
+
+        //The right buttom is visible if the panel is on the left
+        rightButton.SetActive(panelLeft);
+
+        Debug.Log(type + " initialized. Left: " + left + " Pos: " + pos + " Anchors " + top + ", " + bottom);
     }
+
+    //public void ChangePosition(int pos, float top, float bottom)
+    //{
+    //    position = pos;
+
+    //    SetMinAnchor(top);
+    //    SetMaxAnchor(bottom);
+
+    //    height = top - bottom;
+
+    //    //The down button is visible if the panel is not at the bottom
+    //    if (panelLeft)
+    //        downButton.SetActive(position != leftCount - 1);
+    //    else
+    //        downButton.SetActive(position != rightCount - 1);
+
+    //    //The up button is visible if the panel is not at the top
+    //    upButton.SetActive(position != 0);
+
+    //    //The left buttom is visible if the panel is on the right
+    //    leftButton.SetActive(!panelLeft);
+
+    //    //The right buttom is visible if the panel is on the left
+    //    rightButton.SetActive(panelLeft);
+    //}
+
+
 }

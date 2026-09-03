@@ -63,7 +63,7 @@ public class GridRenderer : MonoBehaviour
             //Vector2Int posInGrid = new Vector2Int(Mathf.FloorToInt(mousePosition.x) + tileMatrix.GetLength(0) / 2, Mathf.FloorToInt(mousePosition.y) + tileMatrix.GetLength(1) / 2);
 
             Vector2Int posInGrid = sceneData.gridPosition;
-            Debug.Log(posInGrid.ToString());
+            //Debug.Log(posInGrid.ToString());
 
             //Debug.Log("Mouse" + mousePosition + "| Grid " + posInGrid);
             try

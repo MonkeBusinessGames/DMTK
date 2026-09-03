@@ -1,9 +1,12 @@
 using Newtonsoft.Json;
+using NUnit.Framework.Constraints;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Assemblies;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -19,6 +22,10 @@ public class PanelManager : MonoBehaviour
     [SerializeField] private Image leftPanelParent;
     [SerializeField] private Image rightPanelParent;
     [SerializeField] private Dictionary<PanelType, DockPanel> panels;
+
+    private List<DividerController> leftDividers = new List<DividerController>();
+    private List<DividerController> rightDividers = new List<DividerController>();
+    [SerializeField] private DividerController dividerPrefab;
 
     public Image widthDivider;
 
@@ -51,11 +58,16 @@ public class PanelManager : MonoBehaviour
         //If the folder for storing musics doesn't exist, create it.
         if (!File.Exists(dataPath))
         {
+            Debug.Log("New Panel Data");
             data = new ManagerData();
+            data.Initialize();
             SavePanelData();
         }
         else
+        {
+            Debug.Log("Existing Panel Data");
             data = JsonConvert.DeserializeObject<ManagerData>(File.ReadAllText(dataPath));
+        }
 
         InitiatePanels();
 
@@ -117,7 +129,7 @@ public class PanelManager : MonoBehaviour
                 //mousePosition = newPosition;
 
                 mousePosition = Camera.main.ScreenToViewportPoint(Mouse.current.position.value);
-                Debug.Log(mousePosition);
+                //Debug.Log(mousePosition);
                 if(mousePosition.x > .1 && mousePosition.x < .9)
                 {
                     widthDivider.rectTransform.anchorMin = new Vector2(mousePosition.x, 0);
@@ -145,146 +157,172 @@ public class PanelManager : MonoBehaviour
 
     private void InitiatePanels()
     {
-        ////Set Panel widths
-        //leftPanelParent.preferredWidth = data.leftWidth * baseWidth;
-        //rightPanelParent.preferredWidth = data.rightWidth * baseWidth;
+        //Set Panel widths
+        if(data.leftPanels.Count == 0)
+        {
+            widthDivider.gameObject.SetActive(false);
+            leftPanelParent.rectTransform.anchorMax = new Vector2(0, 0);
+            rightPanelParent.rectTransform.anchorMin = new Vector2(0, 0);
+            Debug.Log("L: " + data.leftPanels.Count + " | R: " + data.rightPanels.Count + " | Ratio: N/A");
 
-        //Initialize Left Panels
+        }
+        else if(data.rightPanels.Count == 0)
+        {
+            widthDivider.gameObject.SetActive(false);
+            leftPanelParent.rectTransform.anchorMax = new Vector2(1, 1);
+            rightPanelParent.rectTransform.anchorMin = new Vector2(1, 1);
+            Debug.Log("L: " + data.leftPanels.Count + " | R: " + data.rightPanels.Count + " | Ratio: N/A");
+
+        }
+        else
+        {
+            widthDivider.gameObject.SetActive(true);
+            widthDivider.rectTransform.anchorMin = new Vector2(data.horizontalRatio, 0);
+            widthDivider.rectTransform.anchorMax = new Vector2(data.horizontalRatio, 1);
+            leftPanelParent.rectTransform.anchorMax = new Vector2(data.horizontalRatio, 1);
+            rightPanelParent.rectTransform.anchorMin = new Vector2(data.horizontalRatio, 0);
+            Debug.Log("L: " + data.leftPanels.Count + " | R: " + data.rightPanels.Count + " | Ratio: " + data.horizontalRatio);
+
+        }
+
+        //Start the counter to calculate anchors
+        float anchorCounter = 1;
+
+        //Set column counts
+        DockPanel.leftCount = data.leftPanels.Count;
+        DockPanel.rightCount = data.rightPanels.Count;
+
+        //Clear Left Panels
         foreach (Transform child in leftPanelParent.transform)
         {
-            child.transform.SetParent(hiddenPanelsParent.transform, false);
+            if(child.TryGetComponent<DockPanel>(out DockPanel test))
+                child.transform.SetParent(hiddenPanelsParent.transform, false);
+            else
+                Destroy(child.gameObject);
         }
+
+        //Initialize Left Panels, Dividers and Set Heights
         for (int i = 0; i < data.leftPanels.Count; i++)
         {
             panels[data.leftPanels[i]].transform.SetParent(leftPanelParent.transform, false);
-            panels[data.leftPanels[i]].SetHeight(data.leftHeights[i] * baseHeight);
-        }
-        foreach (PanelType panel in data.leftPanels) 
-        {
+            panels[data.leftPanels[i]].ResetRect();
+
+            if (i > 0)
+            {
+                anchorCounter -= data.leftHeights[i - 1];
+                var divider = Instantiate(dividerPrefab, leftPanelParent.transform);
+                divider.Initialize(panels[data.leftPanels[i - 1]], panels[data.leftPanels[i]], anchorCounter);
+                leftDividers.Add(divider);
+            }
+            
+            //Initialize the panel on the left
+            panels[data.leftPanels[i]].Initialize(true, i, anchorCounter, anchorCounter - data.leftHeights[i]);           
         }
 
-        //Initialize Right Panels
+        //Reset the anchor counter
+        anchorCounter = 1;
+
+        //Clear Right Panels
         foreach (Transform child in rightPanelParent.transform)
         {
-            child.transform.SetParent(hiddenPanelsParent.transform, false);
+            if (child.TryGetComponent<DockPanel>(out DockPanel test))
+                child.transform.SetParent(hiddenPanelsParent.transform, false);
+            else
+            {
+                Destroy(child.gameObject);
+            }
         }
 
+        //Initialize Right Panels, Dividers and Set Heights
         for (int i = 0; i < data.rightPanels.Count; i++)
         {
             panels[data.rightPanels[i]].transform.SetParent(rightPanelParent.transform, false);
-            panels[data.rightPanels[i]].SetHeight(data.rightHeights[i] * baseHeight);
+            panels[data.rightPanels[i]].ResetRect();
+            Debug.Log("New Panel added to right " + data.rightPanels[i]);
+
+            if (i > 0)
+            {
+                anchorCounter -= data.rightHeights[i - 1];
+                var divider = Instantiate(dividerPrefab, rightPanelParent.transform);
+                divider.Initialize(panels[data.rightPanels[i - 1]], panels[data.rightPanels[i]], anchorCounter);
+                rightDividers.Add(divider); 
+            }
+
+            //Initialize the panel on the right
+            panels[data.rightPanels[i]].Initialize(false, i, anchorCounter, anchorCounter - data.rightHeights[i]);
         }
     }
 
     public void AddPanel(PanelType type)
     {
         //Add the new panel to the column with less panels
-        if(data.rightPanels.Count > data.leftPanels.Count)
-        {
-            panels[data.leftPanels.Last<PanelType>()].Initialize(true, false, false);
-            panels[type].transform.SetParent(leftPanelParent.transform, false);
-            data.leftPanels.Add(type);
-            data.leftHeights.Add(580);
-            panels[type].Initialize(true, false, true);
-        }
+        data.AddPanel(type, data.rightPanels.Count > data.leftPanels.Count);
 
-        else
-        {
-            panels[data.rightPanels.Last<PanelType>()].Initialize(false, false, false);
-            panels[type].transform.SetParent(rightPanelParent.transform, false);
-            data.rightPanels.Add(type);
-            data.rightHeights.Add(580);
-            panels[type].Initialize(false, false, true);
-        }
+        //Reset the panels in the workspace
+        InitiatePanels();
+
+        SavePanelData();
+    }
+
+    public void AddPanel(int type)
+    {
+        if (data.leftPanels.Contains((PanelType)type) || data.rightPanels.Contains((PanelType)type))
+            return;
+
+        //Add the new panel to the column with less panels
+        data.AddPanel((PanelType) type, data.rightPanels.Count > data.leftPanels.Count);
+
+        //Reset the panels in the workspace
+        InitiatePanels();
 
         SavePanelData();
     }
 
     public void RemovePanel(PanelType type, bool left)
     {
-        panels[type].transform.SetParent(hiddenPanelsParent.transform, false);
-        if (left)
-        {
-            data.leftHeights.RemoveAt(data.leftPanels.IndexOf(type));
-            data.leftPanels.Remove(type);
-        }
-        else
-        {
-            data.rightHeights.RemoveAt(data.rightPanels.IndexOf(type));
-            data.rightPanels.Remove(type);
-        }
+        //Remove the panel from the corresponding column
+        data.RemovePanel(type, left);
 
+        //Reset the panels in the workspace
+        InitiatePanels();
+
+        SavePanelData();
     }
 
-    public bool MoveUp(PanelType type, bool left)
+    public void MoveUp(PanelType type, bool left)
     {
-        int index = panels[type].transform.GetSiblingIndex();
-                
-        if (index == 0)
-            return true;
+        //Update the panel from the corresponding column
+        data.MovePanelUp(type, left);
 
-        index -= 1;
+        //Reset the panels in the workspace
+        InitiatePanels();
 
-        if (left) 
-        {
-            panels[type].transform.SetSiblingIndex(index);
-            data.leftPanels.Remove(type);
-            data.leftPanels.Insert(index, type);
-        }
-        else
-        {
-            panels[type].transform.SetSiblingIndex(index);
-            data.leftPanels.Remove(type);
-            data.leftPanels.Insert(index, type);
-        }
-
-        if (index == 0)
-            return true;
-        return false;
+        SavePanelData();
     }
 
-    public bool MoveDown(PanelType type, bool left)
+    public void MoveDown(PanelType type, bool left)
     {
-        int index = panels[type].transform.GetSiblingIndex();
-        
-        index += 1;
+        //Update the panel from the corresponding column
+        data.MovePanelDown(type, left);
 
-        if (left)
-        {
-            if (index > data.leftPanels.Count)
-                return true;
-            panels[type].transform.SetSiblingIndex(index);
-            data.leftPanels.Remove(type);
-            data.leftPanels.Insert(index, type);
+        //Reset the panels in the workspace
+        InitiatePanels();
 
-            if (index > data.leftPanels.Count)
-                return true;
-        }
-        else
-        {
-            if (index > data.leftPanels.Count)
-                return true;
-            panels[type].transform.SetSiblingIndex(index);
-            data.leftPanels.Remove(type);
-
-            if (index > data.leftPanels.Count)
-                return true;
-        }
-        return false;
+        SavePanelData();
     }
 
-    public bool MoveSideways(PanelType type, bool left)
+    public void MoveSideways(PanelType type, bool left)
     {
-        if (left)
-        {
-            panels[type].transform.SetParent(rightPanelParent.transform, false);
-            return false;
-        }
-        else
-        {
-            panels[type].transform.SetParent(leftPanelParent.transform, false);
-            return true;
-        }
+        //Remove the panel from the corresponding column
+        data.RemovePanel(type, left);
+
+        //Add the panel to the other column
+        data.AddPanel(type, !left);
+
+        //Reset the panels in the workspace
+        InitiatePanels();
+
+        SavePanelData();
     }
 
 }

@@ -98,6 +98,7 @@
     <Compile Include="Assets\Scripts\DataNamer.cs" />
     <Compile Include="Assets\Scripts\Image Download\PixabaySearch.cs" />
     <Compile Include="Assets\Scripts\Image Download\ResultButton.cs" />
+    <Compile Include="Assets\Scripts\DividerController.cs" />
     <Compile Include="Assets\Scripts\Tiles\Grid\Layers\LayerButton.cs" />
     <Compile Include="Assets\Scripts\DM Manager.cs" />
     <Compile Include="Assets\Scripts\PanelManager.cs" />
