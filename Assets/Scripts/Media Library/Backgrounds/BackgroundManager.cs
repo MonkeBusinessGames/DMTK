@@ -10,9 +10,10 @@ using UnityEngine.UIElements;
 public class BackgroundManager : MonoBehaviour
 {
     public static BackgroundManager Instance;
-    [SerializeField] BackgroundList bList;
     private string backgroundsPath;
     public List<string> backgrounds = new();
+    public RectTransform content;
+    public BackgroundButton buttonPrefab;
 
     private void Awake()
     {
@@ -36,8 +37,6 @@ public class BackgroundManager : MonoBehaviour
             Directory.CreateDirectory(backgroundsPath);
             InitializeDefaultContent();
         }
-
-
 
         //Refresh the backgrounds list
         Refresh();
@@ -79,6 +78,7 @@ public class BackgroundManager : MonoBehaviour
         }
 
         Refresh();
+        RefreshSelector();
 
     }
 
@@ -95,6 +95,7 @@ public class BackgroundManager : MonoBehaviour
         File.WriteAllBytes(destPath, texture.EncodeToPNG());
         
         Refresh();
+        RefreshSelector();
     }
 
     public async Task<Texture2D> DownloadTexture(string url)
@@ -137,8 +138,6 @@ public class BackgroundManager : MonoBehaviour
             backgrounds.Add(new string(Path.GetFileName(file)));
             Debug.Log(Path.GetFileName(file));
         }
-
-        bList.Refresh();
     }
 
     /// <summary>
@@ -162,6 +161,28 @@ public class BackgroundManager : MonoBehaviour
     {
         File.Delete(Path.Combine(backgroundsPath, fileName));
         backgrounds.Remove(fileName);
-        bList.Refresh();
+
+        Refresh();
+        RefreshSelector();
+    }
+
+    public void RefreshSelector()
+    {
+
+        foreach (Transform child in content)
+        {
+            Destroy(child.gameObject);
+        }
+        int i = 0;
+        foreach (var bg in BackgroundManager.Instance.backgrounds)
+        {
+            var btn = Instantiate(buttonPrefab, content);
+            btn.Setup(bg, i);
+            i++;
+            Debug.Log("new list item " + bg);
+        }
+
+        ////Resize scroll content transform
+        //content.sizeDelta = new Vector2(0, 20 + (444 * Mathf.Ceil((float)i / 3)));
     }
 }

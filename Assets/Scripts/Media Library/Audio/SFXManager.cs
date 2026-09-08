@@ -58,6 +58,7 @@ public class SFXManager : MonoBehaviour
         }
 
         Refresh();
+        RefreshSelector();
 
     }
 
@@ -81,8 +82,6 @@ public class SFXManager : MonoBehaviour
             sfxList.Add(new string(Path.GetFileName(file)));
             Debug.Log(Path.GetFileName(file));
         }
-
-        RefreshSelector();
     }
 
     public async Task<AudioClip> Loadsfx(string fileName)
@@ -114,16 +113,8 @@ public class SFXManager : MonoBehaviour
         File.Delete(Path.Combine(sfxPath, fileName));
         sfxList.Remove(fileName);
         sfxCache.Remove(fileName);
+        Refresh();
         RefreshSelector();
-    }
-
-    public void OpenSelector()
-    {
-        gameObject.SetActive(true);
-    }
-    public void CloseSelector()
-    {
-        gameObject.SetActive(false);
     }
 
     public void RefreshSelector()
@@ -159,6 +150,7 @@ public class SFXManager : MonoBehaviour
         File.WriteAllBytes(destPath, sfx);
 
         Refresh();
+        RefreshSelector();
     }
 
     public async Task<byte[]> DownloadClip(string url)

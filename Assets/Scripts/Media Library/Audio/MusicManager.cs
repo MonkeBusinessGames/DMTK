@@ -79,6 +79,7 @@ public class MusicManager : MonoBehaviour
         }
 
         Refresh();
+        RefreshSelector();
 
     }
 
@@ -102,8 +103,6 @@ public class MusicManager : MonoBehaviour
             musicList.Add(new string(Path.GetFileName(file)));
             Debug.Log(Path.GetFileName(file));
         }
-
-        RefreshSelector();
     }
 
     public async Task<AudioClip> LoadMusic(string fileName)
@@ -136,23 +135,12 @@ public class MusicManager : MonoBehaviour
         File.Delete(Path.Combine(musicPath, fileName));
         musicList.Remove(fileName);
         musicCache.Remove(fileName);
+        Refresh();
         RefreshSelector();
-    }
-
-    public void OpenSelector()
-    {
-        gameObject.SetActive(true);
-        DMManager.onGrid = false;
-    }
-    public void CloseSelector()
-    {
-        gameObject.SetActive(false);
-        DMManager.onGrid = true;
     }
 
     public void RefreshSelector()
     {
-
         foreach (Transform child in content)
         {
              Destroy(child.gameObject);
@@ -181,6 +169,7 @@ public class MusicManager : MonoBehaviour
         File.WriteAllBytes(destPath, music);
 
         Refresh();
+        RefreshSelector();
     }
 
     public async Task<byte[]> DownloadClip(string url)
