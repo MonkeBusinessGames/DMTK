@@ -14,6 +14,8 @@ public class DividerController : MonoBehaviour
     private Vector2 localPosition;
     private Vector2 mousePosition;
 
+    private float ratioOffset;
+
     [SerializeField] private RectTransform rect;
 
     public DividerController(DockPanel top, DockPanel bottom, float ratio)
@@ -45,7 +47,7 @@ public class DividerController : MonoBehaviour
 
     public void UpdateRatio(float ratio)
     {
-        splitRatio = ratio;
+        splitRatio = ratio + ratioOffset;
 
         topPanel.SetMinAnchor(splitRatio);
         bottomPanel.SetMaxAnchor(splitRatio);
@@ -111,6 +113,7 @@ public class DividerController : MonoBehaviour
             {
                 isDragging = true;
                 mousePosition = Camera.main.ScreenToViewportPoint(Mouse.current.position.value);
+                ratioOffset = splitRatio - mousePosition.y;
             }
         }
         else
