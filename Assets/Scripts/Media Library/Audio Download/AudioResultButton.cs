@@ -24,7 +24,7 @@ namespace Assets.Scripts.Image_Download
         public void Setup(string name, string description, string download, string preview, float duration)
         {
             title = name;
-            buttonName.text = name.Truncate(30, "...") + " | " + TimeSpan.FromSeconds(duration).ToString("%m' m. '%s' s. ''%f' ms.'\"");
+            buttonName.text = name.Truncate(30, "...") + " | " + TimeSpan.FromSeconds(duration).ToString("m' m. 's' s. 'fff' ms.'");
             buttonDesc.text = description;
             downloadURL = download;
             previewURL = preview;
