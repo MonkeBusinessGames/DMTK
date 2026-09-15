@@ -78,7 +78,7 @@ public class SceneManager : MonoBehaviour
         TMP_Dropdown.OptionData newOption = new TMP_Dropdown.OptionData();
         newOption.text = fileName;
         musicList[fileName] = newOption;
-        nowPlaying.options.Add(newOption);       
+        nowPlaying.options.Add(newOption);
 
     }
 

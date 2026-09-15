@@ -75,7 +75,12 @@ public class GridRenderer : MonoBehaviour
                 //Highlight all the tiles between gridTiles
                 else if(selectState == ToolState.Box)
                     HighlightBox(overLayMatrix[posInGrid.x, posInGrid.y]);
-
+                //Continue painting on the new tiles
+                else if(selectState == ToolState.Paint)
+                {
+                    HoverOnTile(overLayMatrix[posInGrid.x, posInGrid.y]);
+                    GridManager.Instance.UseTool(tileMatrix[currentTile.gridX, currentTile.gridY, topLayerIndex]);
+                }
                 else
                 //Try showing the hover on the tile
                     HoverOnTile(overLayMatrix[posInGrid.x, posInGrid.y]);
