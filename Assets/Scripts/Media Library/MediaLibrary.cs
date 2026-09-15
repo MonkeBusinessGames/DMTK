@@ -12,7 +12,7 @@ public class MediaLibrary : MonoBehaviour
     [SerializeField] private SFXManager sfxLibrary;
     [SerializeField] private ImageSearchManager imageSearchManager;
     [SerializeField] private AudioSearchManager audioSearchManager;
-    [SerializeField] private GameObject stretchToFit;
+    [SerializeField] private GameObject backgroundCustomizer;
     private int mediaIndex;
 
     private void Start()
@@ -28,19 +28,19 @@ public class MediaLibrary : MonoBehaviour
         {
             case 0: // background
                 backgroundLibrary.RefreshSelector();
-                stretchToFit.SetActive(true);
+                backgroundCustomizer.SetActive(true);
                 audioContent.SetActive(false);
                 imageContent.SetActive(true);
                 break;
             case 1: // music
                 musicLibrary.RefreshSelector();
-                stretchToFit.SetActive(false);
+                backgroundCustomizer.SetActive(false);
                 audioContent.SetActive(true);
                 imageContent.SetActive(false);
                 break;
             case 2: // sfx
                 sfxLibrary.RefreshSelector();
-                stretchToFit.SetActive(false);
+                backgroundCustomizer.SetActive(false);
                 audioContent.SetActive(true);
                 imageContent.SetActive(false);
                 break;

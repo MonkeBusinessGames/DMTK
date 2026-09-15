@@ -10,7 +10,6 @@ using TMPro;
 public class SceneManager : MonoBehaviour
 {
     public static SceneManager Instance;
-
     [SerializeField] Image dmBackground;
     [SerializeField] Image playerBackground;
     [SerializeField] AudioSource musicSource;
@@ -18,8 +17,6 @@ public class SceneManager : MonoBehaviour
     [SerializeField] private GameObject musicPlayer;
     [SerializeField] private TMP_Dropdown nowPlaying;
     private Dictionary<string, TMP_Dropdown.OptionData> musicList = new Dictionary<string, TMP_Dropdown.OptionData>();
-
-
 
     private void Awake()
     {
@@ -39,11 +36,6 @@ public class SceneManager : MonoBehaviour
     {
         Sprite sprite = BackgroundManager.Instance.LoadSprite(fileName);
         dmBackground.sprite = playerBackground.sprite = sprite;
-    }
-
-    public void StretchToFit(bool stretch)
-    {
-        dmBackground.preserveAspect = playerBackground.preserveAspect = !stretch;
     }
 
     public async void SetMusic(string fileName)

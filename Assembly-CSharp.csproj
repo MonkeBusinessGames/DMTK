@@ -84,6 +84,7 @@
     <Compile Include="Assets\StandaloneFileBrowser\StandaloneFileBrowserLinux.cs" />
     <Compile Include="Assets\Scripts\Media Library\Image Download\Image Search Manager.cs" />
     <Compile Include="Assets\StandaloneFileBrowser\Sample\CanvasSampleOpenFileText.cs" />
+    <Compile Include="Assets\FlexibleColorPicker\Scripts\FlexibleColorPicker.cs" />
     <Compile Include="Assets\Scripts\Media Library\Audio Download\FreeSSearch.cs" />
     <Compile Include="Assets\Scripts\Tiles\Assets\ObjectData.cs" />
     <Compile Include="Assets\StandaloneFileBrowser\StandaloneFileBrowserMac.cs" />
@@ -91,10 +92,13 @@
     <Compile Include="Assets\Scripts\Tiles\Assets\GridObject.cs" />
     <Compile Include="Assets\Scripts\Media Library\Audio\MusicButton.cs" />
     <Compile Include="Assets\Scripts\Tiles\Grid\Layers\LayerSelector.cs" />
+    <Compile Include="Assets\Scripts\Media Library\Backgrounds\BackgroundCustomizer.cs" />
     <Compile Include="Assets\Scripts\Media Library\Image Download\IImageSearchProvider.cs" />
     <Compile Include="Assets\Scripts\CursorController.cs" />
+    <Compile Include="Assets\FlexibleColorPicker\Scripts\FCP_Persistence.cs" />
     <Compile Include="Assets\Scripts\Media Library\Image Download\Image Result.cs" />
     <Compile Include="Assets\Scripts\DataNamer.cs" />
+    <Compile Include="Assets\FlexibleColorPicker\Scripts\FCP_SpriteMeshEditor.cs" />
     <Compile Include="Assets\Scripts\Workspace Management\DockPanel.cs" />
     <Compile Include="Assets\Scripts\Tiles\Grid\Layers\LayerButton.cs" />
     <Compile Include="Assets\Scripts\DM Manager.cs" />
@@ -134,6 +138,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\FlexibleColorPicker\Materials\FCP_Gradient.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\StandaloneFileBrowser\Plugins\System.Windows.Forms.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
