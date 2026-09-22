@@ -27,9 +27,8 @@ public class SceneManager : MonoBehaviour
             return;
         }
 
-        //Make this object accessible to other objects and don't destory it.
+        //Make this object accessible to other objects.
         Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     public void SetBackground(string fileName)

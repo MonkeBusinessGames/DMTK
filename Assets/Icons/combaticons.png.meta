@@ -1,0 +1,2287 @@
+fileFormatVersion: 2
+guid: 67cbdb707a8823c49b7110b979530b9a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3248529695967496567
+    second: combaticons_0
+  - first:
+      213: 3913252600813713041
+    second: combaticons_1
+  - first:
+      213: -8015305147695771069
+    second: combaticons_2
+  - first:
+      213: 3120950805659086783
+    second: combaticons_3
+  - first:
+      213: 3475059325205270773
+    second: combaticons_4
+  - first:
+      213: -5172282065839789571
+    second: combaticons_5
+  - first:
+      213: -140468369322509607
+    second: combaticons_6
+  - first:
+      213: -4401362725999071475
+    second: combaticons_7
+  - first:
+      213: -7118908111034863096
+    second: combaticons_8
+  - first:
+      213: 2417434447803555808
+    second: combaticons_9
+  - first:
+      213: 578195640172787986
+    second: combaticons_10
+  - first:
+      213: -8781887675282138311
+    second: combaticons_11
+  - first:
+      213: -3319873726916332294
+    second: combaticons_12
+  - first:
+      213: 4231280239611854264
+    second: combaticons_13
+  - first:
+      213: -2537172621889744025
+    second: combaticons_14
+  - first:
+      213: 1765708253873436789
+    second: combaticons_15
+  - first:
+      213: -7699605175751379313
+    second: combaticons_16
+  - first:
+      213: -114433731614524979
+    second: combaticons_17
+  - first:
+      213: 6828918887758877060
+    second: combaticons_18
+  - first:
+      213: 4857723250940029360
+    second: combaticons_19
+  - first:
+      213: -8334671937348232541
+    second: combaticons_20
+  - first:
+      213: -4372855105807539150
+    second: combaticons_21
+  - first:
+      213: -6280877698461909600
+    second: combaticons_22
+  - first:
+      213: -1592047447997656866
+    second: combaticons_23
+  - first:
+      213: 1677048153911019909
+    second: combaticons_24
+  - first:
+      213: 2449020256060149395
+    second: combaticons_25
+  - first:
+      213: -8604459714390503418
+    second: combaticons_26
+  - first:
+      213: -6887251331852688266
+    second: combaticons_27
+  - first:
+      213: 8540983929096240648
+    second: combaticons_28
+  - first:
+      213: -4471085933890491909
+    second: combaticons_29
+  - first:
+      213: -684930771299491868
+    second: combaticons_30
+  - first:
+      213: -7773712431317473764
+    second: combaticons_31
+  - first:
+      213: 757493168816686988
+    second: combaticons_32
+  - first:
+      213: 6525106746928676614
+    second: combaticons_33
+  - first:
+      213: -7256258607595903672
+    second: combaticons_34
+  - first:
+      213: 6904138076448062891
+    second: combaticons_35
+  - first:
+      213: -6770131779609008372
+    second: combaticons_36
+  - first:
+      213: -8390382725896039843
+    second: combaticons_37
+  - first:
+      213: -8534749346004050076
+    second: combaticons_38
+  - first:
+      213: -5355503637710477940
+    second: combaticons_39
+  - first:
+      213: -3107462034453392008
+    second: combaticons_40
+  - first:
+      213: -8264669549370932998
+    second: combaticons_41
+  - first:
+      213: 1422488869763324723
+    second: combaticons_42
+  - first:
+      213: 5713816637924783308
+    second: combaticons_43
+  - first:
+      213: 7284926755135512800
+    second: combaticons_44
+  - first:
+      213: -1673329956498062374
+    second: combaticons_45
+  - first:
+      213: -7011560873844615139
+    second: combaticons_46
+  - first:
+      213: 1284334146744694803
+    second: combaticons_47
+  - first:
+      213: 3571751512219460079
+    second: combaticons_48
+  - first:
+      213: -8298773205814064021
+    second: combaticons_49
+  - first:
+      213: -1022671083266064579
+    second: combaticons_50
+  - first:
+      213: -1794610326690011696
+    second: combaticons_51
+  - first:
+      213: 8755303620897868707
+    second: combaticons_52
+  - first:
+      213: 1618525079284321885
+    second: combaticons_53
+  - first:
+      213: 4934972833050874685
+    second: combaticons_54
+  - first:
+      213: 7216466934887243177
+    second: combaticons_55
+  - first:
+      213: 5968849220121054299
+    second: combaticons_56
+  - first:
+      213: -8946624274875763765
+    second: combaticons_57
+  - first:
+      213: 8376313324762333184
+    second: combaticons_58
+  - first:
+      213: 4169686779738143073
+    second: combaticons_59
+  - first:
+      213: 5070560775084118436
+    second: combaticons_60
+  - first:
+      213: 5930803377839761523
+    second: combaticons_61
+  - first:
+      213: 3035566034892970986
+    second: combaticons_62
+  - first:
+      213: 2886018543665386968
+    second: combaticons_63
+  - first:
+      213: -3672279604445779445
+    second: combaticons_64
+  - first:
+      213: 1997927947107165463
+    second: combaticons_65
+  - first:
+      213: -7355833806025460667
+    second: combaticons_66
+  - first:
+      213: 7069036510650889394
+    second: combaticons_67
+  - first:
+      213: -4653839728286759063
+    second: combaticons_68
+  - first:
+      213: 974416302712491134
+    second: combaticons_69
+  - first:
+      213: 162786095852726998
+    second: combaticons_70
+  - first:
+      213: 6221099172946492661
+    second: combaticons_71
+  - first:
+      213: 7049907785577822341
+    second: combaticons_72
+  - first:
+      213: -6896740545607438364
+    second: combaticons_73
+  - first:
+      213: 4701980586107357543
+    second: combaticons_74
+  - first:
+      213: 8221208772680031324
+    second: combaticons_75
+  - first:
+      213: 6587350200460842235
+    second: combaticons_76
+  - first:
+      213: -192672268588470526
+    second: combaticons_77
+  - first:
+      213: 5482277433345648172
+    second: combaticons_78
+  - first:
+      213: 3700301118004557958
+    second: combaticons_79
+  - first:
+      213: 6510681597849438487
+    second: combaticons_80
+  - first:
+      213: -6843067588235479288
+    second: combaticons_81
+  - first:
+      213: -8350071343576826495
+    second: combaticons_82
+  - first:
+      213: 1230754875412820580
+    second: combaticons_83
+  - first:
+      213: 8344413453658282996
+    second: combaticons_84
+  - first:
+      213: -4769968776083485339
+    second: combaticons_85
+  - first:
+      213: -864679995183690628
+    second: combaticons_86
+  - first:
+      213: 1898293055035879855
+    second: combaticons_87
+  - first:
+      213: 3470015015168080155
+    second: combaticons_88
+  - first:
+      213: 830491375818804422
+    second: combaticons_89
+  - first:
+      213: -67465891434281672
+    second: combaticons_90
+  - first:
+      213: -2670860930919998064
+    second: combaticons_91
+  - first:
+      213: -3288894107836305706
+    second: combaticons_92
+  - first:
+      213: 1544805075821252252
+    second: combaticons_93
+  - first:
+      213: -5966645442165015320
+    second: combaticons_94
+  - first:
+      213: -8175228264687501726
+    second: combaticons_95
+  - first:
+      213: 8364725185019143411
+    second: combaticons_96
+  - first:
+      213: 6007453936043589926
+    second: combaticons_97
+  - first:
+      213: -2275725863004849059
+    second: combaticons_98
+  - first:
+      213: -4922853716287445012
+    second: combaticons_99
+  - first:
+      213: -222652719188723342
+    second: combaticons_100
+  - first:
+      213: 4560871930333266620
+    second: combaticons_101
+  - first:
+      213: 4290164664161273232
+    second: combaticons_102
+  - first:
+      213: 7266085799226932427
+    second: combaticons_103
+  - first:
+      213: 2526892016696995809
+    second: combaticons_104
+  - first:
+      213: 8754771509770841084
+    second: combaticons_105
+  - first:
+      213: -5108082994366474066
+    second: combaticons_106
+  - first:
+      213: -4019629008948354832
+    second: combaticons_107
+  - first:
+      213: -751388678503834371
+    second: combaticons_108
+  - first:
+      213: 6544221264869626011
+    second: combaticons_109
+  - first:
+      213: 6275165866269081105
+    second: combaticons_110
+  - first:
+      213: 7591176932095534200
+    second: combaticons_111
+  - first:
+      213: -8656586217143736998
+    second: combaticons_112
+  - first:
+      213: -693742230717456982
+    second: combaticons_113
+  - first:
+      213: -8515176665573143417
+    second: combaticons_114
+  - first:
+      213: -4662433391609390941
+    second: combaticons_115
+  - first:
+      213: -4196167715812369646
+    second: combaticons_116
+  - first:
+      213: -4540443869854909590
+    second: combaticons_117
+  - first:
+      213: -474861333643454699
+    second: combaticons_118
+  - first:
+      213: -2970960932592642602
+    second: combaticons_119
+  - first:
+      213: 3335273612941059485
+    second: combaticons_120
+  - first:
+      213: 8391370460380304942
+    second: combaticons_121
+  - first:
+      213: 7500550065679816923
+    second: combaticons_122
+  - first:
+      213: 2068886893336838239
+    second: combaticons_123
+  - first:
+      213: 7168401439927578437
+    second: combaticons_124
+  - first:
+      213: -2973573663944552420
+    second: combaticons_125
+  - first:
+      213: 5261444741277721696
+    second: combaticons_126
+  - first:
+      213: -3435613052457131725
+    second: combaticons_127
+  - first:
+      213: 7896923653088460028
+    second: combaticons_128
+  - first:
+      213: 5059809755507652059
+    second: combaticons_129
+  - first:
+      213: 6353229810599737807
+    second: combaticons_130
+  - first:
+      213: -6232720104338477531
+    second: combaticons_131
+  - first:
+      213: -5905968141424359017
+    second: combaticons_132
+  - first:
+      213: 5905034434465661446
+    second: combaticons_133
+  - first:
+      213: 5376018571395035939
+    second: combaticons_134
+  - first:
+      213: 5811998085069049472
+    second: combaticons_135
+  - first:
+      213: -2021975396794947999
+    second: combaticons_136
+  - first:
+      213: -8671281223828586359
+    second: combaticons_137
+  - first:
+      213: 2825751831525519964
+    second: combaticons_138
+  - first:
+      213: 7273360560210205808
+    second: combaticons_139
+  - first:
+      213: 435252297613472871
+    second: combaticons_140
+  - first:
+      213: 4935608409055482491
+    second: combaticons_141
+  - first:
+      213: 2056055981797833509
+    second: combaticons_142
+  - first:
+      213: -6455662003437614926
+    second: combaticons_143
+  - first:
+      213: 3224916241349864686
+    second: combaticons_144
+  - first:
+      213: -2283969390493126461
+    second: combaticons_145
+  - first:
+      213: -1273965894864162545
+    second: combaticons_146
+  - first:
+      213: 3166668491919584036
+    second: combaticons_147
+  - first:
+      213: -7547757218810446422
+    second: combaticons_148
+  - first:
+      213: 6143986638163462857
+    second: combaticons_149
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 1
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: combaticons_0
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 858
+        width: 105
+        height: 109
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 779437a0c88151d20800000000000000
+      internalID: 3248529695967496567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_1
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 854
+        width: 88
+        height: 111
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 196ffd3d18aae4630800000000000000
+      internalID: 3913252600813713041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_2
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 851
+        width: 108
+        height: 146
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 342db316f6ae3c090800000000000000
+      internalID: -8015305147695771069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_3
+      rect:
+        serializedVersion: 2
+        x: 402
+        y: 850
+        width: 104
+        height: 119
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbf67c4e838df4b20800000000000000
+      internalID: 3120950805659086783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_4
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 855
+        width: 107
+        height: 134
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f0d44c6b04e93030800000000000000
+      internalID: 3475059325205270773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_5
+      rect:
+        serializedVersion: 2
+        x: 666
+        y: 858
+        width: 84
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df9ee737ddc5838b0800000000000000
+      internalID: -5172282065839789571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_6
+      rect:
+        serializedVersion: 2
+        x: 778
+        y: 851
+        width: 116
+        height: 154
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9da7a5823c4fc0ef0800000000000000
+      internalID: -140468369322509607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_7
+      rect:
+        serializedVersion: 2
+        x: 916
+        y: 854
+        width: 79
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0f2e2d8be73be2c0800000000000000
+      internalID: -4401362725999071475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_8
+      rect:
+        serializedVersion: 2
+        x: 1039
+        y: 850
+        width: 98
+        height: 155
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 802be156ace843d90800000000000000
+      internalID: -7118908111034863096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_9
+      rect:
+        serializedVersion: 2
+        x: 1170
+        y: 859
+        width: 76
+        height: 111
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ef9f1972d37c8120800000000000000
+      internalID: 2417434447803555808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_10
+      rect:
+        serializedVersion: 2
+        x: 1279
+        y: 850
+        width: 114
+        height: 143
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 219bd2f0fd9260800800000000000000
+      internalID: 578195640172787986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_11
+      rect:
+        serializedVersion: 2
+        x: 1411
+        y: 856
+        width: 107
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93b5d6110b7702680800000000000000
+      internalID: -8781887675282138311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_12
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 686
+        width: 120
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af4ffff4f607de1d0800000000000000
+      internalID: -3319873726916332294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_13
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 687
+        width: 103
+        height: 107
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8bdb13ba5f688ba30800000000000000
+      internalID: 4231280239611854264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_14
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 690
+        width: 104
+        height: 103
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7635a6261f62accd0800000000000000
+      internalID: -2537172621889744025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_15
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 687
+        width: 93
+        height: 106
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 578f9114d4e018810800000000000000
+      internalID: 1765708253873436789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_16
+      rect:
+        serializedVersion: 2
+        x: 534
+        y: 691
+        width: 104
+        height: 94
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f86749c03e1852590800000000000000
+      internalID: -7699605175751379313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_17
+      rect:
+        serializedVersion: 2
+        x: 674
+        y: 691
+        width: 74
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc93bcc9023796ef0800000000000000
+      internalID: -114433731614524979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_18
+      rect:
+        serializedVersion: 2
+        x: 795
+        y: 685
+        width: 87
+        height: 109
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 481d2d81c8135ce50800000000000000
+      internalID: 6828918887758877060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_19
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 685
+        width: 92
+        height: 109
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b9af653f891a6340800000000000000
+      internalID: 4857723250940029360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_20
+      rect:
+        serializedVersion: 2
+        x: 1042
+        y: 685
+        width: 104
+        height: 105
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3aa11fe280c455c80800000000000000
+      internalID: -8334671937348232541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_21
+      rect:
+        serializedVersion: 2
+        x: 1171
+        y: 685
+        width: 86
+        height: 109
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 234a61c137f7053c0800000000000000
+      internalID: -4372855105807539150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_22
+      rect:
+        serializedVersion: 2
+        x: 1298
+        y: 685
+        width: 85
+        height: 109
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ad3181c207d5d8a0800000000000000
+      internalID: -6280877698461909600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_23
+      rect:
+        serializedVersion: 2
+        x: 1430
+        y: 685
+        width: 72
+        height: 110
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed05884f749e7e9e0800000000000000
+      internalID: -1592047447997656866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_24
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 516
+        width: 93
+        height: 109
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 589471d1962164710800000000000000
+      internalID: 1677048153911019909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_25
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 507
+        width: 97
+        height: 115
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39e833a82faacf120800000000000000
+      internalID: 2449020256060149395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_26
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 517
+        width: 99
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60058976a71d69880800000000000000
+      internalID: -8604459714390503418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_27
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 518
+        width: 100
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 674a51667619b60a0800000000000000
+      internalID: -6887251331852688266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_28
+      rect:
+        serializedVersion: 2
+        x: 533
+        y: 507
+        width: 109
+        height: 119
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80ef916a1aba78670800000000000000
+      internalID: 8540983929096240648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_29
+      rect:
+        serializedVersion: 2
+        x: 666
+        y: 518
+        width: 96
+        height: 108
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf9263e280383f1c0800000000000000
+      internalID: -4471085933890491909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_30
+      rect:
+        serializedVersion: 2
+        x: 795
+        y: 518
+        width: 91
+        height: 109
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ef95f8a713ae76f0800000000000000
+      internalID: -684930771299491868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_31
+      rect:
+        serializedVersion: 2
+        x: 905
+        y: 522
+        width: 113
+        height: 105
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c16a8490bb93e1490800000000000000
+      internalID: -7773712431317473764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_32
+      rect:
+        serializedVersion: 2
+        x: 1054
+        y: 519
+        width: 101
+        height: 110
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c878a1f0608238a00800000000000000
+      internalID: 757493168816686988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_33
+      rect:
+        serializedVersion: 2
+        x: 1178
+        y: 516
+        width: 98
+        height: 105
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60f303cc306dd8a50800000000000000
+      internalID: 6525106746928676614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_34
+      rect:
+        serializedVersion: 2
+        x: 1291
+        y: 515
+        width: 115
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84520efdd379c4b90800000000000000
+      internalID: -7256258607595903672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_35
+      rect:
+        serializedVersion: 2
+        x: 1426
+        y: 518
+        width: 81
+        height: 108
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bad7fe6300d60df50800000000000000
+      internalID: 6904138076448062891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_36
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 512
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0762d12409ab02a0800000000000000
+      internalID: -6770131779609008372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_37
+      rect:
+        serializedVersion: 2
+        x: 1156
+        y: 350
+        width: 115
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d52946d6d5f5f8b80800000000000000
+      internalID: -8390382725896039843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_38
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 357
+        width: 124
+        height: 122
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46f5e6850ba7e8980800000000000000
+      internalID: -8534749346004050076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_39
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 354
+        width: 83
+        height: 107
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8564f0f0dd6da5b0800000000000000
+      internalID: -5355503637710477940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_40
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 354
+        width: 77
+        height: 108
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87594636eb310e4d0800000000000000
+      internalID: -3107462034453392008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_41
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 352
+        width: 76
+        height: 112
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af002cb35defd4d80800000000000000
+      internalID: -8264669549370932998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_42
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 383
+        width: 4
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33b90332712bdb310800000000000000
+      internalID: 1422488869763324723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_43
+      rect:
+        serializedVersion: 2
+        x: 533
+        y: 355
+        width: 101
+        height: 107
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc4393785fd8b4f40800000000000000
+      internalID: 5713816637924783308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_44
+      rect:
+        serializedVersion: 2
+        x: 665
+        y: 361
+        width: 96
+        height: 97
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e0679e5942491560800000000000000
+      internalID: 7284926755135512800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_45
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 359
+        width: 81
+        height: 103
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad3c9ee254327c8e0800000000000000
+      internalID: -1673329956498062374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_46
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 357
+        width: 75
+        height: 106
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d18d679b88ee1be90800000000000000
+      internalID: -7011560873844615139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_47
+      rect:
+        serializedVersion: 2
+        x: 1035
+        y: 359
+        width: 95
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3183f9d0a1fd2d110800000000000000
+      internalID: 1284334146744694803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_49
+      rect:
+        serializedVersion: 2
+        x: 1278
+        y: 353
+        width: 116
+        height: 113
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6c4ce3fcb5d4dc80800000000000000
+      internalID: -8298773205814064021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_50
+      rect:
+        serializedVersion: 2
+        x: 1418
+        y: 353
+        width: 95
+        height: 110
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3fbcdf611ebec1f0800000000000000
+      internalID: -1022671083266064579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_51
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 50
+        width: 87
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d5e4678a634817e0800000000000000
+      internalID: -1794610326690011696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_52
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 189
+        width: 115
+        height: 109
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ab0f407146118970800000000000000
+      internalID: 8755303620897868707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_53
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 202
+        width: 99
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5e8dcafbf7267610800000000000000
+      internalID: 1618525079284321885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_54
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 190
+        width: 103
+        height: 112
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d33533225ab8c7440800000000000000
+      internalID: 4934972833050874685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_55
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 186
+        width: 101
+        height: 115
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ad5e4b517a062460800000000000000
+      internalID: 7216466934887243177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_56
+      rect:
+        serializedVersion: 2
+        x: 526
+        y: 191
+        width: 107
+        height: 107
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5cce2bcdbc95d250800000000000000
+      internalID: 5968849220121054299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_57
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 206
+        width: 102
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc3b42d8f9437d380800000000000000
+      internalID: -8946624274875763765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_58
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 191
+        width: 72
+        height: 106
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00084d9d694ae3470800000000000000
+      internalID: 8376313324762333184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_59
+      rect:
+        serializedVersion: 2
+        x: 914
+        y: 186
+        width: 89
+        height: 112
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1693fe2c804bdd930800000000000000
+      internalID: 4169686779738143073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_60
+      rect:
+        serializedVersion: 2
+        x: 1023
+        y: 181
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a11be2f8204e5640800000000000000
+      internalID: 5070560775084118436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_61
+      rect:
+        serializedVersion: 2
+        x: 1146
+        y: 179
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37863d8df327e4250800000000000000
+      internalID: 5930803377839761523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_63
+      rect:
+        serializedVersion: 2
+        x: 1271
+        y: 187
+        width: 111
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d59d5e13923d0820800000000000000
+      internalID: 2886018543665386968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_64
+      rect:
+        serializedVersion: 2
+        x: 1417
+        y: 194
+        width: 95
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0ae8150821790dc0800000000000000
+      internalID: -3672279604445779445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_66
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 54
+        width: 80
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 544fa055024dae990800000000000000
+      internalID: -7355833806025460667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_67
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 57
+        width: 92
+        height: 85
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b4fc99c0434a1260800000000000000
+      internalID: 7069036510650889394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_68
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 58
+        width: 82
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9670ed99c6d3a6fb0800000000000000
+      internalID: -4653839728286759063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_69
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 57
+        width: 78
+        height: 85
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7c0782f672d58d00800000000000000
+      internalID: 974416302712491134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_70
+      rect:
+        serializedVersion: 2
+        x: 541
+        y: 58
+        width: 78
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6daaca97715524200800000000000000
+      internalID: 162786095852726998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_74
+      rect:
+        serializedVersion: 2
+        x: 802
+        y: 54
+        width: 57
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac664ccb91c086a46a80fae2841b7861
+      internalID: 4701980586107357543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_75
+      rect:
+        serializedVersion: 2
+        x: 913
+        y: 50
+        width: 90
+        height: 89
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3754457022e972240813bede5f09ba0d
+      internalID: 8221208772680031324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_76
+      rect:
+        serializedVersion: 2
+        x: 1173
+        y: 51
+        width: 77
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cdeb02ed928983f47b9a4ed9fd9b1cc6
+      internalID: 6587350200460842235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_77
+      rect:
+        serializedVersion: 2
+        x: 1417
+        y: 46
+        width: 96
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45694a7379aa05e4f9859fcddf6d75b0
+      internalID: -192672268588470526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_80
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 54
+        width: 95
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7be4af2a47609c74c95109e9b092d774
+      internalID: 6510681597849438487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combaticons_81
+      rect:
+        serializedVersion: 2
+        x: 1287
+        y: 57
+        width: 94
+        height: 61
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bc1d2fef61e61547b1bb83f27142d84
+      internalID: -6843067588235479288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 50dc57d0bd67ac448b2970b56e499c9a
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":12.0,"y":6.0},"gridSpriteSize":{"x":128.0,"y":128.0},"gridSpriteOffset":{"x":0.0,"y":45.0},"gridSpritePadding":{"x":0.0,"y":38.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      combaticons_0: 3248529695967496567
+      combaticons_1: 3913252600813713041
+      combaticons_10: 578195640172787986
+      combaticons_11: -8781887675282138311
+      combaticons_12: -3319873726916332294
+      combaticons_13: 4231280239611854264
+      combaticons_14: -2537172621889744025
+      combaticons_15: 1765708253873436789
+      combaticons_16: -7699605175751379313
+      combaticons_17: -114433731614524979
+      combaticons_18: 6828918887758877060
+      combaticons_19: 4857723250940029360
+      combaticons_2: -8015305147695771069
+      combaticons_20: -8334671937348232541
+      combaticons_21: -4372855105807539150
+      combaticons_22: -6280877698461909600
+      combaticons_23: -1592047447997656866
+      combaticons_24: 1677048153911019909
+      combaticons_25: 2449020256060149395
+      combaticons_26: -8604459714390503418
+      combaticons_27: -6887251331852688266
+      combaticons_28: 8540983929096240648
+      combaticons_29: -4471085933890491909
+      combaticons_3: 3120950805659086783
+      combaticons_30: -684930771299491868
+      combaticons_31: -7773712431317473764
+      combaticons_32: 757493168816686988
+      combaticons_33: 6525106746928676614
+      combaticons_34: -7256258607595903672
+      combaticons_35: 6904138076448062891
+      combaticons_36: -6770131779609008372
+      combaticons_37: -8390382725896039843
+      combaticons_38: -8534749346004050076
+      combaticons_39: -5355503637710477940
+      combaticons_4: 3475059325205270773
+      combaticons_40: -3107462034453392008
+      combaticons_41: -8264669549370932998
+      combaticons_42: 1422488869763324723
+      combaticons_43: 5713816637924783308
+      combaticons_44: 7284926755135512800
+      combaticons_45: -1673329956498062374
+      combaticons_46: -7011560873844615139
+      combaticons_47: 1284334146744694803
+      combaticons_48: 3571751512219460079
+      combaticons_49: -8298773205814064021
+      combaticons_5: -5172282065839789571
+      combaticons_50: -1022671083266064579
+      combaticons_51: -1794610326690011696
+      combaticons_52: 8755303620897868707
+      combaticons_53: 1618525079284321885
+      combaticons_54: 4934972833050874685
+      combaticons_55: 7216466934887243177
+      combaticons_56: 5968849220121054299
+      combaticons_57: -8946624274875763765
+      combaticons_58: 8376313324762333184
+      combaticons_59: 4169686779738143073
+      combaticons_6: -140468369322509607
+      combaticons_60: 5070560775084118436
+      combaticons_61: 5930803377839761523
+      combaticons_62: 3035566034892970986
+      combaticons_63: 2886018543665386968
+      combaticons_64: -3672279604445779445
+      combaticons_65: 1997927947107165463
+      combaticons_66: -7355833806025460667
+      combaticons_67: 7069036510650889394
+      combaticons_68: -4653839728286759063
+      combaticons_69: 974416302712491134
+      combaticons_7: -4401362725999071475
+      combaticons_70: 162786095852726998
+      combaticons_71: 6221099172946492661
+      combaticons_72: -357152724
+      combaticons_73: 1262301626
+      combaticons_74: 4701980586107357543
+      combaticons_75: 8221208772680031324
+      combaticons_76: 6587350200460842235
+      combaticons_77: -192672268588470526
+      combaticons_78: -701183031
+      combaticons_79: -1790088681
+      combaticons_8: -7118908111034863096
+      combaticons_80: 6510681597849438487
+      combaticons_81: -6843067588235479288
+      combaticons_82: 175765300
+      combaticons_83: -1450349210
+      combaticons_84: -1953442385
+      combaticons_85: -1471313868
+      combaticons_86: 1690778160
+      combaticons_87: -113739836
+      combaticons_9: 2417434447803555808
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
