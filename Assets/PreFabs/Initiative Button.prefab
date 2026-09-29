@@ -1713,7 +1713,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GridLayoutUpdater
   layoutGroup: {fileID: 22598774898573858}
   rect: {fileID: 1358853822623873769}
-  minWidth: 50
+  minWidth: 70
   widthToHeightRatio: 1
   spacing: 5
 --- !u!1 &2606092801068461842

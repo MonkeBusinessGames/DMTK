@@ -1,3 +1,4 @@
+using Assets.Scripts.Combat;
 using SFB;
 using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
@@ -18,6 +19,7 @@ public class InitiativeTracker : MonoBehaviour
     [SerializeField] private InitiativeDisplay displayPrefab;
 
     [SerializeField] private GameObject initiativeDisplay;
+    [SerializeField] private TurnTimer turnTimer;
     private int initiativeIndex = 0;
 
     private void Awake()
@@ -106,7 +108,8 @@ public class InitiativeTracker : MonoBehaviour
     {
         foreach (Transform child in initiativeDisplay.transform)
         {
-            Destroy(child.gameObject);
+            if (child.name != "Timer")
+                Destroy(child.gameObject);
         }
         int i = 0;
         foreach (var tracker in initiativeOrder)
@@ -120,19 +123,25 @@ public class InitiativeTracker : MonoBehaviour
 
     public void NextInitiative()
     {
+        if (initiativeOrder.Count <= 1)
+            return;
         initiativeOrder[initiativeIndex].EndTurn();
         initiativeIndex++;
         if (initiativeIndex >= initiativeOrder.Count)
             initiativeIndex = 0;
         initiativeOrder[initiativeIndex].StartTurn();
+
     }
     public void PreviousInitiative()
     {
+        if (initiativeOrder.Count <= 1)
+            return;
         initiativeOrder[initiativeIndex].EndTurn();
         initiativeIndex--;
         if (initiativeIndex < 0)
             initiativeIndex = initiativeOrder.Count - 1;
         initiativeOrder[initiativeIndex].StartTurn();
+        turnTimer.ResetTimer();
     }
 
     public bool CheckDisplay()
@@ -140,6 +149,7 @@ public class InitiativeTracker : MonoBehaviour
         float width = initiativeDisplay.GetComponent<RectTransform>().rect.width;
         float threshold = initiativeOrder.Count * 200;
         return (width > threshold);
+        turnTimer.ResetTimer();
 
     }
 }

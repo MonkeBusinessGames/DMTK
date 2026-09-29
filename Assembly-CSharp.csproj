@@ -114,6 +114,7 @@
     <Compile Include="Assets\StandaloneFileBrowser\Sample\CanvasSampleOpenFileTextMultiple.cs" />
     <Compile Include="Assets\Scripts\Tiles\Palettes\PaletteButton.cs" />
     <Compile Include="Assets\Scripts\Combat\ConditionData.cs" />
+    <Compile Include="Assets\Scripts\Combat\TurnTimer.cs" />
     <Compile Include="Assets\Scripts\Media Library\Backgrounds\BackgroundManager.cs" />
     <Compile Include="Assets\Scripts\Tiles\Grid\GridManager.cs" />
     <Compile Include="Assets\Scripts\Tiles\Grid\TileButton.cs" />

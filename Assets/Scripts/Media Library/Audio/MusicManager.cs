@@ -97,11 +97,11 @@ public class MusicManager : MonoBehaviour
 
         foreach (var file in Directory.GetFiles(musicPath))
         {
-            Debug.Log(file);
+            //Debug.Log(file);
             if (!file.EndsWith(".mp3") && !file.EndsWith(".MP#") && !file.EndsWith(".wav") && !file.EndsWith(".WAV") && !file.EndsWith(".ogg") && !file.EndsWith(".OGG"))
                 continue;
             musicList.Add(new string(Path.GetFileName(file)));
-            Debug.Log(Path.GetFileName(file));
+            //Debug.Log(Path.GetFileName(file));
         }
     }
 
@@ -152,7 +152,7 @@ public class MusicManager : MonoBehaviour
             var btn = Instantiate(buttonPrefab, content);
             btn.Setup(bg, i);
             i++;
-            Debug.Log("new list item " + bg);
+            //Debug.Log("new list item " + bg);
         }
 
         //Resize scroll content transform
@@ -163,9 +163,9 @@ public class MusicManager : MonoBehaviour
     {
         byte[] music = await DownloadClip(downloadURL);
 
-        Debug.Log("Saving " + fileName);
+        //Debug.Log("Saving " + fileName);
         string destPath = Path.Combine(musicPath, fileName + ".mp3");
-        Debug.Log("Downloading from " + downloadURL + " to " + fileName + " | " + destPath);
+        //Debug.Log("Downloading from " + downloadURL + " to " + fileName + " | " + destPath);
         File.WriteAllBytes(destPath, music);
 
         Refresh();
