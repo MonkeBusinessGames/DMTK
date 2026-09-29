@@ -88,7 +88,7 @@ public class PaletteManager : MonoBehaviour
                     continue;
 
                 string destPath = Path.Combine(pPath, fileName);
-                Debug.Log(sourcePath + " | " + fileName + " | " + destPath);
+                //Debug.Log(sourcePath + " | " + fileName + " | " + destPath);
                 File.Copy(sourcePath, destPath, overwrite: true);
 
                 //Generate a unique ID for the tile 
@@ -244,7 +244,7 @@ public class PaletteManager : MonoBehaviour
             i++;
             //Resize scroll content transform
             selectorContent.sizeDelta = new Vector2(0, 20 + (180 * i));
-            Debug.Log("new plist item " + palette.paletteName);
+            //Debug.Log("new plist item " + palette.paletteName);
         }
     }
 
@@ -265,7 +265,7 @@ public class PaletteManager : MonoBehaviour
         tempPalette = JsonConvert.DeserializeObject<PaletteData>(json);
         backupPalette = JsonConvert.DeserializeObject<PaletteData>(json);
 
-        Debug.Log(tempPalette);
+        //Debug.Log(tempPalette);
         
         ////Create the new palette folder
         //Directory.CreateDirectory(tempPath);
@@ -329,11 +329,11 @@ public class PaletteManager : MonoBehaviour
         if (palettes.ContainsKey(newName))
         {
             paletteNamer.DuplicateError(tempPalette.paletteName);
-            Debug.Log(newName + " is a duplicate");
+            //Debug.Log(newName + " is a duplicate");
 
             return;
         }
-        Debug.Log(tempPalette.paletteName + " is renamed to " + newName);
+        //Debug.Log(tempPalette.paletteName + " is renamed to " + newName);
 
         paletteNamer.NoError();
         tempPalette.paletteName = newName;
@@ -354,7 +354,7 @@ public class PaletteManager : MonoBehaviour
             //Copy the file over to the palette's folder
             string fileName = Path.GetFileName(sourcePath);
             string destPath = Path.Combine(backupPalette.palettePath, fileName);
-            Debug.Log(sourcePath + " | " + fileName + " | " + destPath);
+            //Debug.Log(sourcePath + " | " + fileName + " | " + destPath);
             File.Copy(sourcePath, destPath, overwrite: true);
 
             //Generate a unique ID for the tile 
@@ -381,7 +381,7 @@ public class PaletteManager : MonoBehaviour
         if (!paletteNamer.RequiredCheck())
             return;
 
-        Debug.Log("Continues Save");
+        //Debug.Log("Continues Save");
 
         //Close the palette manager
         UpdateView(false);
@@ -416,7 +416,7 @@ public class PaletteManager : MonoBehaviour
 
         //Create or Update the palette data json
         File.WriteAllText(Path.Combine(tempPalette.palettePath, "PaletteData"), JsonConvert.SerializeObject(tempPalette, Formatting.Indented));
-        Debug.Log(tempPalette);
+        //Debug.Log(tempPalette);
 
         //Update the Tile Library json
         File.WriteAllText(Path.Combine(palettesPath, "TileLibrary"), JsonConvert.SerializeObject(tileLibrary));
@@ -527,7 +527,7 @@ public class PaletteManager : MonoBehaviour
             btn.Setup(tile.Key, tile.Value, Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100), i);
 
             i++;
-            Debug.Log("new list item " + tile);
+            //Debug.Log("new list item " + tile);
         }
 
         //Resize scroll content transform
@@ -599,7 +599,7 @@ public class PaletteManager : MonoBehaviour
             return tileSpriteCache[tileID];
         }
 
-        Debug.Log(tileID + " not found in cache or library");
+        //Debug.Log(tileID + " not found in cache or library");
         return null;
 
     }

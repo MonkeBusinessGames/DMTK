@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Assets.Scripts;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -13,6 +14,7 @@ public class GridRenderer : MonoBehaviour
     private InputAction leftClick;
     public GridTile currentTile = null;
     public GridTile selectedTile = null;
+    [SerializeField] private SceneInput sceneData;
     [SerializeField] private GridTile tilePrefab;
     [SerializeField] private GridTile overlayPrefab;
     [SerializeField] private Transform overlayParent;
@@ -29,6 +31,7 @@ public class GridRenderer : MonoBehaviour
     private GridTile endGridTile = null;
     private List<GridTile> highlightedTiles = new List<GridTile>();
     private GridTile[] adjacentTiles = new GridTile[4];
+
     private void Awake()
     {
         //Prevent duplicates of this object from existing
@@ -51,15 +54,18 @@ public class GridRenderer : MonoBehaviour
     private void Update()
     {
 
-        if (!EventSystem.current.IsPointerOverGameObject())
+        if (sceneData.isHoveringViewport)
         {
-            //Debug.Log("Mouse is not over UI");
+            ////Debug.Log("Mouse is not over UI");
             
             //Get the position in the grid based on the point position
             Vector2 mousePosition = cam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-            Vector2Int posInGrid = new Vector2Int(Mathf.FloorToInt(mousePosition.x) + tileMatrix.GetLength(0) / 2, Mathf.FloorToInt(mousePosition.y) + tileMatrix.GetLength(1) / 2);
+            //Vector2Int posInGrid = new Vector2Int(Mathf.FloorToInt(mousePosition.x) + tileMatrix.GetLength(0) / 2, Mathf.FloorToInt(mousePosition.y) + tileMatrix.GetLength(1) / 2);
 
-            //Debug.Log("Mouse" + mousePosition + "| Grid " + posInGrid);
+            Vector2Int posInGrid = sceneData.gridPosition;
+            ////Debug.Log(posInGrid.ToString());
+
+            ////Debug.Log("Mouse" + mousePosition + "| Grid " + posInGrid);
             try
             {
                 //Highlight all the tiles being selected
@@ -69,7 +75,12 @@ public class GridRenderer : MonoBehaviour
                 //Highlight all the tiles between gridTiles
                 else if(selectState == ToolState.Box)
                     HighlightBox(overLayMatrix[posInGrid.x, posInGrid.y]);
-
+                //Continue painting on the new tiles
+                else if(selectState == ToolState.Paint)
+                {
+                    HoverOnTile(overLayMatrix[posInGrid.x, posInGrid.y]);
+                    GridManager.Instance.UseTool(tileMatrix[currentTile.gridX, currentTile.gridY, topLayerIndex]);
+                }
                 else
                 //Try showing the hover on the tile
                     HoverOnTile(overLayMatrix[posInGrid.x, posInGrid.y]);
@@ -152,6 +163,7 @@ public class GridRenderer : MonoBehaviour
         int gridWidth = gridMap.width;
         int gridHeight = gridMap.height;
 
+
         GridSizer.Instance.LoadSize(gridWidth, gridHeight);
 
         ResetGridTiles(gridMap, gridWidth, gridHeight);
@@ -159,7 +171,9 @@ public class GridRenderer : MonoBehaviour
 
     public void ResetGridTiles(GridMap gridMap, int gridWidth, int gridHeight)
     {
-        //Debug.Log("Loaded " + gridMap);
+        ////Debug.Log("Loaded " + gridMap);
+        sceneData.xOffset = gridWidth / 2;
+        sceneData.yOffset = gridHeight / 2;
 
         foreach (Transform child in tileParent)
         {
@@ -200,7 +214,7 @@ public class GridRenderer : MonoBehaviour
                     topLayerIndex++;
             }
 
-            Debug.Log("Setting up layer #" + l + ": " + layer);
+            //Debug.Log("Setting up layer #" + l + ": " + layer);
 
             for (int j = 0; j < gridHeight; j++)
             {
@@ -208,7 +222,7 @@ public class GridRenderer : MonoBehaviour
                 {
                     newMatrix[i, j, l] = Instantiate<GridTile>(tilePrefab, new Vector2(xStartPos + i, yStartPos + j), Quaternion.identity, layerParent);
                     newMatrix[i, j, l].Setup(gridMap.tileLayers[l].tiles[i + j * gridWidth], i, j, l);
-                    Debug.Log("GridTile set up at " + i + ", " + j + ", " + l + ": " + newMatrix[i, j, l]);
+                    //Debug.Log("GridTile set up at " + i + ", " + j + ", " + l + ": " + newMatrix[i, j, l]);
                 }
             }
 
@@ -221,7 +235,7 @@ public class GridRenderer : MonoBehaviour
 
     public void HoverOnTile(GridTile newTile)
     {
-        //Debug.Log(newTile);
+        ////Debug.Log(newTile);
         if(currentTile!= null)
         {
             if (highlightedTiles.Contains(currentTile))
@@ -254,7 +268,7 @@ public class GridRenderer : MonoBehaviour
     {
         startGridTile = overLayMatrix[currentTile.gridX, currentTile.gridY];
         startGridTile.sRend.color = highlightColor;
-        Debug.Log("Box Start set to " + startGridTile);
+        //Debug.Log("Box Start set to " + startGridTile);
     }
 
     public void HighlightBox(GridTile newTile)
@@ -302,12 +316,12 @@ public class GridRenderer : MonoBehaviour
 
     public GridTile[] GetAdjacentTiles(int x, int y, int z)
     {
-        Debug.Log("Checking adjacent tiles for " + x + "," + y + "," + z);
+        //Debug.Log("Checking adjacent tiles for " + x + "," + y + "," + z);
 
         try
         {
             adjacentTiles[0] = tileMatrix[x - 1, y , z];
-            Debug.Log("Adjacent tile found for " + (x - 1)  + "," + y+ "," + z + " ; " + adjacentTiles[0]);
+            //Debug.Log("Adjacent tile found for " + (x - 1)  + "," + y+ "," + z + " ; " + adjacentTiles[0]);
         }
         catch (IndexOutOfRangeException)
         {
@@ -316,7 +330,7 @@ public class GridRenderer : MonoBehaviour
         try
         {
             adjacentTiles[1] = tileMatrix[x + 1, y, z];
-            Debug.Log("Adjacent tile found for " + (x + 1) + "," + y + "," + z + " ; " + adjacentTiles[0]);
+            //Debug.Log("Adjacent tile found for " + (x + 1) + "," + y + "," + z + " ; " + adjacentTiles[0]);
         }
         catch (IndexOutOfRangeException)
         {
@@ -325,7 +339,7 @@ public class GridRenderer : MonoBehaviour
         try
         {
             adjacentTiles[2] = tileMatrix[x, y - 1, z];
-            Debug.Log("Adjacent tile found for " + x+ "," + (y - 1) + "," + z + " ; " + adjacentTiles[0]);
+            //Debug.Log("Adjacent tile found for " + x+ "," + (y - 1) + "," + z + " ; " + adjacentTiles[0]);
         }
         catch (IndexOutOfRangeException)
         {
@@ -334,7 +348,7 @@ public class GridRenderer : MonoBehaviour
         try
         {
             adjacentTiles[3] = tileMatrix[x, y + 1, z];
-            Debug.Log("Adjacent tile found for " + x + "," + (y + 1) + "," + z + " ; " + adjacentTiles[0]);
+            //Debug.Log("Adjacent tile found for " + x + "," + (y + 1) + "," + z + " ; " + adjacentTiles[0]);
         }
         catch (IndexOutOfRangeException)
         {
@@ -349,7 +363,7 @@ public class GridRenderer : MonoBehaviour
         try
         {
             tile = tileMatrix[x, y, z];
-            Debug.Log("Adjacent tile found for " + x + "," + y + "," + z + " ; " + tile);
+            //Debug.Log("Adjacent tile found for " + x + "," + y + "," + z + " ; " + tile);
             return true;
         }
         catch (IndexOutOfRangeException)
