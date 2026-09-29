@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,12 +12,15 @@ public enum ToolState
     Erase,
     Drag,
     Paste,
+    VDrag,
+    HDrag,
     None
 }
 
 public class CursorController : MonoBehaviour
 {
     public ToolState tool;
+    private ToolState lastState;
     [SerializeField] Texture2D select;
     [SerializeField] Texture2D paint;
     [SerializeField] Texture2D box;
@@ -24,6 +28,8 @@ public class CursorController : MonoBehaviour
     [SerializeField] Texture2D erase;
     [SerializeField] Texture2D drag;
     [SerializeField] Texture2D paste;
+    [SerializeField] Texture2D vDrag;
+    [SerializeField] Texture2D hDrag;
 
     private Vector2 selectPointer = Vector2.zero;
     private Vector2 paintPointer = new Vector2(0, 64);
@@ -32,6 +38,8 @@ public class CursorController : MonoBehaviour
     private Vector2 erasePointer = new Vector2(0, 64);
     private Vector2 dragPointer = new Vector2(32, 32);
     private Vector2 pastePointer = new Vector2(0, 64);
+    private Vector2 vDragPointer = new Vector2(32, 32);
+    private Vector2 hDragPointer = new Vector2(32, 32);
 
     public static CursorController Instance;
 
@@ -50,6 +58,7 @@ public class CursorController : MonoBehaviour
 
     public void SetCursor(ToolState newState)
     {
+        lastState = tool;
         tool = newState;
 
         switch (newState)
@@ -75,7 +84,19 @@ public class CursorController : MonoBehaviour
             case ToolState.Paste:
                 Cursor.SetCursor(paste, pastePointer, CursorMode.Auto);
                 break;
+            case ToolState.VDrag:
+                Cursor.SetCursor(vDrag, vDragPointer, CursorMode.Auto);
+                break;
+            case ToolState.HDrag:
+                Cursor.SetCursor(hDrag, hDragPointer, CursorMode.Auto);
+                break;
 
         }
+    }
+
+    public void RevertCursor()
+    {
+        SetCursor(lastState);
+        lastState = ToolState.Select;
     }
 }
