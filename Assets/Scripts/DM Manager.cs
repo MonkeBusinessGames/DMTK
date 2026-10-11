@@ -4,6 +4,8 @@ using UnityEngine.Rendering.Universal;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Assets.Scripts;
+using TMPro;
+using JetBrains.Annotations;
 
 public class DMManager : MonoBehaviour
 {
@@ -16,6 +18,9 @@ public class DMManager : MonoBehaviour
 
     [SerializeField] private float scrollSpeed = 1;
     [SerializeField] private float dragSpeed = 0.25f;
+
+    [SerializeField] TMP_Text switchDisplay;
+    private bool playerView = false;
 
     public static bool onGrid;
 
@@ -110,6 +115,27 @@ public class DMManager : MonoBehaviour
                     CursorController.Instance.SetCursor(ToolState.Select);
                 }
             }
+        }
+    }
+    public void SwitchDisplay()
+    {
+        if (playerView)
+        {
+            playerView = false;
+            switchDisplay.text = "Player View";
+
+
+            uiCamera.targetDisplay = sceneCamera.targetDisplay = 1;
+            playerCamera.targetDisplay = 0;
+        }
+        else
+        {
+            playerView = true;
+            switchDisplay.text = "DM View";
+
+
+            uiCamera.targetDisplay = sceneCamera.targetDisplay = 0;
+            playerCamera.targetDisplay = 1;
         }
     }
 }

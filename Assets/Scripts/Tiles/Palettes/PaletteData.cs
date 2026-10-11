@@ -8,7 +8,7 @@ public class PaletteData
 {
     public string paletteName;
     public string palettePath;
-    public Dictionary<int, string> tList;
+    [SerializeField] public Dictionary<int, string> tList;
     public string mainSprite;
 
     public PaletteData()

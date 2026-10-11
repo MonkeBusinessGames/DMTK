@@ -13,13 +13,11 @@ public class BackgroundButton : MonoBehaviour
         fileName = file;
         preview.sprite = BackgroundManager.Instance.LoadSprite(file);
         buttonName.text = fileName;
-
-        GetComponent<RectTransform>().anchoredPosition = new Vector2(-620 + 620 * (listPosition % 3), -20 - 444 * Mathf.Floor(listPosition / 3));
     }
 
     public void OnClick()
     {
-        FindFirstObjectByType<SceneManager>().SetBackground(fileName);
+        FindAnyObjectByType<SceneManager>().SetBackground(fileName);
     }
 
     public void Delete()

@@ -12,10 +12,10 @@ public class PaletteManager : MonoBehaviour
 
     //Palette Data Elements
     private string palettesPath;
-    public Dictionary<string, PaletteData> palettes = new();
-    public Dictionary<int, Sprite> tileSpriteCache = new();
-    public Dictionary<int, TileData> tileDataCache = new();
-    public Dictionary<int, string> tileLibrary = new();
+    [SerializeField] public Dictionary<string, PaletteData> palettes = new();
+    [SerializeField] public Dictionary<int, Sprite> tileSpriteCache = new();
+    [SerializeField] public Dictionary<int, TileData> tileDataCache = new();
+    [SerializeField] public Dictionary<int, string> tileLibrary = new();
     public PaletteData loadedPalette = null;
     public PaletteData tempPalette = null;
     public PaletteData backupPalette = null;

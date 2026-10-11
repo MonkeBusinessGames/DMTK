@@ -44,9 +44,8 @@ public class PanelManager : MonoBehaviour
             return;
         }
 
-        //Make this object accessible to other objects and don't destory it.
+        //Make this object accessible to other objects.
         Instance = this;
-        DontDestroyOnLoad(gameObject);
 
         //Define the panel path
         dataPath = Path.Combine(Application.persistentDataPath, "Panels");

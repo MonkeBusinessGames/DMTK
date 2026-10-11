@@ -11,7 +11,8 @@ public enum PanelType
     GridEditor,
     MediaLibrary,
     SFXBoards,
-    CombatTracker
+    CombatTracker,
+    CampaignManager
 }
 
 [System.Serializable]

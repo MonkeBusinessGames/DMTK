@@ -24,9 +24,8 @@ public class SFXManager : MonoBehaviour
             return;
         }
 
-        //Make this object accessible to other objects and don't destory it.
+        //Make this object accessible to other objects.
         Instance = this;
-        DontDestroyOnLoad(gameObject);
 
         //Define the sfx path
         sfxPath = Path.Combine(Application.persistentDataPath, "SFX");

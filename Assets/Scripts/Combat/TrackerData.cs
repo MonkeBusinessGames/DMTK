@@ -18,6 +18,12 @@ public class TrackerData
         trackerName = newName;
         trackerNames.Add(trackerName);
     }
+    public TrackerData(string newName, Sprite sprite)
+    {
+        trackerName = newName;
+        trackerSprite = sprite;
+        trackerNames.Add(trackerName);
+    }
 
     public bool RenameTracker(string newName)
     {

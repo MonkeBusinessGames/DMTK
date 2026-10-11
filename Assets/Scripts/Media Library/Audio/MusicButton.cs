@@ -12,12 +12,11 @@ public class MusicButton : MonoBehaviour
         fileName = file;
         buttonName.text = fileName;
 
-        //GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -20 - 180 * listPosition);
     }
 
     public void OnClick()
     {
-        FindFirstObjectByType<SceneManager>().SetMusic(fileName);
+        FindAnyObjectByType<SceneManager>().SetMusic(fileName);
     }
 
     public void Delete()

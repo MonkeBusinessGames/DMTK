@@ -47,6 +47,17 @@ public class InitiativeTracker : MonoBehaviour
         RefreshSelector();
     }
 
+    /// <summary>
+    /// Allow users to add a new tracker.
+    /// </summary>
+    public void AddTracker(string trackerName, Sprite trackerSprite)
+    {
+        TrackerData temp = new TrackerData(trackerName, trackerSprite);
+        initiativeOrder.Add(temp);
+        Debug.Log(temp);
+        RefreshSelector();
+    }
+
     public void Delete(TrackerData tracker)
     {
         initiativeOrder.Remove(tracker);

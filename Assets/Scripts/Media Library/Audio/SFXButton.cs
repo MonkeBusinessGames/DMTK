@@ -12,12 +12,11 @@ public class SFXButton : MonoBehaviour
         fileName = file;
         buttonName.text = fileName;
 
-        //GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -20 - 180 * listPosition);
     }
 
     public void OnClick()
     {
-        FindFirstObjectByType<SceneManager>().PlaySFX(fileName);
+        FindAnyObjectByType<SceneManager>().PlaySFX(fileName);
     }
 
     public void Delete()

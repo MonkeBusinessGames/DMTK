@@ -13,8 +13,6 @@ public class TilePreview : MonoBehaviour
         tile = tileID;
         preview.sprite = previewSprite;
         buttonName.text = tileName;
-
-        //GetComponent<RectTransform>().anchoredPosition = new Vector2(-700 + 350 * (listPosition % 5), -20 - 400 * Mathf.Floor(listPosition / 5));
     }
 
     public void Delete()
