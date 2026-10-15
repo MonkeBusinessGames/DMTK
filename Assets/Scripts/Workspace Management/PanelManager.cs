@@ -325,7 +325,6 @@ public class PanelManager : MonoBehaviour
         if (start)
         {
             processing.gameObject.SetActive(true);
-            processing.StartPlayback();
         }
         else
             processing.gameObject.SetActive(false);

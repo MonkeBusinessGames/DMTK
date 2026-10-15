@@ -37,7 +37,7 @@ public class GridTile : MonoBehaviour
 
         //Update the tile in the GridMap data
         GridSelector.Instance.loadedGridMap.SetTile(gridX, gridY, gridLayer, tile);
-        Debug.Log(this + " updated with " + tile);
+        //Debug.Log(this + " updated with " + tile);
     }
 
     private void UpdateSprite(int tile)

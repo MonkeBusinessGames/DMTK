@@ -14,7 +14,7 @@ public class DNDSearchManager : MonoBehaviour
     public static DNDSearchManager Instance;
 
     private string query;
-    private Dictionary<string, string> filters;
+    private Dictionary<string, string> filters = new Dictionary<string, string>();
     [SerializeField] private GameObject searchPage;
     [SerializeField] private GameObject filtersPage;
     [SerializeField] private Transform resultsContainer;

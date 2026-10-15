@@ -15,10 +15,10 @@ public class Open5ESearch : IDNDSearchProvider
 
         string filters = "";
 
-        //foreach(var filter in filterList)
-        //{
-        //    filters += filter.Key + "=" + filter.Value + "&";
-        //}
+        foreach(var filter in filterList)
+        {
+            filters += filter.Value + "&";
+        }
 
         string encodedFilters = UnityWebRequest.EscapeURL(filters);
 

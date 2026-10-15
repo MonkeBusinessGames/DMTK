@@ -131,11 +131,9 @@ public class BackgroundManager : MonoBehaviour
 
         foreach (var file in Directory.GetFiles(backgroundsPath))
         {
-            Debug.Log(file);
             if (!file.EndsWith(".png") && !file.EndsWith(".jpg") && !file.EndsWith(".jpeg") && !file.EndsWith(".webp") && !file.EndsWith(".PNG") && !file.EndsWith(".JPG") && !file.EndsWith(".JPEG") && !file.EndsWith(".WEBP"))
                 continue;
             backgrounds.Add(new string(Path.GetFileName(file)));
-            Debug.Log(Path.GetFileName(file));
         }
     }
 

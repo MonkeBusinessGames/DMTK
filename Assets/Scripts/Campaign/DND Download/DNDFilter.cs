@@ -26,6 +26,7 @@ namespace Assets.Scripts.Campaign.DND_Download
             dropdown.AddOptions(values);
 
             dropdownLabel.text = filterLabel;
+            Debug.Log("Filters Updated for " + filterLabel);
         }
 
         public void UpdateFilters()
@@ -49,6 +50,8 @@ namespace Assets.Scripts.Campaign.DND_Download
             }
             returnValue.TrimEnd(",");
             searchManager.UpdateFilters(filterLabel, returnValue);
+
+            Debug.Log(dropdown.value + " created " + returnValue);
         }
 
     }

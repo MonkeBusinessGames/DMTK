@@ -140,13 +140,13 @@ public class GridManager : MonoBehaviour
 
         filledTiles.Add(gridTile);
 
-        Debug.Log("Starting flood check for against " + checkID + " for tile: " + gridTile);
+        //Debug.Log("Starting flood check for against " + checkID + " for tile: " + gridTile);
   
         if(checkID == gridTile.tileID)
         {
             Paint(gridTile);
 
-            Debug.Log(gridTile + " was flood filled with " + selectedTile);
+            //Debug.Log(gridTile + " was flood filled with " + selectedTile);
 
             GridTile check = null;
 
@@ -168,13 +168,13 @@ public class GridManager : MonoBehaviour
         {
             if (tile == null)
             {
-                Debug.Log("Tile was null");
+                //Debug.Log("Tile was null");
                 continue;
             }
 
             if (filledTiles.Contains(tile))
             {
-                Debug.Log("Tile was already checked");
+                //Debug.Log("Tile was already checked");
                 continue;
             }
 
@@ -184,7 +184,7 @@ public class GridManager : MonoBehaviour
             {
                 gridTile.SetTile(selectedTile);
                 FloodCheck(checkID, tile);
-                Debug.Log(tile + " was flood filled with " + selectedTile);
+                //Debug.Log(tile + " was flood filled with " + selectedTile);
             }                
         }*/
     }

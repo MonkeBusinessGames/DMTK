@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
 using System.IO;
 using System.Threading.Tasks;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -17,6 +18,8 @@ public class InitiativeTracker : MonoBehaviour
     public RectTransform content;
     [SerializeField] private InitiativeButton buttonPrefab;
     [SerializeField] private InitiativeDisplay displayPrefab;
+
+    [SerializeField] private TMP_Text initiativeDisplayButton;
 
     [SerializeField] private GameObject initiativeDisplay;
     [SerializeField] private TurnTimer turnTimer;
@@ -110,9 +113,18 @@ public class InitiativeTracker : MonoBehaviour
         RefreshSelector();
     }
 
-    public void ToggleDisplay(bool toggle)
+    public void ToggleDisplay()
     {
-        initiativeDisplay.SetActive(toggle);
+        if (initiativeDisplay.activeSelf)
+        {
+            initiativeDisplay.SetActive(false);
+            initiativeDisplayButton.text = "Display Initiative";
+        }
+        else
+        {
+            initiativeDisplay.SetActive(true);
+            initiativeDisplayButton.text = "Hide Initiative";
+        }
     }
 
     public void RefreshDisplay()

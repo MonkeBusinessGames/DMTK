@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.3, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4676668298311548794
 CanvasRenderer:
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 71.6
+  m_fontSize: 18
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -343,7 +343,7 @@ MonoBehaviour:
   m_fontSize: 30
   m_fontSizeBase: 30
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -359,7 +359,7 @@ MonoBehaviour:
   m_charWidthMaxAdj: 0
   m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
+  m_overflowMode: 1
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 0
@@ -700,51 +700,13 @@ MonoBehaviour:
   dropdownLabel: {fileID: 451460555360415255}
   filterLabel: Source
   values:
-  - System Reference Document 5.1
-  - System Reference Document 5.2
-  - Adventurer's Guide
-  - "Dungeon Delver\u2019s Guide"
-  - Gate Pass Gazette
-  - Monstrous Menagerie
-  - Black Flag SRD
-  - Creature Codex
-  - Deep Magic for 5th Edition
-  - Deep Magic Extended
-  - Kobold Press Compilation
-  - Tome of Beasts
-  - Tome of Beasts 1 (2023 Edition)
-  - Tome of Beasts 2
-  - Tome of Beasts 3
-  - Tome of Heroes
-  - Vault of Magic
-  - Warlock Zine
-  - Open5e Originals
-  - Open5e Originals
-  - Spells That Don't Suck
-  - Tal'dorei Campaign Setting
+  - Test 1
+  - Test 2
+  - Test 3
   keys:
-  - srd-2014
-  - srd-2024
-  - a5e-ag
-  - a5e-ddg
-  - a5e-gpg
-  - a5e-mm
-  - bfrd
-  - ccdx
-  - deepm
-  - deepmx
-  - kp
-  - tob
-  - tob-2023
-  - tob2
-  - tob3
-  - toh
-  - vom
-  - wz
-  - open5e
-  - open5e-2024
-  - spells-that-dont-suck
-  - tdcs
+  - test1
+  - test2
+  - test3
 --- !u!1 &5047236225829900146
 GameObject:
   m_ObjectHideFlags: 0
@@ -1457,7 +1419,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 53.7
+  m_fontSize: 18
   m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 1
