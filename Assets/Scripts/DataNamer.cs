@@ -1,6 +1,6 @@
 using UnityEngine;
 using TMPro;
-
+using UnityEngine.EventSystems;
 public class DataNamer : MonoBehaviour
 {
 
@@ -35,5 +35,12 @@ public class DataNamer : MonoBehaviour
         else
             return true;
     }
+    private void OnEnable()
+    {
+        // 1. Tell Unity's EventSystem to focus on this UI GameObject
+        EventSystem.current.SetSelectedGameObject(input.gameObject);
 
+        // 2. Open up the field for active typing and bring up the mobile keyboard if applicable
+        input.ActivateInputField();
+    }
 }

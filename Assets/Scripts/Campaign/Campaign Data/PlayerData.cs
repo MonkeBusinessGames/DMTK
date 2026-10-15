@@ -3,16 +3,14 @@ using UnityEngine;
 
 
 [System.Serializable]
-public class PlayerData
+public class PlayerData : CreatureData
 {
-
-    public string playerName;
     public bool customIcon;
 
     public Sprite sprite;
     public PlayerData(string newName)
     {
-        playerName = newName;
+        name = newName;
         customIcon = false;
         sprite = null;
     }

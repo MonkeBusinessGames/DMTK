@@ -20,6 +20,7 @@ namespace Assets.Scripts.Campaign
         {
             playerName = file;
             buttonName.text = playerName;
+            namer.SetName(playerName);
 
             if (playerSprite == null)
                 UpdateSprite(iconDropdown.defaultOption);

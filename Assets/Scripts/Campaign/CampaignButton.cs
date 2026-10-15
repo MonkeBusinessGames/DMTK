@@ -7,27 +7,28 @@ namespace Assets.Scripts.Campaign
     public class CampaignButton : MonoBehaviour
     {
         [SerializeField] private TMP_Text buttonName;
-        private string fileName;
+        private string campaignName;
         [SerializeField] private GameObject buttonObject;
         [SerializeField] private DataNamer namer;
    
         public void Setup(string file)
         {
-            fileName = file;
-            buttonName.text = fileName;
+            campaignName = file;
+            buttonName.text = campaignName;
+            namer.SetName(campaignName);
         }
 
         public void UpdateName(string newName)
         {
             if (!namer.RequiredCheck())
                 return;
-            if (!CampaignManager.Instance.UpdateCampaignName(fileName, newName))
+            if (!CampaignManager.Instance.UpdateCampaignName(campaignName, newName))
             {
-                namer.DuplicateError(fileName);
+                namer.DuplicateError(campaignName);
                 return;
             }
-            fileName = newName;
-            buttonName.text = fileName;
+            campaignName = newName;
+            buttonName.text = campaignName;
             buttonObject.SetActive(true);
             namer.gameObject.SetActive(false);
         }
@@ -40,7 +41,7 @@ namespace Assets.Scripts.Campaign
 
         public void OnClick()
         {
-            CampaignManager.Instance.SelectCampaign(fileName);
+            CampaignManager.Instance.SelectCampaign(campaignName);
         }
 
         public void Delete()

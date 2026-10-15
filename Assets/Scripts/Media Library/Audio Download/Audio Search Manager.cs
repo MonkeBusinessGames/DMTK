@@ -97,6 +97,7 @@ public class AudioSearchManager : MonoBehaviour
     private async void SearchAudio(string query)
     {
 
+        PanelManager.Instance.Processing(true);
         ClearSearch();
 
         IAudioSearchProvider provider =
@@ -108,6 +109,7 @@ public class AudioSearchManager : MonoBehaviour
         if (results.Count == 0)
         {
             errorMessage.SetActive(true);
+            PanelManager.Instance.Processing(false);
             return;
         }
 
@@ -121,8 +123,9 @@ public class AudioSearchManager : MonoBehaviour
             temp.Setup(audio.title, audio.description, audio.downloadURL, audio.previewURL, audio.duration);
             i++;    
             if (i >= 50)
-                return;
+                break;
         }
+        PanelManager.Instance.Processing(false);
     }
 
     public void OpenSearchPage(bool forSFX)

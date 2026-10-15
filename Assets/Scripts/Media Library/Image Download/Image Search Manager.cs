@@ -43,6 +43,7 @@ public class ImageSearchManager : MonoBehaviour
     private async void SearchImages(string query)
     {
 
+        PanelManager.Instance.Processing(true);
         //Clear the existing results
         foreach (Transform child in resultsContainer)
         {
@@ -58,6 +59,7 @@ public class ImageSearchManager : MonoBehaviour
         if (imageResults.Count == 0)
         {
             errorMessage.SetActive(true);
+            PanelManager.Instance.Processing(false);
             return;
         }
 
@@ -72,8 +74,9 @@ public class ImageSearchManager : MonoBehaviour
             temp.Setup(image.title, sprite, image.fullImageURL);
             i++;
             if (i >= 50)
-                return;
+                break;
         }
+        PanelManager.Instance.Processing(false);
     }
 
     public void OpenSearchPage()

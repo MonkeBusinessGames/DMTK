@@ -15,7 +15,6 @@ public class DMManager : MonoBehaviour
     [SerializeField] PixelPerfectCamera dmCam;
     [SerializeField] PixelPerfectCamera pCam;
     [SerializeField] SceneInput sceneData;
-
     [SerializeField] private float scrollSpeed = 1;
     [SerializeField] private float dragSpeed = 0.25f;
 

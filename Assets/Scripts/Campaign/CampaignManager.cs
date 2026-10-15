@@ -16,6 +16,7 @@ public class CampaignManager : MonoBehaviour
     [SerializeField] private GameObject playerSelector;
     [SerializeField] private GameObject npcSelector;
     [SerializeField] private GameObject deleteConfirmation;
+    [SerializeField] private GameObject searchButton;
     private string deletableCampaign;
     private string campaignPath;
     public List<string> campaignList = new();
@@ -71,17 +72,20 @@ public class CampaignManager : MonoBehaviour
                 campaignSelector.SetActive(true);
                 playerSelector.SetActive(false); 
                 npcSelector.SetActive(false);
+                searchButton.SetActive(false);
 
                 break;
             case 1: // players
                 campaignSelector.SetActive(false);
                 playerSelector.SetActive(true);
                 npcSelector.SetActive(false);
+                searchButton.SetActive(false);
                 break;
             case 2: // npcs
                 campaignSelector.SetActive(false);
                 playerSelector.SetActive(false);
                 npcSelector.SetActive(true);
+                searchButton.SetActive(true);
                 break;
         }
     }

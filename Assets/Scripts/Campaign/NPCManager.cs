@@ -45,7 +45,7 @@ namespace Assets.Scripts.Campaign
             foreach (var npc in campaign.loadedCampaign.npcs.Values)
             {
                 var btn = Instantiate(buttonPrefab, content);
-                btn.Setup(npc.npcName, npc.sprite);
+                btn.Setup(npc.name, npc.sprite);
                 i++;
                 //Debug.Log("new list item " + bg);   
             }
@@ -61,7 +61,7 @@ namespace Assets.Scripts.Campaign
                 return false;
 
             NPCData temp = campaign.loadedCampaign.npcs[oldName];
-            temp.npcName = newName;
+            temp.name = newName;
 
             campaign.loadedCampaign.npcs.Add(newName, temp);
             campaign.loadedCampaign.npcs.Remove(oldName);
@@ -81,6 +81,13 @@ namespace Assets.Scripts.Campaign
             campaign.loadedCampaign.npcs.Add("New NPC", new NPCData("New NPC"));
             var btn = Instantiate(buttonPrefab, content);
             btn.Setup("New NPC", null);
+        }
+
+        public void NewNPC(CreatureData data)
+        {
+            campaign.loadedCampaign.npcs.Add(data.name, new NPCData(data));
+            var btn = Instantiate(buttonPrefab, content);
+            btn.Setup(data.name, null);
         }
     }
 }

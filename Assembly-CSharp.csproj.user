@@ -5,6 +5,9 @@
     <Compile Update="Assets\Scripts\Campaign\CampaignButton.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Assets\Scripts\Campaign\DND Download\DNDFilter.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Assets\Scripts\Campaign\NPCButton.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -21,6 +24,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Assets\Scripts\Media Library\Backgrounds\BackgroundCustomizer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Assets\Scripts\StringBulkEditor.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Assets\Scripts\Tiles\Assets\TileLayer.cs">

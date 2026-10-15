@@ -61,7 +61,7 @@ namespace Assets.Scripts.Player
             foreach (var player in campaign.loadedCampaign.players.Values)
             {
                 var btn = Instantiate(buttonPrefab, content);
-                btn.Setup(player.playerName, player.sprite);
+                btn.Setup(player.name, player.sprite);
                 i++;
             }
 
@@ -77,7 +77,7 @@ namespace Assets.Scripts.Player
                 return false;
 
             PlayerData temp = campaign.loadedCampaign.players[oldName];
-            temp.playerName = newName;
+            temp.name = newName;
 
             campaign.loadedCampaign.players.Add(newName, temp);
             campaign.loadedCampaign.players.Remove(oldName);

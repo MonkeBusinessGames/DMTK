@@ -14,6 +14,7 @@ public class PanelManager : MonoBehaviour
 {
     public static PanelManager Instance;
 
+    [SerializeField] Animator processing;
     public ManagerData data;
 
     private string dataPath;
@@ -319,5 +320,14 @@ public class PanelManager : MonoBehaviour
 
         SavePanelData();
     }
-
+    public void Processing(bool start)
+    {
+        if (start)
+        {
+            processing.gameObject.SetActive(true);
+            processing.StartPlayback();
+        }
+        else
+            processing.gameObject.SetActive(false);
+    }
 }

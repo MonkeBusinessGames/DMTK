@@ -19,6 +19,7 @@ namespace Assets.Scripts.Campaign
         {
             npcName = file;
             buttonName.text = npcName;
+            namer.SetName(npcName);
 
             if (npcSprite == null)
                 UpdateSprite(iconDropdown.defaultOption);
